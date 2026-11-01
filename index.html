@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -122,20 +121,28 @@ body:before{
  height:120px;
  margin:0 auto 12px;
 }
+
 .avatar{
- width:100%;
- height:100%;
- border-radius:50%;
+ position:absolute;
+ width:88%;
+ height:88%;
+ top:50%;
+ left:50%;
+ transform:translate(-50%,-50%);
  object-fit:cover;
- border:4px solid white;
- box-shadow:0 8px 30px #7774;
+ object-position:center;
+ border:0;
+ border-radius:50%;
+ box-shadow:none;
+ z-index:1;
 }
+
 .avatar-frame{
  position:absolute;
  top:50%;
  left:50%;
- width:120%;
- height:120%;
+ width:135%;
+ height:135%;
  transform:translate(-50%,-50%);
  object-fit:contain;
  pointer-events:none;
