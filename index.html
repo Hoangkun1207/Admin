@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -5,16 +6,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f5f6ff">
 <title>Hoàng Kun iOS | App Library</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
-/* ==============================
-   1. CẤU HÌNH GIAO DIỆN
-============================== */
-
 :root{
  --bg:#f5f6ff;
  --card:#fff;
@@ -22,11 +18,10 @@
  --muted:#8991aa;
  --primary:#6265ff;
  --secondary:#c03ef3;
- --shadow:0 10px 30px rgba(55,65,120,.12);
+ --shadow:0 8px 25px rgba(55,65,120,.13);
 }
-
 *{box-sizing:border-box;margin:0;padding:0}
-
+html{scroll-behavior:smooth}
 body{
  font-family:'Quicksand',sans-serif;
  background:var(--bg);
@@ -35,20 +30,17 @@ body{
  overflow-x:hidden;
  transition:background .3s,color .3s;
 }
-
 body.dark{
  --bg:#11121d;
  --card:#1c1e2d;
  --text:#f5f5ff;
  --muted:#a0a6bd;
- --shadow:0 10px 30px rgba(0,0,0,.3);
+ --shadow:0 8px 25px rgba(0,0,0,.3);
 }
-
 a{text-decoration:none;color:inherit}
 button{font-family:inherit;cursor:pointer}
 
 /* NỀN ÁNH SÁNG */
-
 body:before{
  content:"";
  position:fixed;
@@ -56,21 +48,17 @@ body:before{
  z-index:-2;
  pointer-events:none;
  background:
- radial-gradient(ellipse at 15% 10%,#c8d4ff55,transparent 35%),
- radial-gradient(ellipse at 85% 20%,#f0caff55,transparent 35%),
+ radial-gradient(ellipse at 15% 10%,#c8d4ff66,transparent 35%),
+ radial-gradient(ellipse at 85% 20%,#f0caff66,transparent 35%),
  radial-gradient(ellipse at 50% 90%,#c5eaff44,transparent 40%);
  animation:bgMove 12s ease-in-out infinite alternate;
 }
-
 @keyframes bgMove{
  from{transform:translateY(-15px)}
  to{transform:translateY(15px)}
 }
 
-/* ==============================
-   2. HIỆU ỨNG RƠI
-============================== */
-
+/* HẠT RƠI */
 #particles{
  position:fixed;
  inset:0;
@@ -78,42 +66,22 @@ body:before{
  pointer-events:none;
  z-index:50;
 }
-
 .particle{
  position:absolute;
  top:-30px;
- color:#8a83ff;
  opacity:0;
  animation:fall linear infinite;
  text-shadow:0 0 12px currentColor;
  will-change:transform,opacity;
 }
-
 @keyframes fall{
- 0%{
-  transform:translate3d(0,-30px,0) rotate(0deg);
-  opacity:0;
- }
+ 0%{transform:translate3d(0,-30px,0) rotate(0deg);opacity:0}
  10%{opacity:.8}
  80%{opacity:.65}
- 100%{
-  transform:translate3d(var(--drift),110vh,0) rotate(360deg);
-  opacity:0;
- }
+ 100%{transform:translate3d(var(--drift),110vh,0) rotate(360deg);opacity:0}
 }
 
-@media(prefers-reduced-motion:reduce){
- *,*:before,*:after{
-  animation-duration:.01ms!important;
-  animation-iteration-count:1!important;
-  scroll-behavior:auto!important;
- }
-}
-
-/* ==============================
-   3. THANH ĐIỀU HƯỚNG
-============================== */
-
+/* THANH TRÊN */
 .navbar{
  height:53px;
  position:sticky;
@@ -128,9 +96,7 @@ body:before{
  -webkit-backdrop-filter:blur(20px);
  border-bottom:1px solid #ddd4;
 }
-
 .dark .navbar{background:#171827dd}
-
 .nav-btn{
  width:38px;
  height:38px;
@@ -140,28 +106,22 @@ body:before{
  font-size:17px;
  transition:.2s;
 }
-
 .nav-btn:hover{background:#8882;transform:scale(1.1)}
 .bell{color:#6175ff}
 .theme{color:#ff9e00}
 
-/* ==============================
-   4. AVATAR VÀ PROFILE
-============================== */
-
+/* PROFILE */
 .hero{
  text-align:center;
- padding:40px 15px 40px;
+ padding:40px 15px 45px;
  position:relative;
 }
-
 .avatar-wrap{
  position:relative;
  width:120px;
  height:120px;
  margin:0 auto 12px;
 }
-
 .avatar{
  width:100%;
  height:100%;
@@ -170,7 +130,6 @@ body:before{
  border:4px solid white;
  box-shadow:0 8px 30px #7774;
 }
-
 .avatar-frame{
  position:absolute;
  top:50%;
@@ -182,53 +141,62 @@ body:before{
  pointer-events:none;
  z-index:4;
 }
-
-/* Ảnh mũ PNG trong suốt */
 .avatar-wrap:after{
  content:"";
  position:absolute;
  inset:-7px;
  border-radius:50%;
- border:2px solid #8770ff66;
+ border:2px solid #8770ff55;
  box-shadow:0 0 20px #947aff44;
  pointer-events:none;
 }
-
 .hello{
  color:var(--muted);
- font-size:12px;
+ font-size:13px;
  margin-top:12px;
 }
-
 .hero h1{
  font-size:23px;
  font-weight:800;
  margin-top:5px;
+ letter-spacing:-.4px;
 }
-
-.verified{color:#2196f3}
-
+.verified{
+ color:#2196f3;
+ font-size:19px;
+ margin-left:3px;
+ vertical-align:1px;
+ filter:drop-shadow(0 2px 4px #2196f344);
+}
 .tagline{
- margin-top:7px;
+ margin-top:8px;
  color:var(--muted);
- font-size:14px;
+ font-size:15px;
+ min-height:23px;
 }
-
 .tagline span{
  color:#7663ff;
  font-weight:800;
 }
-
+.typing-cursor{
+ display:inline-block;
+ width:2px;
+ height:15px;
+ background:#8065ff;
+ margin-left:3px;
+ vertical-align:-2px;
+ animation:blink .7s infinite;
+}
+@keyframes blink{50%{opacity:0}}
 .socials{
  display:flex;
  justify-content:center;
  gap:12px;
  margin-top:20px;
 }
-
 .social{
- width:54px;
- height:54px;
+ width:55px;
+ height:55px;
  display:grid;
  place-items:center;
  border-radius:19px;
@@ -237,51 +205,39 @@ body:before{
  font-size:23px;
  transition:.3s;
 }
-
-.social:hover{
- transform:translateY(-7px) scale(1.05);
-}
-
+.social:hover{transform:translateY(-7px) scale(1.05)}
 .discord{color:#5865f2}
 .telegram{color:#20a5e9}
 .youtube{color:#ff2424}
 
-/* ==============================
-   5. THÔNG BÁO
-============================== */
-
+/* THÔNG BÁO */
 .notice{
  max-width:1200px;
  margin:0 auto 23px;
- padding:14px 18px;
- border-radius:16px;
+ padding:13px 18px;
+ border-radius:15px;
  background:var(--card);
  box-shadow:var(--shadow);
  display:flex;
  align-items:center;
  gap:12px;
  font-size:12px;
+ color:var(--muted);
 }
-
 .notice i,.notice strong{color:#7663ff}
 
-/* ==============================
-   6. DANH SÁCH ỨNG DỤNG
-============================== */
-
+/* DANH SÁCH ỨNG DỤNG */
 .container{
  width:100%;
  max-width:1660px;
  padding:0 14px;
  margin:auto;
 }
-
 .apps{
  display:grid;
  grid-template-columns:repeat(3,minmax(0,1fr));
  gap:18px;
 }
-
 .app-card{
  min-width:0;
  background:var(--card);
@@ -293,68 +249,81 @@ body:before{
  animation:showCard .7s ease forwards;
  transition:transform .3s,box-shadow .3s;
 }
-
 .app-card:hover{
- transform:translateY(-6px);
+ transform:translateY(-5px);
  box-shadow:0 18px 35px #5553;
 }
-
 @keyframes showCard{
  to{opacity:1;transform:translateY(0)}
 }
-
-.app-cover{
+.cover-wrap{
  width:100%;
  aspect-ratio:1.8/1;
+ position:relative;
+ overflow:hidden;
+ background:#e6e8f5;
+}
+.app-cover{
+ width:100%;
+ height:100%;
  display:block;
  object-fit:cover;
- background:#e6e8f5;
  transition:transform .5s;
 }
-
-.app-card:hover .app-cover{transform:scale(1.025)}
-
-.app-content{padding:0 15px}
-
+.app-card:hover .app-cover{transform:scale(1.035)}
+.platform{
+ position:absolute;
+ top:9px;
+ right:10px;
+ padding:5px 12px;
+ border-radius:20px;
+ color:#fff;
+ background:#171923dd;
+ border:1px solid #ffffff55;
+ font-size:10px;
+ font-weight:800;
+ backdrop-filter:blur(8px);
+}
+.platform.android{background:#16a34add}
+.platform i{margin-right:4px}
+.app-content{padding:0 15px 2px}
 .app-heading{
  display:flex;
  align-items:center;
  gap:10px;
- margin-top:-27px;
+ margin-top:-28px;
  position:relative;
- min-height:59px;
+ min-height:62px;
 }
-
 .app-icon{
- width:60px;
- height:60px;
- flex:0 0 60px;
+ width:64px;
+ height:64px;
+ flex:0 0 64px;
  object-fit:cover;
  border-radius:17px;
  border:3px solid var(--card);
  background:var(--card);
  box-shadow:0 4px 12px #0002;
 }
-
 .app-details{
  min-width:0;
- padding-top:23px;
+ padding-top:24px;
 }
-
 .app-name{
- font-size:12px;
+ font-size:13px;
  font-weight:800;
- line-height:1.5;
+ line-height:1.45;
+ color:var(--text);
  overflow-wrap:anywhere;
+ letter-spacing:-.2px;
 }
-
 .app-date{
  font-size:10px;
  color:var(--muted);
  font-style:italic;
+ font-weight:600;
  margin-top:3px;
 }
-
 .app-description{
  color:var(--muted);
  font-size:10px;
@@ -363,8 +332,7 @@ body:before{
  line-height:1.6;
 }
 
-/* BUTTON DOWNLOAD */
-
+/* DOWNLOAD */
 .download{
  width:100%;
  min-height:43px;
@@ -381,24 +349,20 @@ body:before{
  box-shadow:0 5px 16px #8750ff33;
  transition:.25s;
 }
-
 .download:hover{
  transform:translateY(-3px);
  box-shadow:0 9px 23px #8750ff55;
  filter:brightness(1.08);
 }
+.download:active{transform:scale(.98)}
 
-/* ==============================
-   7. MUSIC PLAYER
-============================== */
-
+/* MUSIC */
 .bottom{
  display:grid;
  grid-template-columns:1fr 1fr;
  gap:16px;
  margin:25px 0 20px;
 }
-
 .panel{
  min-width:0;
  background:var(--card);
@@ -406,13 +370,11 @@ body:before{
  padding:16px;
  box-shadow:var(--shadow);
 }
-
 .music{
  display:flex;
  align-items:center;
  gap:12px;
 }
-
 .music-cover{
  width:62px;
  height:62px;
@@ -421,9 +383,7 @@ body:before{
  border:2px solid #ff843e;
  flex-shrink:0;
 }
-
 .music-content{flex:1;min-width:0}
-
 .music-title{
  font-size:12px;
  font-weight:800;
@@ -431,19 +391,12 @@ body:before{
  white-space:nowrap;
  text-overflow:ellipsis;
 }
-
 .music-artist{
  color:var(--muted);
  font-size:10px;
  margin-top:5px;
 }
-
-.music-controls{
- display:flex;
- gap:7px;
- align-items:center;
-}
-
+.music-controls{display:flex;gap:7px;align-items:center}
 .music-controls button{
  width:32px;
  height:32px;
@@ -454,14 +407,8 @@ body:before{
  font-size:11px;
  transition:.2s;
 }
-
 .music-controls button:hover{transform:scale(1.12)}
-
-.dark .music-controls button{
- background:#292b42;
- border-color:#414365;
-}
-
+.dark .music-controls button{background:#292b42;border-color:#414365}
 .progress-area{
  display:flex;
  align-items:center;
@@ -470,7 +417,6 @@ body:before{
  font-size:9px;
  color:var(--muted);
 }
-
 .progress{
  flex:1;
  min-width:0;
@@ -479,16 +425,8 @@ body:before{
  cursor:pointer;
 }
 
-/* ==============================
-   8. YOUTUBE
-============================== */
-
-.youtube-panel{
- display:flex;
- align-items:center;
- gap:13px;
-}
-
+/* YOUTUBE */
+.youtube-panel{display:flex;align-items:center;gap:13px}
 .youtube-avatar{
  width:62px;
  height:62px;
@@ -496,17 +434,9 @@ body:before{
  object-fit:cover;
  flex-shrink:0;
 }
-
 .youtube-info{flex:1;min-width:0}
-
 .youtube-info h3{font-size:14px}
-
-.youtube-info p{
- color:var(--muted);
- font-size:10px;
- margin-top:4px;
-}
-
+.youtube-info p{color:var(--muted);font-size:10px;margin-top:4px}
 .subscribe{
  background:#111;
  color:white;
@@ -517,16 +447,9 @@ body:before{
  white-space:nowrap;
  transition:.2s;
 }
+.subscribe:hover{background:#ff2020;transform:scale(1.04)}
 
-.subscribe:hover{
- background:#ff2020;
- transform:scale(1.04);
-}
-
-/* ==============================
-   9. FOOTER
-============================== */
-
+/* FOOTER */
 footer{
  text-align:center;
  padding:19px 10px;
@@ -534,13 +457,9 @@ footer{
  border-top:1px solid #ddd4;
  font-size:11px;
 }
-
 footer span{color:#8065ff;font-weight:800}
 
-/* ==============================
-   10. THÔNG BÁO NHỎ
-============================== */
-
+/* TOAST */
 .toast{
  position:fixed;
  bottom:25px;
@@ -557,531 +476,339 @@ footer span{color:#8065ff;font-weight:800}
  text-align:center;
  max-width:90%;
 }
+.toast.show{transform:translate(-50%,0);opacity:1}
 
-.toast.show{
- transform:translate(-50%,0);
- opacity:1;
-}
-
-/* ==============================
-   11. RESPONSIVE MOBILE
-============================== */
-
+/* RESPONSIVE */
 @media(max-width:950px){
  .apps{grid-template-columns:repeat(2,minmax(0,1fr))}
  .notice{margin-left:14px;margin-right:14px}
 }
-
 @media(max-width:600px){
-
  .navbar{height:49px;padding:0 13px}
-
- .hero{padding:35px 12px 34px}
-
+ .hero{padding:35px 12px 35px}
  .avatar-wrap{width:105px;height:105px}
-
  .avatar-frame{width:120%;height:120%}
-
  .hero h1{font-size:21px}
-
  .social{width:48px;height:48px;border-radius:16px}
-
- .notice{
-  margin:0 10px 18px;
-  font-size:11px;
-  padding:12px;
- }
-
+ .notice{margin:0 10px 18px;font-size:11px;padding:12px}
  .container{padding:0 10px}
-
  .apps{grid-template-columns:1fr;gap:15px}
-
- .app-cover{aspect-ratio:1.7/1}
-
+ .cover-wrap{aspect-ratio:1.7/1}
+ .app-name{font-size:13px}
  .bottom{grid-template-columns:1fr;gap:12px;margin-top:18px}
-
  .panel{padding:13px}
-
  .youtube-avatar{width:55px;height:55px}
-
  .subscribe{padding:10px 15px}
-
  .particle{font-size:12px!important}
 }
-
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{
+  animation-duration:.01ms!important;
+  animation-iteration-count:1!important;
+  scroll-behavior:auto!important;
+ }
+}
 </style>
 </head>
 
 <body>
-
-<!-- HIỆU ỨNG RƠI -->
 <div id="particles"></div>
 
-<!-- NAVBAR -->
 <header class="navbar">
-
- <button class="nav-btn bell" onclick="showToast('Chào mừng đến với Hoàng Kun iOS!')">
+ <button class="nav-btn bell" onclick="showToast('Chào mừng đến với Hoàng Kun iOS!')" aria-label="Thông báo">
   <i class="fa-solid fa-bell"></i>
  </button>
-
- <button class="nav-btn theme" id="themeBtn" onclick="toggleTheme()">
+ <button class="nav-btn theme" id="themeBtn" onclick="toggleTheme()" aria-label="Đổi giao diện">
   <i class="fa-solid fa-sun"></i>
  </button>
-
 </header>
 
-<!-- PROFILE -->
 <section class="hero">
-
  <div class="avatar-wrap">
-
-  <!-- ẢNH ĐẠI DIỆN -->
-  <img class="avatar"
-   src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop&crop=faces"
-   alt="Hoàng Kun">
-
-  <!-- KHUNG MŨ GIỐNG VÂN THẮNG IOS -->
-  <img class="avatar-frame"
-   src="https://vthangios.xyz/uploads/intro/1789270294_e1f9986c9748fea3.png"
-   alt=""
-   aria-hidden="true">
-
+  <img class="avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop&crop=faces" alt="Hoàng Kun">
+  <img class="avatar-frame" src="https://vthangios.xyz/uploads/intro/1789270294_e1f9986c9748fea3.png" alt="" aria-hidden="true">
  </div>
 
  <p class="hello">Hi, i am</p>
-
- <h1>
-  Hoàng Kun
-  <i class="fa-solid fa-circle-check verified"></i>
- </h1>
-
- <p class="tagline">
-  and I'm a <span>Developer.</span>
- </p>
+ <h1>Hoàng Kun iOS <i class="fa-solid fa-circle-check verified" title="Verified"></i></h1>
+ <p class="tagline">and I'm a <span id="typingText">Gamer</span><span class="typing-cursor"></span></p>
 
  <div class="socials">
-
-  <a class="social discord" href="#" aria-label="Discord">
-   <i class="fa-brands fa-discord"></i>
-  </a>
-
-  <a class="social telegram" href="#" aria-label="Telegram">
-   <i class="fa-brands fa-telegram"></i>
-  </a>
-
-  <a class="social youtube"
-   href="https://www.youtube.com/@KunMusic06"
-   target="_blank" rel="noopener">
-   <i class="fa-brands fa-youtube"></i>
-  </a>
-
+  <a class="social discord" href="#" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+  <a class="social telegram" href="#" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+  <a class="social youtube" href="https://www.youtube.com/@KunMusic06" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i></a>
  </div>
-
 </section>
 
-<!-- THÔNG BÁO -->
 <div class="notice">
  <i class="fa-solid fa-bullhorn"></i>
- <div>
-  <strong>THÔNG BÁO:</strong>
-  Chào mừng bạn đến với hệ thống Hoàng Kun iOS!
- </div>
+ <div><strong>THÔNG BÁO:</strong> Chào mừng bạn đến với hệ thống Hoàng Kun iOS!</div>
 </div>
 
 <main class="container">
-
- <!-- DANH SÁCH ỨNG DỤNG -->
  <section class="apps" id="appList"></section>
 
- <!-- NHẠC VÀ YOUTUBE -->
  <section class="bottom">
-
   <div class="panel">
-
    <div class="music">
-
-    <img class="music-cover"
-     src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&h=300&fit=crop"
-     alt="Music">
-
+    <img class="music-cover" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&h=300&fit=crop" alt="Music">
     <div class="music-content">
      <div class="music-title" id="musicTitle">HOÀNG KUN MUSIC</div>
      <div class="music-artist" id="musicArtist">Playlist yêu thích</div>
     </div>
-
     <div class="music-controls">
-
-     <button onclick="changeTrack(-1)">
-      <i class="fa-solid fa-backward-step"></i>
-     </button>
-
-     <button onclick="toggleMusic()" id="playBtn">
-      <i class="fa-solid fa-play"></i>
-     </button>
-
-     <button onclick="changeTrack(1)">
-      <i class="fa-solid fa-forward-step"></i>
-     </button>
-
+     <button onclick="changeTrack(-1)" aria-label="Bài trước"><i class="fa-solid fa-backward-step"></i></button>
+     <button onclick="toggleMusic()" id="playBtn" aria-label="Phát nhạc"><i class="fa-solid fa-play"></i></button>
+     <button onclick="changeTrack(1)" aria-label="Bài tiếp"><i class="fa-solid fa-forward-step"></i></button>
     </div>
-
    </div>
-
    <div class="progress-area">
     <span id="currentTime">0:00</span>
     <input class="progress" id="progress" type="range" min="0" max="100" value="0">
     <span id="duration">0:00</span>
    </div>
-
    <audio id="audio" preload="metadata"></audio>
-
   </div>
 
   <div class="panel youtube-panel">
-
-   <img class="youtube-avatar"
-    src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop&crop=faces"
-    alt="Hoàng Kun">
-
+   <img class="youtube-avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop&crop=faces" alt="Hoàng Kun">
    <div class="youtube-info">
     <h3>Hoàng Kun Music</h3>
     <p>@KunMusic06</p>
     <p>Welcome to my channel!</p>
    </div>
-
-   <a class="subscribe"
-    href="https://www.youtube.com/@KunMusic06"
-    target="_blank" rel="noopener">
-    Đăng ký
-   </a>
-
+   <a class="subscribe" href="https://www.youtube.com/@KunMusic06" target="_blank" rel="noopener">Đăng ký</a>
   </div>
-
  </section>
-
 </main>
 
-<footer>
- © Designer by <span>HOÀNG KUN iOS</span> 2026
-</footer>
-
+<footer>© Designer by <span>HOÀNG KUN iOS</span> 2026</footer>
 <div class="toast" id="toast"></div>
 
 <script>
-
-/* ==============================
-   1. DANH SÁCH ỨNG DỤNG
-   Sửa thông tin tại đây
-============================== */
-
-const apps = [
-
+/* DANH SÁCH ỨNG DỤNG - CHỈNH NỘI DUNG Ở ĐÂY */
+const apps=[
  {
   name:"MENU AOV MAP V1",
   date:"30/10/2026",
   description:"Phiên bản AOV MAP dành cho Android",
+  platform:"iOS",
   cover:"https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1000&h=560&fit=crop",
   icon:"https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=200&h=200&fit=crop",
   link:""
  },
-
  {
   name:"MENU AOV MAP V2",
   date:"31/10/2026",
   description:"Phiên bản cập nhật mới nhất",
+  platform:"iOS",
   cover:"https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1000&h=560&fit=crop",
   icon:"https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=200&h=200&fit=crop",
   link:""
  },
-
  {
-  name:"FREE FIRE CHEAT PROXY",
-  date:"17/10/2026",
-  description:"Ứng dụng hỗ trợ Free Fire",
+  name:"MENU AOV ESP V3",
+  date:"01/11/2026",
+  description:"Phiên bản menu AOV mới",
+  platform:"iOS",
   cover:"https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=1000&h=560&fit=crop",
   icon:"https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=200&h=200&fit=crop",
   link:""
  },
-
  {
-  name:"8 BALL POOL",
-  date:"26/10/2026",
-  description:"Ứng dụng 8 Ball Pool",
-  cover:"https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=1000&h=560&fit=crop",
-  icon:"https://images.unsplash.com/photo-1511512578047-dfb367046420?w=200&h=200&fit=crop",
+  name:"MENU FREE FIRE",
+  date:"27/10/2026",
+  description:"Phiên bản hỗ trợ Free Fire",
+  platform:"Android",
+  cover:"https://images.unsplash.com/photo-1603481546238-487240415921?w=1000&h=560&fit=crop",
+  icon:"https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=200&h=200&fit=crop",
   link:""
  },
-
+ {
+  name:"MENU HỖ TRỢ GAME",
+  date:"28/10/2026",
+  description:"Công cụ hỗ trợ chơi game",
+  platform:"Android",
+  cover:"https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1000&h=560&fit=crop",
+  icon:"https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=200&h=200&fit=crop",
+  link:""
+ },
  {
   name:"TIKTOK MOD",
-  date:"27/10/2026",
+  date:"29/10/2026",
   description:"Phiên bản TikTok tùy chỉnh",
+  platform:"iOS",
   cover:"https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1000&h=560&fit=crop",
   icon:"https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=200&h=200&fit=crop",
   link:""
  }
-
 ];
 
-
-/* ==============================
-   2. HIỂN THỊ ỨNG DỤNG
-============================== */
-
+/* HIỂN THỊ CARD */
 function renderApps(){
-
- const list = document.getElementById("appList");
-
- list.innerHTML = apps.map((app,index)=>`
-
-  <article class="app-card" style="animation-delay:${index*.12}s">
-
-   <img class="app-cover"
-    src="${app.cover}"
-    alt="${app.name}"
-    loading="lazy">
-
+ const list=document.getElementById("appList");
+ list.innerHTML=apps.map((app,index)=>`
+  <article class="app-card" style="animation-delay:${index*.1}s">
+   <div class="cover-wrap">
+    <img class="app-cover" src="${app.cover}" alt="${app.name}" loading="lazy">
+    <span class="platform ${app.platform.toLowerCase()==="android"?"android":""}">
+     <i class="fa-brands ${app.platform.toLowerCase()==="android"?"fa-android":"fa-apple"}"></i>${app.platform}
+    </span>
+   </div>
    <div class="app-content">
-
     <div class="app-heading">
-
-     <img class="app-icon"
-      src="${app.icon}"
-      alt="${app.name}"
-      loading="lazy">
-
+     <img class="app-icon" src="${app.icon}" alt="${app.name}" loading="lazy">
      <div class="app-details">
       <div class="app-name">${app.name}</div>
       <div class="app-date">Cập Nhật Ngày ${app.date}</div>
      </div>
-
     </div>
-
     <p class="app-description">${app.description}</p>
-
-    <a class="download"
-     href="${app.link || '#'}"
-     onclick="return downloadApp(event,${index})">
-
-     <i class="fa-solid fa-download"></i>
-     Download
-
+    <a class="download" href="${app.link||"#"}" onclick="return downloadApp(event,${index})">
+     <i class="fa-solid fa-download"></i> Download
     </a>
-
    </div>
-
   </article>
-
  `).join("");
-
 }
-
 function downloadApp(event,index){
-
  if(!apps[index].link){
   event.preventDefault();
   showToast("Ứng dụng chưa có link tải!");
   return false;
  }
-
  return true;
 }
 
+/* HIỆU ỨNG GÕ CHỮ */
+const words=["Gamer","YouTuber","TikToker","Developer"];
+let wordIndex=0;
+let charIndex=0;
+let deleting=false;
+const typingText=document.getElementById("typingText");
+function typeWriter(){
+ const word=words[wordIndex];
+ if(!deleting){
+  charIndex++;
+  typingText.textContent=word.substring(0,charIndex);
+  if(charIndex===word.length){
+   deleting=true;
+   setTimeout(typeWriter,1400);
+   return;
+  }
+ }else{
+  charIndex--;
+  typingText.textContent=word.substring(0,charIndex);
+  if(charIndex===0){
+   deleting=false;
+   wordIndex=(wordIndex+1)%words.length;
+  }
+ }
+ setTimeout(typeWriter,deleting?65:115);
+}
 
-/* ==============================
-   3. HIỆU ỨNG HẠT RƠI
-============================== */
-
+/* SAO VÀ HẠT LẤP LÁNH */
 function createParticles(){
-
- const area = document.getElementById("particles");
-
- const symbols = ["✦","✧","·","✺","❋"];
- const colors = ["#8d85ff","#ff9bcf","#79dfff","#a4e9bd"];
-
- const mobile = window.innerWidth < 600;
- const count = mobile ? 14 : 28;
-
+ const area=document.getElementById("particles");
+ const symbols=["✦","✧","·","✺","❋"];
+ const colors=["#8d85ff","#ff9bcf","#79dfff","#a4e9bd"];
+ const count=window.innerWidth<600?14:28;
  for(let i=0;i<count;i++){
-
-  const particle = document.createElement("span");
-
-  particle.className = "particle";
-  particle.textContent = symbols[Math.floor(Math.random()*symbols.length)];
-
-  particle.style.left = Math.random()*100+"%";
-  particle.style.fontSize = (8+Math.random()*11)+"px";
-  particle.style.color = colors[Math.floor(Math.random()*colors.length)];
-  particle.style.animationDuration = (9+Math.random()*13)+"s";
-  particle.style.animationDelay = (-Math.random()*18)+"s";
-  particle.style.setProperty("--drift",(Math.random()*140-70)+"px");
-
-  area.appendChild(particle);
-
+  const p=document.createElement("span");
+  p.className="particle";
+  p.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+  p.style.left=Math.random()*100+"%";
+  p.style.fontSize=(8+Math.random()*11)+"px";
+  p.style.color=colors[Math.floor(Math.random()*colors.length)];
+  p.style.animationDuration=(9+Math.random()*13)+"s";
+  p.style.animationDelay=(-Math.random()*18)+"s";
+  p.style.setProperty("--drift",(Math.random()*140-70)+"px");
+  area.appendChild(p);
  }
-
 }
 
-
-/* ==============================
-   4. DARK MODE
-============================== */
-
+/* DARK MODE */
 function toggleTheme(){
-
  document.body.classList.toggle("dark");
-
- const dark = document.body.classList.contains("dark");
-
- document.getElementById("themeBtn").innerHTML = dark
-  ? '<i class="fa-solid fa-moon"></i>'
-  : '<i class="fa-solid fa-sun"></i>';
-
+ const dark=document.body.classList.contains("dark");
+ document.getElementById("themeBtn").innerHTML=dark
+  ?'<i class="fa-solid fa-moon"></i>'
+  :'<i class="fa-solid fa-sun"></i>';
 }
 
-
-/* ==============================
-   5. THÔNG BÁO
-============================== */
-
+/* TOAST */
 let toastTimer;
-
 function showToast(message){
-
- const toast = document.getElementById("toast");
-
- toast.textContent = message;
+ const toast=document.getElementById("toast");
+ toast.textContent=message;
  toast.classList.add("show");
-
  clearTimeout(toastTimer);
-
- toastTimer = setTimeout(()=>{
-  toast.classList.remove("show");
- },2500);
-
+ toastTimer=setTimeout(()=>toast.classList.remove("show"),2500);
 }
 
-
-/* ==============================
-   6. MUSIC PLAYER
-   Đặt music.mp3 cùng thư mục
-============================== */
-
-const tracks = [
-
- {
-  title:"HOÀNG KUN MUSIC",
-  artist:"Playlist yêu thích",
-  src:"music.mp3"
- }
-
+/* MUSIC PLAYER - ĐẶT MUSIC.MP3 CÙNG THƯ MỤC */
+const tracks=[
+ {title:"HOÀNG KUN MUSIC",artist:"Playlist yêu thích",src:"music.mp3"}
 ];
-
-let trackIndex = 0;
-
-const audio = document.getElementById("audio");
-const playBtn = document.getElementById("playBtn");
-const progress = document.getElementById("progress");
+let trackIndex=0;
+const audio=document.getElementById("audio");
+const playBtn=document.getElementById("playBtn");
+const progress=document.getElementById("progress");
 
 function loadTrack(){
-
- const track = tracks[trackIndex];
-
- audio.src = track.src;
-
- document.getElementById("musicTitle").textContent = track.title;
- document.getElementById("musicArtist").textContent = track.artist;
-
- progress.value = 0;
-
+ const track=tracks[trackIndex];
+ audio.src=track.src;
+ document.getElementById("musicTitle").textContent=track.title;
+ document.getElementById("musicArtist").textContent=track.artist;
+ progress.value=0;
 }
-
 function toggleMusic(){
-
  if(audio.paused){
-
-  audio.play()
-   .then(()=>{
-    playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-   })
-   .catch(()=>{
-    showToast("Không tìm thấy file nhạc music.mp3!");
-   });
-
+  audio.play().then(()=>{
+   playBtn.innerHTML='<i class="fa-solid fa-pause"></i>';
+  }).catch(()=>showToast("Không tìm thấy file music.mp3!"));
  }else{
-
   audio.pause();
-  playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-
+  playBtn.innerHTML='<i class="fa-solid fa-play"></i>';
  }
-
 }
-
 function changeTrack(direction){
-
- if(tracks.length===1){
-  audio.currentTime=0;
-  if(audio.paused) toggleMusic();
-  return;
- }
-
  trackIndex=(trackIndex+direction+tracks.length)%tracks.length;
-
  loadTrack();
- toggleMusic();
-
+ audio.play().then(()=>{
+  playBtn.innerHTML='<i class="fa-solid fa-pause"></i>';
+ }).catch(()=>showToast("Không tìm thấy file music.mp3!"));
 }
-
 function formatTime(seconds){
-
- if(!Number.isFinite(seconds)) return "0:00";
-
- return Math.floor(seconds/60)+":"+
- String(Math.floor(seconds%60)).padStart(2,"0");
-
+ if(!Number.isFinite(seconds))return "0:00";
+ return Math.floor(seconds/60)+":"+String(Math.floor(seconds%60)).padStart(2,"0");
 }
-
 audio.addEventListener("loadedmetadata",()=>{
-
  document.getElementById("duration").textContent=formatTime(audio.duration);
-
 });
-
 audio.addEventListener("timeupdate",()=>{
-
- if(!audio.duration) return;
-
+ if(!audio.duration)return;
  progress.value=audio.currentTime/audio.duration*100;
-
- document.getElementById("currentTime").textContent=
- formatTime(audio.currentTime);
-
+ document.getElementById("currentTime").textContent=formatTime(audio.currentTime);
 });
-
 progress.addEventListener("input",()=>{
-
- if(audio.duration){
-  audio.currentTime=progress.value/100*audio.duration;
- }
-
+ if(audio.duration)audio.currentTime=progress.value/100*audio.duration;
 });
-
-audio.addEventListener("ended",()=>{
-
+audio.addEventListener("play",()=>{
+ playBtn.innerHTML='<i class="fa-solid fa-pause"></i>';
+});
+audio.addEventListener("pause",()=>{
  playBtn.innerHTML='<i class="fa-solid fa-play"></i>';
-
+});
+audio.addEventListener("ended",()=>{
+ playBtn.innerHTML='<i class="fa-solid fa-play"></i>';
 });
 
-
-/* ==============================
-   7. KHỞI CHẠY WEBSITE
-============================== */
-
+/* KHỞI CHẠY */
 renderApps();
 createParticles();
 loadTrack();
-
+typeWriter();
 </script>
-
 </body>
 </html>
