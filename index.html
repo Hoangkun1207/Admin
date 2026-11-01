@@ -123,20 +123,21 @@ body:before{
  width:140px;
  height:140px;
  margin:0 auto 5px;
+ overflow:visible;
 }
 
-/* ẢNH CHÂN DUNG NẰM SAU MŨ */
+/* ẢNH CHÂN DUNG */
 .avatar{
  position:absolute;
- width:88px;
- height:88px;
- top:54%;
+ width:82px;
+ height:82px;
+ top:53%;
  left:50%;
  transform:translate(-50%,-50%);
  object-fit:cover;
  object-position:center;
  border:0;
- border-radius:0;
+ border-radius:50%;
  box-shadow:none;
  z-index:2;
 }
@@ -158,6 +159,12 @@ body:before{
 .avatar-frame:not([src]),
 .avatar-frame[src=""]{display:none}
 
+/* MOBILE */
+@media(max-width:600px){
+ .avatar-wrap{width:130px;height:130px}
+ .avatar{width:76px;height:76px;top:53%}
+ .avatar-frame{width:130px;height:130px}
+}
 .hello{
  color:var(--muted);
  font-size:13px;
