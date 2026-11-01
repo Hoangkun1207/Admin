@@ -19,6 +19,7 @@
  --primary:#6265ff;
  --secondary:#c03ef3;
  --shadow:0 8px 25px rgba(0,0,0,.3);
+ --border:#ffffff12;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -36,6 +37,7 @@ body.light{
  --text:#191a30;
  --muted:#8991aa;
  --shadow:0 8px 25px rgba(55,65,120,.13);
+ --border:#00000012;
 }
 a{text-decoration:none;color:inherit}
 button{font-family:inherit;cursor:pointer}
@@ -75,7 +77,7 @@ body:before{
  will-change:transform,opacity;
 }
 @keyframes fall{
- 0%{transform:translate3d(0,-30px,0) rotate(0deg);opacity:0}
+ 0%{transform:translate3d(0,-30px,0) rotate(0);opacity:0}
  10%{opacity:.8}
  80%{opacity:.65}
  100%{transform:translate3d(var(--drift),110vh,0) rotate(360deg);opacity:0}
@@ -94,7 +96,7 @@ body:before{
  background:#171827dd;
  backdrop-filter:blur(20px);
  -webkit-backdrop-filter:blur(20px);
- border-bottom:1px solid #ffffff12;
+ border-bottom:1px solid var(--border);
 }
 .light .navbar{background:#ffffffbb}
 .nav-btn{
@@ -116,8 +118,6 @@ body:before{
  padding:40px 15px 45px;
  position:relative;
 }
-
-/* AVATAR + MŨ TRÙM */
 .avatar-wrap{
  position:relative;
  width:140px;
@@ -125,8 +125,6 @@ body:before{
  margin:0 auto 5px;
  overflow:visible;
 }
-
-/* ẢNH CHÂN DUNG */
 .avatar{
  position:absolute;
  width:100px;
@@ -141,8 +139,6 @@ body:before{
  box-shadow:none;
  z-index:2;
 }
-
-/* MŨ TRÙM PNG */
 .avatar-frame{
  position:absolute;
  top:50%;
@@ -154,18 +150,9 @@ body:before{
  pointer-events:none;
  z-index:3;
 }
-
-/* ẨN KHUNG KHI KHÔNG CÓ ẢNH */
 .avatar-frame:not([src]),
 .avatar-frame[src=""]{display:none}
 
-/* MOBILE */
-@media(max-width:600px){
- .avatar-wrap{width:130px;height:130px}
- .avatar{width:94px;height:94px;top:53%}
- .avatar-frame{width:130px;height:130px}
-}
- 
 .hello{
  color:var(--muted);
  font-size:13px;
@@ -181,8 +168,6 @@ body:before{
  justify-content:center;
  gap:7px;
 }
-
-/* DẤU TÍCH XANH */
 .verified{
  width:19px;
  height:19px;
@@ -256,13 +241,15 @@ body:before{
 }
 .notice i,.notice strong{color:#7663ff}
 
-/* APP LIST */
+/* MAIN */
 .container{
  width:100%;
  max-width:1660px;
  padding:0 14px;
  margin:auto;
 }
+
+/* APP LIST */
 .apps{
  display:grid;
  grid-template-columns:repeat(3,minmax(0,1fr));
@@ -385,7 +372,7 @@ body:before{
 }
 .download:active{transform:scale(.98)}
 
-/* MUSIC */
+/* BOTTOM */
 .bottom{
  display:grid;
  grid-template-columns:1fr 1fr;
@@ -399,67 +386,71 @@ body:before{
  padding:16px;
  box-shadow:var(--shadow);
 }
-.music{
+
+/* SOUNDCLOUD */
+.music-header{
  display:flex;
  align-items:center;
- gap:12px;
+ justify-content:space-between;
+ gap:8px;
+ margin-bottom:13px;
 }
-.music-cover{
- width:62px;
- height:62px;
- border-radius:50%;
- object-fit:cover;
- border:2px solid #ff843e;
- flex-shrink:0;
-}
-.music-content{flex:1;min-width:0}
-.music-title{
- font-size:12px;
- font-weight:800;
- overflow:hidden;
- white-space:nowrap;
- text-overflow:ellipsis;
-}
-.music-artist{
- color:var(--muted);
- font-size:10px;
- margin-top:5px;
-}
-.music-controls{
- display:flex;
- gap:7px;
- align-items:center;
-}
-.music-controls button{
- width:32px;
- height:32px;
- border:1px solid #414365;
- background:#292b42;
- color:#a99aff;
- border-radius:50%;
- font-size:11px;
- transition:.2s;
-}
-.light .music-controls button{
- background:#f0f1ff;
- border-color:#dce0ff;
- color:#7864ff;
-}
-.music-controls button:hover{transform:scale(1.12)}
-.progress-area{
+.music-heading{
  display:flex;
  align-items:center;
  gap:9px;
- margin-top:10px;
- font-size:9px;
- color:var(--muted);
+ font-size:14px;
+ font-weight:800;
 }
-.progress{
- flex:1;
- min-width:0;
- height:4px;
- accent-color:#8061ff;
- cursor:pointer;
+.music-heading i{
+ color:#ff7043;
+ font-size:20px;
+}
+.music-status{
+ display:flex;
+ align-items:center;
+ gap:6px;
+ color:var(--muted);
+ font-size:10px;
+ white-space:nowrap;
+}
+.music-status:before{
+ content:"";
+ width:7px;
+ height:7px;
+ border-radius:50%;
+ background:#22c55e;
+ box-shadow:0 0 8px #22c55e;
+}
+.soundcloud-frame{
+ width:100%;
+ overflow:hidden;
+ border-radius:15px;
+ background:#252638;
+}
+.soundcloud-frame iframe{
+ display:block;
+ width:100%;
+ height:350px;
+ border:0;
+}
+.soundcloud-link{
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ gap:8px;
+ margin-top:12px;
+ padding:11px;
+ border-radius:13px;
+ background:linear-gradient(100deg,#ff7138,#ff3d00);
+ color:white;
+ font-size:12px;
+ font-weight:800;
+ transition:.25s;
+}
+.soundcloud-link:hover{
+ transform:translateY(-2px);
+ filter:brightness(1.1);
 }
 
 /* YOUTUBE */
@@ -499,7 +490,7 @@ footer{
  text-align:center;
  padding:19px 10px;
  color:var(--muted);
- border-top:1px solid #ffffff15;
+ border-top:1px solid var(--border);
  font-size:11px;
 }
 footer span{color:#8065ff;font-weight:800}
@@ -548,6 +539,7 @@ footer span{color:#8065ff;font-weight:800}
  .panel{padding:13px}
  .youtube-avatar{width:55px;height:55px}
  .subscribe{padding:10px 15px}
+ .soundcloud-frame iframe{height:350px}
  .particle{font-size:12px!important}
 }
 @media(prefers-reduced-motion:reduce){
@@ -557,7 +549,6 @@ footer span{color:#8065ff;font-weight:800}
   scroll-behavior:auto!important;
  }
 }
- 
 </style>
 </head>
 
@@ -585,7 +576,6 @@ footer span{color:#8065ff;font-weight:800}
  </div>
 
  <p class="hello">Hi, i am</p>
-
  <h1>
   Hoàng Kun iOS
   <span class="verified"><i class="fa-solid fa-check"></i></span>
@@ -617,33 +607,42 @@ footer span{color:#8065ff;font-weight:800}
  <section class="apps" id="appList"></section>
 
  <section class="bottom">
-  <div class="panel">
-   <div class="music">
-    <img class="music-cover" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&h=300&fit=crop" alt="Music">
 
-    <div class="music-content">
-     <div class="music-title" id="musicTitle">HOÀNG KUN MUSIC</div>
-     <div class="music-artist" id="musicArtist">Playlist yêu thích</div>
+  <!-- SOUNDCLOUD MUSIC -->
+  <div class="panel music-panel">
+   <div class="music-header">
+    <div class="music-heading">
+     <i class="fa-brands fa-soundcloud"></i>
+     HOÀNG KUN MUSIC
     </div>
-
-    <div class="music-controls">
-     <button onclick="changeTrack(-1)" aria-label="Bài trước"><i class="fa-solid fa-backward-step"></i></button>
-     <button onclick="toggleMusic()" id="playBtn" aria-label="Phát nhạc"><i class="fa-solid fa-play"></i></button>
-     <button onclick="changeTrack(1)" aria-label="Bài tiếp"><i class="fa-solid fa-forward-step"></i></button>
-    </div>
+    <div class="music-status">SoundCloud</div>
    </div>
 
-   <div class="progress-area">
-    <span id="currentTime">0:00</span>
-    <input class="progress" id="progress" type="range" min="0" max="100" value="0">
-    <span id="duration">0:00</span>
+   <div class="soundcloud-frame">
+    <iframe
+     title="Hoàng Kun SoundCloud Player"
+     scrolling="no"
+     allow="autoplay"
+     loading="lazy"
+     src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fng-vi-t-ho-ng-172356656&color=%237665ff&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+    </iframe>
    </div>
 
-   <audio id="audio" preload="metadata"></audio>
+   <a class="soundcloud-link"
+    href="https://soundcloud.com/ng-vi-t-ho-ng-172356656"
+    target="_blank"
+    rel="noopener noreferrer">
+    <i class="fa-solid fa-headphones"></i>
+    Mở SoundCloud
+    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+   </a>
   </div>
 
+  <!-- YOUTUBE -->
   <div class="panel youtube-panel">
-   <img class="youtube-avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop&crop=faces" alt="Hoàng Kun">
+   <img class="youtube-avatar"
+    src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop&crop=faces"
+    alt="Hoàng Kun">
 
    <div class="youtube-info">
     <h3>Hoàng Kun Music</h3>
@@ -651,8 +650,12 @@ footer span{color:#8065ff;font-weight:800}
     <p>Welcome to my channel!</p>
    </div>
 
-   <a class="subscribe" href="https://www.youtube.com/@KunMusic06" target="_blank" rel="noopener">Đăng ký</a>
+   <a class="subscribe"
+    href="https://www.youtube.com/@KunMusic06"
+    target="_blank"
+    rel="noopener">Đăng ký</a>
   </div>
+
  </section>
 </main>
 
@@ -762,7 +765,9 @@ function downloadApp(event,index){
 
 /* CHỮ CHẠY */
 const words=["Gamer","YouTuber","TikToker","Developer"];
-let wordIndex=0,charIndex=0,deleting=false;
+let wordIndex=0;
+let charIndex=0;
+let deleting=false;
 const typingText=document.getElementById("typingText");
 
 function typeWriter(){
@@ -831,75 +836,9 @@ function showToast(message){
  toastTimer=setTimeout(()=>toast.classList.remove("show"),2500);
 }
 
-/* MUSIC PLAYER */
-const tracks=[
- {title:"HOÀNG KUN MUSIC",artist:"Playlist yêu thích",src:"music.mp3"}
-];
-
-let trackIndex=0;
-const audio=document.getElementById("audio");
-const playBtn=document.getElementById("playBtn");
-const progress=document.getElementById("progress");
-
-function loadTrack(){
- const track=tracks[trackIndex];
- audio.src=track.src;
- document.getElementById("musicTitle").textContent=track.title;
- document.getElementById("musicArtist").textContent=track.artist;
- progress.value=0;
- document.getElementById("currentTime").textContent="0:00";
- document.getElementById("duration").textContent="0:00";
-}
-
-function toggleMusic(){
- if(audio.paused){
-  audio.play().catch(()=>showToast("Kiểm tra file music.mp3 nhé!"));
- }else{
-  audio.pause();
- }
-}
-
-function changeTrack(direction){
- trackIndex=(trackIndex+direction+tracks.length)%tracks.length;
- loadTrack();
- toggleMusic();
-}
-
-function formatTime(seconds){
- if(!Number.isFinite(seconds))return "0:00";
- return Math.floor(seconds/60)+":"+String(Math.floor(seconds%60)).padStart(2,"0");
-}
-
-audio.addEventListener("loadedmetadata",()=>{
- document.getElementById("duration").textContent=formatTime(audio.duration);
-});
-
-audio.addEventListener("timeupdate",()=>{
- if(!audio.duration)return;
- progress.value=audio.currentTime/audio.duration*100;
- document.getElementById("currentTime").textContent=formatTime(audio.currentTime);
-});
-
-progress.addEventListener("input",()=>{
- if(audio.duration)audio.currentTime=progress.value/100*audio.duration;
-});
-
-audio.addEventListener("play",()=>{
- playBtn.innerHTML='<i class="fa-solid fa-pause"></i>';
-});
-
-audio.addEventListener("pause",()=>{
- playBtn.innerHTML='<i class="fa-solid fa-play"></i>';
-});
-
-audio.addEventListener("ended",()=>{
- playBtn.innerHTML='<i class="fa-solid fa-play"></i>';
-});
-
 /* KHỞI CHẠY */
 renderApps();
 createParticles();
-loadTrack();
 typeWriter();
 </script>
 </body>
