@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#f6f7fc">
+<meta name="theme-color" content="#f5f6fc">
 <title>Hoàng Kun iOS | App Library</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,51 +17,33 @@
  --card:#fff;
  --text:#17182b;
  --muted:#8992aa;
- --border:rgba(130,140,180,.13);
- --shadow:0 10px 28px rgba(50,60,110,.12);
  --purple:#6265ff;
  --pink:#c03ef3;
+ --shadow:0 10px 28px rgba(50,60,110,.12);
 }
-*{margin:0;padding:0;box-sizing:border-box}
+
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
+
 body{
- font-family:'Be Vietnam Pro',sans-serif;
+ font-family:"Be Vietnam Pro",sans-serif;
  background:var(--bg);
  color:var(--text);
  min-height:100vh;
  overflow-x:hidden;
- transition:background .3s,color .3s;
+ transition:.25s;
 }
+
 body.dark{
  --bg:#11121d;
  --card:#1c1e2c;
  --text:#f5f5ff;
  --muted:#a0a6bd;
- --border:rgba(255,255,255,.08);
  --shadow:0 10px 30px rgba(0,0,0,.3);
 }
-button,a{font:inherit}
+
 a{text-decoration:none;color:inherit}
-button{cursor:pointer}
-body:before{
- content:"";
- position:fixed;
- width:650px;height:650px;
- top:-320px;left:50%;
- transform:translateX(-50%);
- background:radial-gradient(circle,rgba(111,126,255,.17),transparent 70%);
- pointer-events:none;
- z-index:-1;
-}
-body:after{
- content:"";
- position:fixed;
- width:500px;height:500px;
- bottom:-300px;right:-200px;
- background:radial-gradient(circle,rgba(213,115,255,.1),transparent 70%);
- pointer-events:none;
- z-index:-1;
-}
+button{font:inherit;cursor:pointer}
 
 /* NAVBAR */
 .navbar{
@@ -72,77 +55,109 @@ body:after{
  justify-content:space-between;
  align-items:center;
  padding:0 24px;
- background:rgba(255,255,255,.73);
- backdrop-filter:blur(22px);
- -webkit-backdrop-filter:blur(22px);
- border-bottom:1px solid var(--border);
+ background:rgba(255,255,255,.8);
+ backdrop-filter:blur(20px);
+ border-bottom:1px solid #ddd3;
 }
-.dark .navbar{background:rgba(20,21,34,.78)}
+
+.dark .navbar{background:rgba(20,21,34,.85)}
+
 .nav-btn{
- width:36px;height:36px;
+ width:36px;
+ height:36px;
  border:0;
  border-radius:50%;
  background:transparent;
- display:grid;
- place-items:center;
  font-size:17px;
- transition:.25s;
 }
-.nav-btn:hover{background:rgba(120,120,255,.12);transform:scale(1.08)}
+
 .bell{color:#6175ff}
 .theme{color:#ff9d00}
 
-/* HERO */
+/* PROFILE */
 .hero{
  text-align:center;
- padding:39px 15px 43px;
+ padding:40px 15px 38px;
 }
-.avatar-wrapper{
- width:112px;height:112px;
+
+.avatar-wrap{
+ width:116px;
+ height:116px;
  position:relative;
  margin:0 auto 12px;
- isolation:isolate;
 }
-.avatar-main{
- width:100%;height:100%;
+
+.avatar{
+ width:100%;
+ height:100%;
  object-fit:cover;
  border-radius:50%;
  border:4px solid white;
- box-shadow:0 6px 25px rgba(90,90,180,.2);
+ box-shadow:0 6px 25px #7774;
 }
-.avatar-hat{
+
+.avatar-wrap:before{
+ content:"";
  position:absolute;
- width:142px;height:142px;
- max-width:none;
- object-fit:contain;
- top:-14px;
- left:50%;
- transform:translateX(-50%);
- z-index:2;
+ inset:-5px;
+ border-radius:50%;
+ border:2px solid #8065ff66;
  pointer-events:none;
 }
-.avatar-wrapper.no-hat .avatar-hat{display:none}
-.hello{font-size:12px;color:var(--muted);margin-top:10px}
-.hero h1{font-size:22px;font-weight:800;margin-top:5px}
-.verified{color:#2196f3;font-size:16px}
-.tagline{font-size:13px;color:var(--muted);margin-top:6px}
-.tagline span{color:#7964ff;font-weight:800}
+
+.avatar-hat{
+ position:absolute;
+ top:-15px;
+ left:50%;
+ transform:translateX(-50%);
+ font-size:36px;
+ filter:drop-shadow(0 3px 3px #0004);
+}
+
+.hello{
+ font-size:12px;
+ color:var(--muted);
+ margin-top:10px;
+}
+
+.hero h1{
+ font-size:22px;
+ font-weight:800;
+ margin-top:5px;
+}
+
+.verified{color:#2196f3}
+
+.tagline{
+ font-size:13px;
+ color:var(--muted);
+ margin-top:6px;
+}
+
+.tagline span{
+ color:#7964ff;
+ font-weight:800;
+}
+
 .socials{
  display:flex;
  justify-content:center;
  gap:12px;
  margin-top:18px;
 }
+
 .social{
- width:51px;height:51px;
+ width:51px;
+ height:51px;
  border-radius:17px;
  display:grid;
  place-items:center;
  background:var(--card);
  box-shadow:var(--shadow);
  font-size:22px;
- transition:.3s;
+ transition:.25s;
 }
+
 .social:hover{transform:translateY(-5px)}
 .discord{color:#5865f2}
 .telegram{color:#20a5e9}
@@ -161,39 +176,43 @@ body:after{
  gap:11px;
  font-size:12px;
 }
-.notice i{color:#6865ff;font-size:17px}
-.notice strong{color:#7563ff}
 
-/* APPLICATIONS */
+.notice i,.notice strong{color:#7563ff}
+
+/* APP GRID */
 .container{
  width:100%;
  max-width:1660px;
  padding:0 14px;
  margin:auto;
 }
+
 .apps{
  display:grid;
  grid-template-columns:repeat(3,minmax(0,1fr));
  gap:17px;
 }
+
 .app-card{
  min-width:0;
  background:var(--card);
  border-radius:22px;
  overflow:hidden;
  box-shadow:var(--shadow);
- border:1px solid var(--border);
- transition:transform .3s,box-shadow .3s;
- animation:fadeUp .6s both;
+ transition:.25s;
+ animation:fadeUp .55s both;
 }
+
 .app-card:hover{
  transform:translateY(-5px);
- box-shadow:0 16px 35px rgba(85,85,170,.17);
+ box-shadow:0 16px 35px #5555;
 }
+
 @keyframes fadeUp{
- from{opacity:0;transform:translateY(20px)}
+ from{opacity:0;transform:translateY(18px)}
  to{opacity:1;transform:translateY(0)}
 }
+
 .app-cover{
  width:100%;
  aspect-ratio:1.8/1;
@@ -201,37 +220,48 @@ body:after{
  display:block;
  background:#e6e8f5;
 }
+
 .app-content{padding:0 15px 1px}
+
 .app-heading{
  display:flex;
  align-items:center;
  gap:10px;
  margin-top:-27px;
  position:relative;
- min-height:57px;
+ min-height:58px;
 }
+
 .app-icon{
- width:58px;height:58px;
- flex-shrink:0;
+ width:59px;
+ height:59px;
+ flex:0 0 59px;
  object-fit:cover;
  border-radius:16px;
  border:3px solid var(--card);
  background:var(--card);
- box-shadow:0 3px 12px rgba(0,0,0,.12);
+ box-shadow:0 3px 12px #0002;
 }
-.app-details{min-width:0;padding-top:23px}
+
+.app-details{
+ min-width:0;
+ padding-top:23px;
+}
+
 .app-name{
  font-size:12px;
  font-weight:800;
  line-height:1.5;
  overflow-wrap:anywhere;
 }
+
 .app-date{
  font-size:10px;
  color:var(--muted);
  font-style:italic;
  margin-top:2px;
 }
+
 .app-description{
  font-size:10px;
  color:var(--muted);
@@ -239,6 +269,8 @@ body:after{
  min-height:17px;
  line-height:1.6;
 }
+
+/* DOWNLOAD */
 .download{
  width:100%;
  min-height:42px;
@@ -248,19 +280,19 @@ body:after{
  justify-content:center;
  align-items:center;
  gap:9px;
- color:#fff;
+ color:white;
  font-size:12px;
  font-weight:700;
  background:linear-gradient(100deg,#6265ff,#c03ef3);
- box-shadow:0 5px 14px rgba(130,80,255,.2);
- transition:.25s;
+ box-shadow:0 5px 14px #8050ff33;
+ transition:.22s;
 }
+
 .download:hover{
  filter:brightness(1.08);
  transform:translateY(-2px);
- box-shadow:0 8px 22px rgba(130,80,255,.35);
+ box-shadow:0 8px 22px #8050ff55;
 }
-.download:active{transform:scale(.98)}
 
 /* BOTTOM */
 .bottom{
@@ -269,29 +301,36 @@ body:after{
  gap:16px;
  margin:24px 0 19px;
 }
+
 .panel{
  background:var(--card);
  border-radius:21px;
  padding:16px;
  box-shadow:var(--shadow);
- border:1px solid var(--border);
  min-width:0;
 }
 
-/* MUSIC */
+/* MUSIC PLAYER */
 .music{
  display:flex;
  align-items:center;
  gap:12px;
 }
+
 .music-cover{
- width:61px;height:61px;
+ width:61px;
+ height:61px;
  border-radius:50%;
  border:2px solid #ff823e;
  object-fit:cover;
  flex-shrink:0;
 }
-.music-content{flex:1;min-width:0}
+
+.music-content{
+ flex:1;
+ min-width:0;
+}
+
 .music-title{
  font-size:12px;
  font-weight:800;
@@ -299,10 +338,22 @@ body:after{
  text-overflow:ellipsis;
  white-space:nowrap;
 }
-.music-artist{font-size:10px;color:var(--muted);margin-top:4px}
-.music-controls{display:flex;align-items:center;gap:7px}
+
+.music-artist{
+ font-size:10px;
+ color:var(--muted);
+ margin-top:4px;
+}
+
+.music-controls{
+ display:flex;
+ align-items:center;
+ gap:7px;
+}
+
 .music-controls button{
- width:31px;height:31px;
+ width:31px;
+ height:31px;
  flex-shrink:0;
  border-radius:50%;
  border:1px solid #dce0ff;
@@ -310,8 +361,12 @@ body:after{
  color:#7864ff;
  font-size:11px;
 }
-.music-controls button:hover{background:#dedfff}
-.dark .music-controls button{background:#292b42;border-color:#414365}
+
+.dark .music-controls button{
+ background:#292b42;
+ border-color:#414365;
+}
+
 .progress-area{
  display:flex;
  align-items:center;
@@ -320,6 +375,7 @@ body:after{
  color:var(--muted);
  font-size:9px;
 }
+
 .progress{
  flex:1;
  min-width:0;
@@ -334,15 +390,23 @@ body:after{
  align-items:center;
  gap:12px;
 }
+
 .youtube-avatar{
- width:62px;height:62px;
+ width:62px;
+ height:62px;
  border-radius:50%;
  object-fit:cover;
  flex-shrink:0;
 }
+
 .youtube-info{flex:1;min-width:0}
 .youtube-info h3{font-size:14px}
-.youtube-info p{font-size:10px;color:var(--muted);margin-top:4px}
+.youtube-info p{
+ font-size:10px;
+ color:var(--muted);
+ margin-top:4px;
+}
+
 .subscribe{
  background:#111;
  color:white;
@@ -351,19 +415,21 @@ body:after{
  font-size:11px;
  font-weight:700;
  white-space:nowrap;
- transition:.2s;
 }
-.subscribe:hover{background:#333;transform:scale(1.04)}
 
 /* FOOTER */
 footer{
  text-align:center;
- border-top:1px solid var(--border);
+ border-top:1px solid #ddd3;
  padding:18px 10px;
  color:var(--muted);
  font-size:11px;
 }
-footer span{color:#8065ff;font-weight:700}
+
+footer span{
+ color:#8065ff;
+ font-weight:700;
+}
 
 /* TOAST */
 .toast{
@@ -373,53 +439,53 @@ footer span{color:#8065ff;font-weight:700}
  transform:translate(-50%,100px);
  opacity:0;
  background:#202131;
- color:#fff;
+ color:white;
  padding:12px 22px;
  border-radius:30px;
  font-size:12px;
  z-index:200;
- transition:.35s;
- box-shadow:var(--shadow);
+ transition:.3s;
  max-width:90%;
  text-align:center;
 }
-.toast.show{transform:translate(-50%,0);opacity:1}
+
+.toast.show{
+ transform:translate(-50%,0);
+ opacity:1;
+}
 
 /* RESPONSIVE */
 @media(max-width:950px){
  .apps{grid-template-columns:repeat(2,minmax(0,1fr))}
  .notice{margin-left:14px;margin-right:14px}
 }
+
 @media(max-width:600px){
  .navbar{height:49px;padding:0 13px}
  .hero{padding:32px 12px 35px}
- .avatar-wrapper{width:100px;height:100px}
- .avatar-hat{width:128px;height:128px;top:-13px}
+ .avatar-wrap{width:100px;height:100px}
  .hero h1{font-size:20px}
  .social{width:47px;height:47px}
  .notice{margin:0 10px 17px;font-size:11px}
  .container{padding:0 10px}
  .apps{grid-template-columns:1fr;gap:15px}
  .app-cover{aspect-ratio:1.7/1}
- .app-icon{width:59px;height:59px}
  .bottom{grid-template-columns:1fr;gap:12px;margin-top:17px}
  .panel{padding:13px}
  .youtube-avatar{width:55px;height:55px}
  .subscribe{padding:10px 15px}
-}
-@media(prefers-reduced-motion:reduce){
- *,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
 }
 </style>
 </head>
 
 <body>
 
-<!-- MENU -->
+<!-- NAVBAR -->
 <header class="navbar">
  <button class="nav-btn bell" onclick="showToast('Chào mừng đến với Hoàng Kun iOS!')">
   <i class="fa-solid fa-bell"></i>
  </button>
+
  <button class="nav-btn theme" id="themeBtn" onclick="toggleTheme()">
   <i class="fa-solid fa-sun"></i>
  </button>
@@ -427,44 +493,68 @@ footer span{color:#8065ff;font-weight:700}
 
 <!-- PROFILE -->
 <section class="hero">
- <div class="avatar-wrapper">
-  <img class="avatar-main" src="assets/avatar.jpg" alt="Hoàng Kun">
-  <img class="avatar-hat" src="assets/avatar-frame.png" alt="" aria-hidden="true">
+
+ <div class="avatar-wrap">
+  <img class="avatar"
+   src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop&crop=faces"
+   alt="Hoàng Kun">
+
+  <span class="avatar-hat">🧢</span>
  </div>
 
  <p class="hello">Hi, i am</p>
- <h1>Hoàng Kun <i class="fa-solid fa-circle-check verified"></i></h1>
- <p class="tagline">and I'm a <span>Developer.</span></p>
+
+ <h1>
+  Hoàng Kun
+  <i class="fa-solid fa-circle-check verified"></i>
+ </h1>
+
+ <p class="tagline">
+  and I'm a <span>Developer.</span>
+ </p>
 
  <div class="socials">
-  <a class="social discord" href="#" title="Discord">
+  <a class="social discord" href="#" aria-label="Discord">
    <i class="fa-brands fa-discord"></i>
   </a>
-  <a class="social telegram" href="#" title="Telegram">
+
+  <a class="social telegram" href="#" aria-label="Telegram">
    <i class="fa-brands fa-telegram"></i>
   </a>
-  <a class="social youtube" href="https://youtube.com/kunmusic06" target="_blank" rel="noopener">
+
+  <a class="social youtube"
+   href="https://youtube.com/kunmusic06"
+   target="_blank" rel="noopener">
    <i class="fa-brands fa-youtube"></i>
   </a>
  </div>
+
 </section>
 
 <!-- NOTICE -->
 <div class="notice">
  <i class="fa-solid fa-bullhorn"></i>
- <div><strong>THÔNG BÁO:</strong> Chào mừng bạn đến với hệ thống Hoàng Kun iOS!</div>
+ <div>
+  <strong>THÔNG BÁO:</strong>
+  Chào mừng bạn đến với hệ thống Hoàng Kun iOS!
+ </div>
 </div>
 
-<!-- APP LIST -->
 <main class="container">
+
+ <!-- APP LIST -->
  <section class="apps" id="appList"></section>
 
  <!-- MUSIC + YOUTUBE -->
  <section class="bottom">
 
   <div class="panel">
+
    <div class="music">
-    <img class="music-cover" src="assets/music-cover.jpg" alt="Music cover">
+
+    <img class="music-cover"
+     src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&h=300&fit=crop"
+     alt="Music">
 
     <div class="music-content">
      <div class="music-title" id="musicTitle">HOÀNG KUN MUSIC</div>
@@ -472,42 +562,54 @@ footer span{color:#8065ff;font-weight:700}
     </div>
 
     <div class="music-controls">
-     <button onclick="changeTrack(-1)" title="Bài trước">
+     <button onclick="changeTrack(-1)">
       <i class="fa-solid fa-backward-step"></i>
      </button>
-     <button onclick="toggleMusic()" id="playBtn" title="Phát nhạc">
+
+     <button onclick="toggleMusic()" id="playBtn">
       <i class="fa-solid fa-play"></i>
      </button>
-     <button onclick="changeTrack(1)" title="Bài tiếp">
+
+     <button onclick="changeTrack(1)">
       <i class="fa-solid fa-forward-step"></i>
      </button>
     </div>
+
    </div>
 
    <div class="progress-area">
     <span id="currentTime">0:00</span>
-    <input class="progress" id="progress" type="range" min="0" max="100" value="0">
+    <input class="progress" id="progress"
+     type="range" min="0" max="100" value="0">
     <span id="duration">0:00</span>
    </div>
 
    <audio id="audio" preload="metadata"></audio>
+
   </div>
 
   <div class="panel youtube-panel">
-   <img class="youtube-avatar" src="assets/avatar.jpg" alt="Hoàng Kun">
+
+   <img class="youtube-avatar"
+    src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop&crop=faces"
+    alt="Hoàng Kun">
+
    <div class="youtube-info">
     <h3>Hoàng Kun iOS</h3>
     <p>@kunmusic06</p>
     <p>YouTube Channel</p>
    </div>
+
    <a class="subscribe"
     href="https://youtube.com/kunmusic06"
-    target="_blank" rel="noopener noreferrer">
+    target="_blank" rel="noopener">
     Đăng ký
    </a>
+
   </div>
 
  </section>
+
 </main>
 
 <footer>
@@ -517,67 +619,83 @@ footer span{color:#8065ff;font-weight:700}
 <div class="toast" id="toast"></div>
 
 <script>
-/* ==================================
-   DANH SÁCH ỨNG DỤNG
-   Thêm ứng dụng tại đây
-================================== */
 
-const apps=[
+/* =================================
+   1. DANH SÁCH ỨNG DỤNG
+   Chỉ cần sửa thông tin ở đây.
+================================= */
+
+const apps = [
+
  {
   name:"MENU AOV MAP ADR V1",
   date:"30/10/2026",
   description:"Phiên bản AOV MAP dành cho Android",
-  cover:"assets/app1-cover.jpg",
-  icon:"assets/app1-icon.png",
+  cover:"https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1000&h=560&fit=crop",
+  icon:"https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=200&h=200&fit=crop",
   link:""
  },
+
  {
   name:"MENU AOV MAP ADR V2",
   date:"31/10/2026",
   description:"Phiên bản cập nhật mới nhất",
-  cover:"assets/app2-cover.jpg",
-  icon:"assets/app2-icon.png",
+  cover:"https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1000&h=560&fit=crop",
+  icon:"https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=200&h=200&fit=crop",
   link:""
  },
+
  {
   name:"FREE FIRE CHEAT PROXY",
   date:"17/10/2026",
   description:"Ứng dụng hỗ trợ Free Fire",
-  cover:"assets/app3-cover.jpg",
-  icon:"assets/app3-icon.png",
+  cover:"https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1000&h=560&fit=crop",
+  icon:"https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=200&h=200&fit=crop",
   link:""
  },
+
  {
   name:"8 BALL POOL",
   date:"26/10/2026",
   description:"Ứng dụng 8 Ball Pool",
-  cover:"assets/app4-cover.jpg",
-  icon:"assets/app4-icon.png",
+  cover:"https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=1000&h=560&fit=crop",
+  icon:"https://images.unsplash.com/photo-1511512578047-dfb367046420?w=200&h=200&fit=crop",
   link:""
  },
+
  {
   name:"TIKTOK MOD",
   date:"27/10/2026",
   description:"Phiên bản TikTok tùy chỉnh",
-  cover:"assets/app5-cover.jpg",
-  icon:"assets/app5-icon.png",
+  cover:"https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1000&h=560&fit=crop",
+  icon:"https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=200&h=200&fit=crop",
   link:""
  }
+
 ];
 
-/* HIỂN THỊ ỨNG DỤNG */
-function renderApps(){
- const list=document.getElementById("appList");
 
- list.innerHTML=apps.map((app,index)=>`
-  <article class="app-card" style="animation-delay:${index*.08}s">
+/* =================================
+   2. HIỂN THỊ ỨNG DỤNG
+================================= */
+
+function renderApps(){
+
+ const list = document.getElementById("appList");
+
+ list.innerHTML = apps.map((app,index)=>`
+
+  <article class="app-card">
+
    <img class="app-cover"
     src="${app.cover}"
     alt="${app.name}"
     loading="lazy">
 
    <div class="app-content">
+
     <div class="app-heading">
+
      <img class="app-icon"
       src="${app.icon}"
       alt="${app.name}"
@@ -587,152 +705,209 @@ function renderApps(){
       <div class="app-name">${app.name}</div>
       <div class="app-date">Cập Nhật Ngày ${app.date}</div>
      </div>
+
     </div>
 
-    <p class="app-description">${app.description}</p>
+    <p class="app-description">
+     ${app.description}
+    </p>
 
     <a class="download"
      href="${app.link || '#'}"
-     ${app.link ? 'target="_blank" rel="noopener noreferrer"' : ''}
      onclick="return downloadApp(event,${index})">
+
      <i class="fa-solid fa-download"></i>
      Download
+
     </a>
+
    </div>
+
   </article>
+
  `).join("");
+
 }
 
-/* DOWNLOAD */
-function downloadApp(event,index){
- const link=apps[index].link;
 
- if(!link){
+function downloadApp(event,index){
+
+ if(!apps[index].link){
   event.preventDefault();
   showToast("Ứng dụng chưa có link tải!");
   return false;
  }
+
  return true;
 }
 
-/* DARK MODE */
-function toggleTheme(){
- document.body.classList.toggle("dark");
- const dark=document.body.classList.contains("dark");
 
- document.getElementById("themeBtn").innerHTML=dark
+/* =================================
+   3. DARK MODE
+================================= */
+
+function toggleTheme(){
+
+ document.body.classList.toggle("dark");
+
+ const dark = document.body.classList.contains("dark");
+
+ document.getElementById("themeBtn").innerHTML =
+ dark
  ? '<i class="fa-solid fa-moon"></i>'
  : '<i class="fa-solid fa-sun"></i>';
 
- document.querySelector('meta[name="theme-color"]').content=
- dark?"#11121d":"#f6f7fc";
 }
 
-/* TOAST */
+
+/* =================================
+   4. THÔNG BÁO
+================================= */
+
 let toastTimer;
+
 function showToast(message){
- const toast=document.getElementById("toast");
- toast.textContent=message;
+
+ const toast = document.getElementById("toast");
+
+ toast.textContent = message;
  toast.classList.add("show");
 
  clearTimeout(toastTimer);
- toastTimer=setTimeout(()=>{
+
+ toastTimer = setTimeout(()=>{
   toast.classList.remove("show");
  },2500);
+
 }
 
-/* ==================================
-   MUSIC PLAYER
-   Thêm bài hát vào danh sách tracks
-================================== */
 
-const tracks=[
+/* =================================
+   5. MUSIC PLAYER
+   Đặt music.mp3 cùng thư mục HTML.
+================================= */
+
+const tracks = [
+
  {
   title:"HOÀNG KUN MUSIC",
   artist:"Playlist yêu thích",
   src:"music.mp3"
  }
+
 ];
 
-let trackIndex=0;
+let trackIndex = 0;
 
-const audio=document.getElementById("audio");
-const playBtn=document.getElementById("playBtn");
-const progress=document.getElementById("progress");
+const audio = document.getElementById("audio");
+const playBtn = document.getElementById("playBtn");
+const progress = document.getElementById("progress");
+
 
 function loadTrack(){
- const track=tracks[trackIndex];
 
- audio.src=track.src;
- document.getElementById("musicTitle").textContent=track.title;
- document.getElementById("musicArtist").textContent=track.artist;
- progress.value=0;
- document.getElementById("currentTime").textContent="0:00";
- document.getElementById("duration").textContent="0:00";
+ const track = tracks[trackIndex];
+
+ audio.src = track.src;
+
+ document.getElementById("musicTitle").textContent = track.title;
+ document.getElementById("musicArtist").textContent = track.artist;
+
+ progress.value = 0;
+
 }
+
 
 function toggleMusic(){
+
  if(audio.paused){
-  audio.play().then(()=>{
-   playBtn.innerHTML='<i class="fa-solid fa-pause"></i>';
-  }).catch(()=>{
-   showToast("Không tìm thấy file nhạc hoặc không thể phát!");
-  });
+
+  audio.play()
+   .then(()=>{
+    playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+   })
+   .catch(()=>{
+    showToast("Không tìm thấy file nhạc music.mp3!");
+   });
+
  }else{
+
   audio.pause();
-  playBtn.innerHTML='<i class="fa-solid fa-play"></i>';
+
+  playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+
  }
+
 }
 
+
 function changeTrack(direction){
- if(tracks.length<=1){
-  audio.currentTime=0;
-  if(audio.paused)toggleMusic();
-  else audio.play();
+
+ if(tracks.length === 1){
+  audio.currentTime = 0;
+  if(audio.paused) toggleMusic();
   return;
  }
 
- trackIndex=(trackIndex+direction+tracks.length)%tracks.length;
- loadTrack();
+ trackIndex = (trackIndex + direction + tracks.length) % tracks.length;
 
- audio.play().then(()=>{
-  playBtn.innerHTML='<i class="fa-solid fa-pause"></i>';
- }).catch(()=>showToast("Không thể phát nhạc!"));
+ loadTrack();
+ toggleMusic();
+
 }
+
 
 function formatTime(seconds){
- if(!Number.isFinite(seconds))return "0:00";
- const minutes=Math.floor(seconds/60);
- const sec=Math.floor(seconds%60).toString().padStart(2,"0");
- return `${minutes}:${sec}`;
+
+ if(!Number.isFinite(seconds)) return "0:00";
+
+ return Math.floor(seconds/60) + ":" +
+ String(Math.floor(seconds%60)).padStart(2,"0");
+
 }
 
+
 audio.addEventListener("loadedmetadata",()=>{
- document.getElementById("duration").textContent=
+
+ document.getElementById("duration").textContent =
  formatTime(audio.duration);
+
 });
+
 
 audio.addEventListener("timeupdate",()=>{
- if(!audio.duration)return;
 
- progress.value=audio.currentTime/audio.duration*100;
- document.getElementById("currentTime").textContent=
+ if(!audio.duration) return;
+
+ progress.value = audio.currentTime / audio.duration * 100;
+
+ document.getElementById("currentTime").textContent =
  formatTime(audio.currentTime);
+
 });
+
 
 progress.addEventListener("input",()=>{
+
  if(audio.duration){
-  audio.currentTime=progress.value/100*audio.duration;
+  audio.currentTime = progress.value / 100 * audio.duration;
  }
+
 });
+
 
 audio.addEventListener("ended",()=>{
- playBtn.innerHTML='<i class="fa-solid fa-play"></i>';
+
+ playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+
 });
 
+
 /* KHỞI CHẠY */
+
 renderApps();
 loadTrack();
+
 </script>
 
 </body>
