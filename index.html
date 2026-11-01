@@ -356,9 +356,11 @@ body:before{
  justify-content:center;
  align-items:center;
  gap:9px;
+ border:0;
  border-radius:30px;
  margin:11px 0 13px;
  color:white;
+ font-family:inherit;
  font-size:12px;
  font-weight:800;
  background:linear-gradient(100deg,#6265ff,#c03ef3);
@@ -371,6 +373,16 @@ body:before{
  filter:brightness(1.08);
 }
 .download:active{transform:scale(.98)}
+.download.maintenance{
+ background:linear-gradient(100deg,#555b70,#34394c);
+ box-shadow:none;
+ cursor:not-allowed;
+}
+.download.maintenance:hover{
+ transform:none;
+ filter:none;
+ box-shadow:none;
+}
 
 /* BOTTOM */
 .bottom{
@@ -668,47 +680,52 @@ const apps=[
  {
   name:"MENU AOV MAP V1",
   date:"30/10/2026",
-  description:"Phiên bản AOV MAP dành cho Android",
+  description:"Ứng dụng đang được bảo trì, vui lòng quay lại sau!",
   platform:"iOS",
   cover:"https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1000&h=560&fit=crop",
   icon:"https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=200&h=200&fit=crop",
-  link:""
+  link:"",
+  maintenance:true
  },
  {
   name:"MENU AOV MAP V2",
   date:"31/10/2026",
-  description:"Phiên bản cập nhật mới nhất",
+  description:"Ứng dụng đang được bảo trì, vui lòng quay lại sau!",
   platform:"iOS",
   cover:"https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1000&h=560&fit=crop",
   icon:"https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=200&h=200&fit=crop",
-  link:""
+  link:"",
+  maintenance:true
  },
  {
   name:"MENU AOV ESP V3",
   date:"01/11/2026",
-  description:"Phiên bản menu AOV mới",
+  description:"Ứng dụng đang được bảo trì, vui lòng quay lại sau!",
   platform:"iOS",
   cover:"https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=1000&h=560&fit=crop",
   icon:"https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=200&h=200&fit=crop",
-  link:""
+  link:"",
+  maintenance:true
  },
  {
   name:"MENU FREE FIRE",
   date:"27/10/2026",
-  description:"Phiên bản hỗ trợ Free Fire",
+  description:"Ứng dụng đang được bảo trì, vui lòng quay lại sau!",
   platform:"Android",
   cover:"https://images.unsplash.com/photo-1603481546238-487240415921?w=1000&h=560&fit=crop",
   icon:"https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=200&h=200&fit=crop",
-  link:""
+  link:"",
+  maintenance:true
  },
  {
   name:"MENU HỖ TRỢ GAME",
   date:"28/10/2026",
-  description:"Công cụ hỗ trợ chơi game",
+  description:"Ứng dụng đang được bảo trì, vui lòng quay lại sau!",
   platform:"Android",
   cover:"https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1000&h=560&fit=crop",
   icon:"https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=200&h=200&fit=crop",
-  link:""
+  link:"",
+  maintenance:true
  },
  {
   name:"TIKTOK MOD",
@@ -717,7 +734,8 @@ const apps=[
   platform:"iOS",
   cover:"https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1000&h=560&fit=crop",
   icon:"https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=200&h=200&fit=crop",
-  link:""
+  link:"",
+  maintenance:false
  }
 ];
 
@@ -746,21 +764,31 @@ function renderApps(){
 
     <p class="app-description">${app.description}</p>
 
-    <a class="download" href="${app.link||"#"}" onclick="return downloadApp(event,${index})">
-     <i class="fa-solid fa-download"></i> Download
-    </a>
+    <button class="download ${app.maintenance?"maintenance":""}"
+     type="button"
+     onclick="downloadApp(${index})">
+     <i class="fa-solid ${app.maintenance?"fa-screwdriver-wrench":"fa-download"}"></i>
+     ${app.maintenance?"ĐANG BẢO TRÌ":"Download"}
+    </button>
    </div>
   </article>
  `).join("");
 }
 
-function downloadApp(event,index){
- if(!apps[index].link){
-  event.preventDefault();
-  showToast("Ứng dụng chưa có link tải!");
-  return false;
+function downloadApp(index){
+ const app=apps[index];
+
+ if(app.maintenance){
+  showToast("Ứng dụng đang bảo trì, vui lòng quay lại sau!");
+  return;
  }
- return true;
+
+ if(!app.link){
+  showToast("TikTok MOD chưa có link tải!");
+  return;
+ }
+
+ window.open(app.link,"_blank","noopener");
 }
 
 /* CHỮ CHẠY */
