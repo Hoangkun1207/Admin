@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -60,7 +61,7 @@ body:before{
  to{transform:translateY(15px)}
 }
 
-/* SAO ROI */
+/* PARTICLES */
 #particles{
  position:fixed;
  inset:0;
@@ -134,9 +135,7 @@ body:before{
  transform:translate(-50%,-50%);
  object-fit:cover;
  object-position:center;
- border:0;
  border-radius:50%;
- box-shadow:none;
  z-index:2;
 }
 .avatar-frame{
@@ -152,7 +151,6 @@ body:before{
 }
 .avatar-frame:not([src]),
 .avatar-frame[src=""]{display:none}
-
 .hello{
  color:var(--muted);
  font-size:13px;
@@ -388,6 +386,7 @@ body:before{
 .bottom{
  display:grid;
  grid-template-columns:1fr 1fr;
+ align-items:stretch;
  gap:16px;
  margin:25px 0 20px;
 }
@@ -465,37 +464,150 @@ body:before{
  filter:brightness(1.1);
 }
 
-/* YOUTUBE */
+/* YOUTUBE PREMIUM */
 .youtube-panel{
+ position:relative;
+ display:flex;
+ flex-direction:column;
+ justify-content:space-between;
+ max-width:none;
+ margin:0;
+ padding:22px;
+ overflow:hidden;
+ border:1px solid var(--border);
+ border-radius:22px;
+ background:linear-gradient(135deg,rgba(255,0,0,.10),var(--card) 70%);
+ transition:.3s ease;
+}
+.youtube-panel:hover{
+ transform:translateY(-4px);
+ border-color:rgba(255,0,0,.3);
+ box-shadow:0 18px 40px rgba(255,0,0,.09);
+}
+.youtube-panel:before{
+ content:"";
+ position:absolute;
+ width:180px;
+ height:180px;
+ right:-70px;
+ top:-90px;
+ border-radius:50%;
+ background:#ff0000;
+ filter:blur(90px);
+ opacity:.13;
+ pointer-events:none;
+}
+.youtube-top{
+ position:relative;
  display:flex;
  align-items:center;
- gap:13px;
+ gap:15px;
 }
-.youtube-avatar{
- width:62px;
- height:62px;
- border-radius:50%;
- object-fit:cover;
+.youtube-avatar-wrap{
+ position:relative;
  flex-shrink:0;
 }
-.youtube-info{flex:1;min-width:0}
-.youtube-info h3{font-size:14px}
-.youtube-info p{
+.youtube-avatar{
+ display:block;
+ width:82px;
+ height:82px;
+ object-fit:cover;
+ border-radius:50%;
+ border:3px solid rgba(255,255,255,.15);
+ box-shadow:0 5px 20px rgba(0,0,0,.25);
+}
+.youtube-verified{
+ position:absolute;
+ right:0;
+ bottom:2px;
+ width:22px;
+ height:22px;
+ display:grid;
+ place-items:center;
+ border:3px solid var(--card);
+ border-radius:50%;
+ background:#ff0033;
+ color:white;
+ font-size:9px;
+}
+.youtube-info{
+ position:relative;
+ flex:1;
+ min-width:0;
+}
+.youtube-label{
+ display:inline-flex;
+ align-items:center;
+ gap:6px;
+ color:#ff4545;
+ font-size:10px;
+ font-weight:800;
+ letter-spacing:1.1px;
+}
+.youtube-info h3{
+ margin:7px 0 3px;
+ color:var(--text);
+ font-size:19px;
+ font-weight:800;
+ overflow-wrap:anywhere;
+}
+.youtube-username{
+ margin:0;
+ color:var(--muted);
+ font-size:12px;
+}
+.youtube-desc{
+ margin:7px 0 0;
+ color:var(--muted);
+ font-size:11px;
+}
+.youtube-bottom{
+ position:relative;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:12px;
+ flex-wrap:wrap;
+ margin-top:23px;
+ padding-top:17px;
+ border-top:1px solid var(--border);
+}
+.youtube-status{
+ display:flex;
+ align-items:center;
+ gap:8px;
  color:var(--muted);
  font-size:10px;
- margin-top:4px;
+}
+.youtube-dot{
+ width:7px;
+ height:7px;
+ flex-shrink:0;
+ border-radius:50%;
+ background:#ff3333;
+ box-shadow:0 0 10px #ff3333;
 }
 .subscribe{
- background:#111;
- color:white;
- padding:11px 21px;
+ display:inline-flex;
+ justify-content:center;
+ align-items:center;
+ gap:9px;
+ padding:12px 20px;
  border-radius:30px;
+ background:linear-gradient(135deg,#ff3030,#d90024);
+ color:white;
+ text-decoration:none;
  font-size:11px;
  font-weight:800;
+ letter-spacing:.4px;
  white-space:nowrap;
- transition:.2s;
+ box-shadow:0 7px 20px rgba(255,0,0,.2);
+ transition:.25s ease;
 }
-.subscribe:hover{background:#ff2020;transform:scale(1.04)}
+.subscribe:hover{
+ transform:translateY(-3px) scale(1.03);
+ box-shadow:0 10px 25px rgba(255,0,0,.35);
+}
 
 /* FOOTER */
 footer{
@@ -549,9 +661,13 @@ footer span{color:#8065ff;font-weight:800}
  .app-name{font-size:13px}
  .bottom{grid-template-columns:1fr;gap:12px;margin-top:18px}
  .panel{padding:13px}
- .youtube-avatar{width:55px;height:55px}
- .subscribe{padding:10px 15px}
  .soundcloud-frame iframe{height:350px}
+ .youtube-panel{padding:18px;border-radius:20px}
+ .youtube-avatar{width:72px;height:72px}
+ .youtube-info h3{font-size:17px}
+ .youtube-bottom{align-items:stretch}
+ .youtube-status{width:100%}
+ .subscribe{width:100%;box-sizing:border-box}
  .particle{font-size:12px!important}
 }
 @media(prefers-reduced-motion:reduce){
@@ -560,189 +676,6 @@ footer span{color:#8065ff;font-weight:800}
   animation-iteration-count:1!important;
   scroll-behavior:auto!important;
  }
-}
-
- /* ===== YOUTUBE PREMIUM CARD ===== */
-.youtube-panel{
-    position:relative;
-    max-width:650px;
-    margin:35px auto;
-    padding:24px;
-    overflow:hidden;
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:26px;
-    background:linear-gradient(135deg,rgba(255,0,0,.10),var(--card) 65%);
-    box-shadow:0 15px 45px rgba(0,0,0,.2);
-    transition:.3s ease;
-}
-
-.youtube-panel:hover{
-    transform:translateY(-5px);
-    border-color:rgba(255,0,0,.35);
-    box-shadow:0 20px 50px rgba(255,0,0,.10);
-}
-
-.youtube-panel:before{
-    content:"";
-    position:absolute;
-    width:180px;
-    height:180px;
-    right:-70px;
-    top:-90px;
-    border-radius:50%;
-    background:#ff0000;
-    filter:blur(90px);
-    opacity:.15;
-    pointer-events:none;
-}
-
-.youtube-top{
-    position:relative;
-    display:flex;
-    align-items:center;
-    gap:18px;
-}
-
-.youtube-avatar-wrap{
-    position:relative;
-    flex-shrink:0;
-}
-
-.youtube-avatar{
-    width:88px;
-    height:88px;
-    object-fit:cover;
-    border-radius:50%;
-    border:3px solid rgba(255,255,255,.15);
-    box-shadow:0 5px 20px rgba(0,0,0,.3);
-}
-
-.youtube-verified{
-    position:absolute;
-    right:0;
-    bottom:3px;
-    width:23px;
-    height:23px;
-    display:grid;
-    place-items:center;
-    border:3px solid var(--card);
-    border-radius:50%;
-    background:#ff0033;
-    color:white;
-    font-size:9px;
-}
-
-.youtube-info{
-    min-width:0;
-}
-
-.youtube-label{
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    color:#ff4545;
-    font-size:10px;
-    font-weight:800;
-    letter-spacing:1.2px;
-}
-
-.youtube-info h3{
-    margin:7px 0 3px;
-    color:var(--text);
-    font-size:21px;
-    font-weight:800;
-}
-
-.youtube-username{
-    margin:0;
-    color:var(--sub);
-    font-size:13px;
-}
-
-.youtube-desc{
-    margin:7px 0 0;
-    color:var(--sub);
-    font-size:12px;
-}
-
-.youtube-bottom{
-    position:relative;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-    flex-wrap:wrap;
-    margin-top:23px;
-    padding-top:18px;
-    border-top:1px solid rgba(255,255,255,.08);
-}
-
-.youtube-status{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    color:var(--sub);
-    font-size:11px;
-}
-
-.youtube-dot{
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#ff3333;
-    box-shadow:0 0 10px #ff3333;
-}
-
-.subscribe{
-    display:inline-flex;
-    justify-content:center;
-    align-items:center;
-    gap:9px;
-    padding:12px 21px;
-    border-radius:30px;
-    background:linear-gradient(135deg,#ff3030,#d90024);
-    color:white;
-    text-decoration:none;
-    font-size:12px;
-    font-weight:800;
-    letter-spacing:.4px;
-    box-shadow:0 7px 20px rgba(255,0,0,.2);
-    transition:.25s ease;
-}
-
-.subscribe:hover{
-    transform:translateY(-3px) scale(1.03);
-    box-shadow:0 10px 25px rgba(255,0,0,.35);
-}
-
-@media(max-width:480px){
-    .youtube-panel{
-        margin:25px 12px;
-        padding:18px;
-        border-radius:22px;
-    }
-
-    .youtube-avatar{
-        width:72px;
-        height:72px;
-    }
-
-    .youtube-info h3{
-        font-size:17px;
-    }
-
-    .youtube-bottom{
-        align-items:stretch;
-    }
-
-    .youtube-status{
-        width:100%;
-    }
-
-    .subscribe{
-        width:100%;
-        box-sizing:border-box;
-    }
 }
 </style>
 </head>
@@ -787,7 +720,7 @@ footer span{color:#8065ff;font-weight:800}
   <a class="social telegram" href="#" aria-label="Telegram">
    <i class="fa-brands fa-telegram"></i>
   </a>
-  <a class="social youtube" href="https://www.youtube.com/@KunMusic06" target="_blank" rel="noopener">
+  <a class="social youtube" href="https://www.youtube.com/@KunMusic06" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
    <i class="fa-brands fa-youtube"></i>
   </a>
  </div>
@@ -803,7 +736,7 @@ footer span{color:#8065ff;font-weight:800}
 
  <section class="bottom">
 
-  <!-- SOUNDCLOUD MUSIC -->
+  <!-- SOUNDCLOUD -->
   <div class="panel music-panel">
    <div class="music-header">
     <div class="music-heading">
@@ -834,43 +767,44 @@ footer span{color:#8065ff;font-weight:800}
   </div>
 
   <!-- YOUTUBE PREMIUM -->
-<div class="panel youtube-panel">
-    <div class="youtube-top">
-        <div class="youtube-avatar-wrap">
-            <img class="youtube-avatar"
-                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop&crop=faces"
-                alt="Hoàng Kun">
-            <span class="youtube-verified">
-                <i class="fas fa-check"></i>
-            </span>
-        </div>
-
-        <div class="youtube-info">
-            <span class="youtube-label">
-                <i class="fab fa-youtube"></i> YOUTUBE CHANNEL
-            </span>
-            <h3>Hoàng Kun Music</h3>
-            <p class="youtube-username">@KunMusic06</p>
-            <p class="youtube-desc">Welcome to my channel! ❤️</p>
-        </div>
+  <div class="panel youtube-panel">
+   <div class="youtube-top">
+    <div class="youtube-avatar-wrap">
+     <img class="youtube-avatar"
+      src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop&crop=faces"
+      alt="Hoàng Kun">
+     <span class="youtube-verified">
+      <i class="fa-solid fa-check"></i>
+     </span>
     </div>
 
-    <div class="youtube-bottom">
-        <div class="youtube-status">
-            <span class="youtube-dot"></span>
-            Music • Remix • Entertainment
-        </div>
-
-        <a class="subscribe"
-            href="https://www.youtube.com/@KunMusic06"
-            target="_blank"
-            rel="noopener noreferrer">
-            <i class="fab fa-youtube"></i>
-            ĐĂNG KÝ
-            <i class="fas fa-arrow-up-right-from-square"></i>
-        </a>
+    <div class="youtube-info">
+     <span class="youtube-label">
+      <i class="fa-brands fa-youtube"></i>
+      YOUTUBE CHANNEL
+     </span>
+     <h3>Hoàng Kun Music</h3>
+     <p class="youtube-username">@KunMusic06</p>
+     <p class="youtube-desc">Welcome to my channel! ❤️</p>
     </div>
-</div> 
+   </div>
+
+   <div class="youtube-bottom">
+    <div class="youtube-status">
+     <span class="youtube-dot"></span>
+     Music • Remix • Entertainment
+    </div>
+
+    <a class="subscribe"
+     href="https://www.youtube.com/@KunMusic06"
+     target="_blank"
+     rel="noopener noreferrer">
+     <i class="fa-brands fa-youtube"></i>
+     ĐĂNG KÝ
+     <i class="fa-solid fa-arrow-up-right-from-square"></i>
+    </a>
+   </div>
+  </div>
 
  </section>
 </main>
@@ -912,7 +846,7 @@ const apps=[
   maintenance:true
  },
  {
-  name:" MENU AOV MAP ADR V1",
+  name:"MENU AOV MAP ADR V1",
   date:"27/10/2026",
   description:"Ứng dụng đang được bảo trì, vui lòng quay lại sau!",
   platform:"Android",
@@ -932,7 +866,7 @@ const apps=[
   maintenance:true
  },
  {
-  name:"FREE FIRE CHEAT PROXY ",
+  name:"FREE FIRE CHEAT PROXY",
   date:"28/10/2026",
   description:"Ứng dụng đang được bảo trì, vui lòng quay lại sau!",
   platform:"iOS",
@@ -967,36 +901,53 @@ const apps=[
 function renderApps(){
  const list=document.getElementById("appList");
 
- list.innerHTML=apps.map((app,index)=>`
-  <article class="app-card" style="animation-delay:${index*.1}s">
-   <div class="cover-wrap">
-    <img class="app-cover" src="${app.cover}" alt="${app.name}" loading="lazy">
-    <span class="platform ${app.platform.toLowerCase()==="android"?"android":""}">
-     <i class="fa-brands ${app.platform.toLowerCase()==="android"?"fa-android":"fa-apple"}"></i>
-     ${app.platform}
-    </span>
-   </div>
+ list.innerHTML=apps.map((app,index)=>{
+  const platform=app.platform.toLowerCase();
+  const isAndroid=platform.includes("android");
+  const isBoth=platform.includes("ios")&&isAndroid;
+  const platformIcon=isBoth
+   ?"fa-mobile-screen-button"
+   :isAndroid?"fa-android":"fa-apple";
 
-   <div class="app-content">
-    <div class="app-heading">
-     <img class="app-icon" src="${app.icon}" alt="${app.name}" loading="lazy">
-     <div class="app-details">
-      <div class="app-name">${app.name}</div>
-      <div class="app-date">Cập Nhật Ngày ${app.date}</div>
-     </div>
+  return `
+   <article class="app-card" style="animation-delay:${index*.1}s">
+    <div class="cover-wrap">
+     <img class="app-cover"
+      src="${app.cover}"
+      alt="${app.name}"
+      loading="lazy">
+
+     <span class="platform ${isAndroid&&!isBoth?"android":""}">
+      <i class="fa-brands ${platformIcon}"></i>
+      ${app.platform}
+     </span>
     </div>
 
-    <p class="app-description">${app.description}</p>
+    <div class="app-content">
+     <div class="app-heading">
+      <img class="app-icon"
+       src="${app.icon}"
+       alt="${app.name}"
+       loading="lazy">
 
-    <button class="download ${app.maintenance?"maintenance":""}"
-     type="button"
-     onclick="downloadApp(${index})">
-     <i class="fa-solid ${app.maintenance?"fa-screwdriver-wrench":"fa-download"}"></i>
-     ${app.maintenance?"ĐANG BẢO TRÌ":"Download"}
-    </button>
-   </div>
-  </article>
- `).join("");
+      <div class="app-details">
+       <div class="app-name">${app.name.trim()}</div>
+       <div class="app-date">Cập Nhật Ngày ${app.date}</div>
+      </div>
+     </div>
+
+     <p class="app-description">${app.description}</p>
+
+     <button class="download ${app.maintenance?"maintenance":""}"
+      type="button"
+      onclick="downloadApp(${index})">
+      <i class="fa-solid ${app.maintenance?"fa-screwdriver-wrench":"fa-download"}"></i>
+      ${app.maintenance?"ĐANG BẢO TRÌ":"Download"}
+     </button>
+    </div>
+   </article>
+  `;
+ }).join("");
 }
 
 function downloadApp(index){
@@ -1008,7 +959,7 @@ function downloadApp(index){
  }
 
  if(!app.link){
-  showToast("TikTok MOD chưa có link tải!");
+  showToast(app.name+" chưa có link tải!");
   return;
  }
 
