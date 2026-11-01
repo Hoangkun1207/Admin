@@ -676,10 +676,175 @@ footer span{color:#8065ff;font-weight:800}
   scroll-behavior:auto!important;
  }
 }
+
+ 
+/* ===== HOANG KUN SECURITY ALERT ===== */
+.security-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(5, 6, 20, .72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s ease;
+}
+
+.security-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.security-box {
+    position: relative;
+    width: 100%;
+    max-width: 370px;
+    padding: 30px 24px;
+    text-align: center;
+    border-radius: 25px;
+    color: #fff;
+    background: linear-gradient(145deg, #20213b, #111322);
+    border: 1px solid rgba(145, 110, 255, .55);
+    box-shadow: 0 0 35px #8155ff55,
+                0 20px 80px #0009;
+    transform: scale(.75) translateY(30px);
+    transition: .4s cubic-bezier(.2,.8,.2,1);
+    overflow: hidden;
+}
+
+.security-overlay.active .security-box {
+    transform: scale(1) translateY(0);
+}
+
+.security-box:before {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    top: -110px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #8855ff;
+    filter: blur(75px);
+    opacity: .6;
+}
+
+.security-icon {
+    position: relative;
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 18px;
+    display: grid;
+    place-items: center;
+    border-radius: 23px;
+    font-size: 34px;
+    color: #fff;
+    background: linear-gradient(135deg,#755cff,#d13eff);
+    box-shadow: 0 0 30px #9555ff88;
+    animation: securityPulse 1.5s infinite;
+}
+
+@keyframes securityPulse {
+    50% { transform: scale(1.08); box-shadow: 0 0 45px #b15aff; }
+}
+
+.security-box h2 {
+    position: relative;
+    font-size: 21px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg,#9a8aff,#ed8cff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.security-box p {
+    position: relative;
+    color: #b9bad1;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.security-warning {
+    position: relative;
+    margin: 20px 0;
+    padding: 12px;
+    border-radius: 13px;
+    color: #ffb7c5;
+    font-size: 12px;
+    background: #ff426b18;
+    border: 1px solid #ff426b40;
+}
+
+.security-close {
+    position: relative;
+    width: 100%;
+    padding: 13px;
+    border: 0;
+    border-radius: 13px;
+    color: white;
+    font-weight: 800;
+    font-family: inherit;
+    background: linear-gradient(100deg,#695cff,#c13ef3);
+    box-shadow: 0 5px 20px #8b50ff44;
+    transition: .25s;
+}
+
+.security-close:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.15);
+}
+
+.security-box.shake {
+    animation: securityShake .35s;
+}
+
+@keyframes securityShake {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+}
+
 </style>
 </head>
 
 <body>
+
+<!-- HOANG KUN SECURITY -->
+<div class="security-overlay" id="securityOverlay">
+    <div class="security-box" id="securityBox">
+
+        <div class="security-icon">
+            <i class="fa-solid fa-shield-halved"></i>
+        </div>
+
+        <h2>PHÁT HIỆN THAO TÁC BỊ CẤM!</h2>
+
+        <p id="securityMessage">
+            Vui lòng không sử dụng công cụ kiểm tra
+            hoặc truy cập trái phép vào hệ thống.
+        </p>
+
+        <div class="security-warning">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            Hệ thống Hoàng Kun iOS đang được bảo vệ!
+        </div>
+
+        <button class="security-close" onclick="closeSecurityAlert()">
+            <i class="fa-solid fa-check-circle"></i>
+            TÔI ĐÃ HIỂU
+        </button>
+
+    </div>
+</div>
+
+ 
 <div id="particles"></div>
 
 <header class="navbar">
@@ -1044,5 +1209,60 @@ renderApps();
 createParticles();
 typeWriter();
 </script>
+
+ <script>
+  
+/* ===== HOANG KUN ANTI DEVTOOLS ===== */
+
+const securityOverlay = document.getElementById("securityOverlay");
+const securityBox = document.getElementById("securityBox");
+const securityMessage = document.getElementById("securityMessage");
+
+let securityTimer;
+
+function showSecurityAlert(message) {
+    securityMessage.textContent = message;
+
+    securityOverlay.classList.add("active");
+
+    securityBox.classList.remove("shake");
+    void securityBox.offsetWidth;
+    securityBox.classList.add("shake");
+
+    clearTimeout(securityTimer);
+
+    securityTimer = setTimeout(() => {
+        closeSecurityAlert();
+    }, 3000);
+}
+
+function closeSecurityAlert() {
+    securityOverlay.classList.remove("active");
+}
+
+// Chặn chuột phải
+document.addEventListener("contextmenu", function(e) {
+    e.preventDefault();
+    showSecurityAlert("Chuột phải đã bị vô hiệu hóa trên website!");
+});
+
+// Chặn phím tắt
+document.addEventListener("keydown", function(e) {
+    const key = e.key.toLowerCase();
+
+    const blocked =
+        key === "f12" ||
+        (e.ctrlKey && e.shiftKey && ["i", "j", "c"].includes(key)) ||
+        (e.ctrlKey && ["u", "s"].includes(key));
+
+    if (blocked) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        showSecurityAlert("Thao tác bàn phím này không được phép trên hệ thống!");
+    }
+}, true);
+
+ </script>
 </body>
 </html>
