@@ -1980,6 +1980,102 @@ input:focus-visible {
         transform: none;
     }
 }
+
+   
+/* =========================================
+   HOANG KUN iOS - MOBILE PERFORMANCE FIX
+========================================= */
+
+@media (max-width: 760px) {
+
+    /* Tối ưu cuộn trang */
+    html {
+        scroll-behavior: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    body {
+        overflow-x: clip;
+    }
+
+    /* Tắt hiệu ứng nền nặng */
+    .ambient,
+    .hero::before,
+    .hero::after {
+        animation: none !important;
+        filter: none !important;
+    }
+
+    .ambient {
+        opacity: .12;
+    }
+
+    /* Navbar nhẹ hơn */
+    .navbar {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(10, 8, 25, .97) !important;
+        transition: none !important;
+    }
+
+    /* Tắt hiệu ứng kính nặng */
+    .panel,
+    .stat-card,
+    .app-card,
+    .notice,
+    .donation-panel,
+    .social {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+
+    /* Giảm hiệu ứng chuyển động */
+    .app-card,
+    .social,
+    .stat-card,
+    .donation-qr-box,
+    .avatar-wrap {
+        transition: none !important;
+        transform-style: flat !important;
+    }
+
+    .app-card {
+        will-change: auto !important;
+    }
+
+    /* Hạn chế hiệu ứng ảnh */
+    .app-card:hover .app-cover,
+    .app-card:hover .app-icon,
+    .avatar-wrap:hover .avatar {
+        transform: none !important;
+    }
+
+    /* Giảm tải hiệu ứng hạt */
+    #particles {
+        display: none !important;
+    }
+
+    /* Giảm hiệu ứng reveal */
+    .hk-reveal {
+        transition: opacity .25s ease !important;
+        transform: none !important;
+    }
+
+    /* Giảm đổ bóng nặng */
+    .app-card,
+    .panel,
+    .donation-panel {
+        box-shadow: 0 8px 24px rgba(0,0,0,.16);
+    }
+}
+
+/* Máy cấu hình yếu */
+@media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
+    * {
+        scroll-behavior: auto !important;
+    }
+}
+
 </style>
 </head>
 
