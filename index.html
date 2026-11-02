@@ -463,16 +463,17 @@ img {
     z-index: -1;
 }
 
-/* AVATAR WRAPPER */
+/* AVATAR - FINAL FIX */
 .avatar-wrap {
     position: relative;
     width: 120px;
     height: 120px;
     margin: auto;
     overflow: visible;
+    isolation: isolate;
+    transform-style: preserve-3d;
 }
 
-/* ẢNH ĐẠI DIỆN */
 .avatar {
     position: absolute;
     top: 50%;
@@ -481,12 +482,12 @@ img {
     height: 100%;
     transform: translate(-50%, -50%);
     object-fit: cover;
+    object-position: center;
     border: none !important;
     border-radius: 50%;
     z-index: 1;
 }
 
-/* KHUNG MŨ TRÙM - GIỐNG VÂN THẮNG IOS */
 .avatar-frame {
     position: absolute;
     top: 50%;
@@ -497,6 +498,11 @@ img {
     object-fit: contain;
     pointer-events: none;
     z-index: 4;
+    mix-blend-mode: normal;
+}
+
+.avatar-wrap:hover .avatar {
+    transform: translate(-50%, -50%) scale(1.045);
 }
    
 .hero-greeting {
@@ -2360,6 +2366,43 @@ input:focus-visible {
     object-fit: contain;
     pointer-events: none;
     mix-blend-mode: screen;
+}
+
+   @media (min-width: 761px) {
+    .hero::before,
+    .hero::after {
+        animation: none !important;
+    }
+
+    .ambient {
+        animation: none !important;
+    }
+
+    .navbar,
+    .panel,
+    .stat-card,
+    .app-card,
+    .notice,
+    .donation-panel,
+    .social {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+
+    .app-card {
+        transform-style: flat;
+        will-change: auto;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
 }
 </style>
 </head>
