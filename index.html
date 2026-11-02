@@ -463,11 +463,13 @@ img {
     z-index: -1;
 }
 
+/* AVATAR FIX */
 .avatar-wrap {
     position: relative;
     width: 165px;
     height: 165px;
     margin: auto;
+    overflow: visible;
     filter: drop-shadow(0 0 25px #985cff66);
 }
 
@@ -477,7 +479,7 @@ img {
     left: 50%;
     width: 112px;
     height: 112px;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     border-radius: 50%;
     border: 3px solid rgba(255,255,255,.2);
     object-fit: cover;
@@ -492,8 +494,9 @@ img {
     object-fit: contain;
     z-index: 3;
     pointer-events: none;
+    mix-blend-mode: screen;
 }
-
+   
 .hero-greeting {
     margin-top: 12px;
     color: var(--muted);
