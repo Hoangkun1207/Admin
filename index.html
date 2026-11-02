@@ -2,813 +2,2297 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#11121d">
-<title>Hoàng Kun iOS | App Library</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#090817">
+<meta name="description" content="Hoàng Kun iOS - Kho ứng dụng, công nghệ, âm nhạc và giải trí.">
+<meta name="author" content="Hoàng Kun">
+<title>Hoàng Kun iOS | Ultra Premium</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
-:root{
- --bg:#11121d;
- --card:#1c1e2d;
- --text:#f5f5ff;
- --muted:#a0a6bd;
- --primary:#6265ff;
- --secondary:#c03ef3;
- --shadow:0 8px 25px rgba(0,0,0,.3);
- --border:#ffffff12;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
- font-family:'Quicksand',sans-serif;
- background:var(--bg);
- color:var(--text);
- min-height:100vh;
- overflow-x:hidden;
- transition:background .3s,color .3s;
-}
-body.light{
- --bg:#f5f6ff;
- --card:#fff;
- --text:#191a30;
- --muted:#8991aa;
- --shadow:0 8px 25px rgba(55,65,120,.13);
- --border:#00000012;
-}
-a{text-decoration:none;color:inherit}
-button{font-family:inherit;cursor:pointer}
 
-/* BACKGROUND */
-body:before{
- content:"";
- position:fixed;
- inset:0;
- z-index:-2;
- pointer-events:none;
- background:
- radial-gradient(ellipse at 15% 10%,#777bff35,transparent 35%),
- radial-gradient(ellipse at 85% 20%,#d45bff30,transparent 35%),
- radial-gradient(ellipse at 50% 90%,#46caff20,transparent 40%);
- animation:bgMove 12s ease-in-out infinite alternate;
-}
-@keyframes bgMove{
- from{transform:translateY(-15px)}
- to{transform:translateY(15px)}
+/* =====================================================
+   01. GLOBAL DESIGN SYSTEM
+===================================================== */
+
+:root {
+    --bg: #090817;
+    --bg2: #100e24;
+    --card: #17152d;
+    --card2: #201c3b;
+
+    --text: #f8f7ff;
+    --muted: #aaa6c5;
+
+    --purple: #925cff;
+    --purple2: #c14cff;
+    --blue: #31d9ff;
+    --pink: #ff55c8;
+    --red: #ff3d58;
+    --green: #39e6a0;
+
+    --border: rgba(255,255,255,.09);
+    --glass: rgba(255,255,255,.055);
+
+    --shadow:
+        0 20px 60px rgba(0,0,0,.3);
+
+    --glow:
+        0 0 30px rgba(146,92,255,.25);
+
+    --radius: 22px;
+    --max-width: 1440px;
 }
 
-/* PARTICLES */
-#particles{
- position:fixed;
- inset:0;
- overflow:hidden;
- pointer-events:none;
- z-index:50;
-}
-.particle{
- position:absolute;
- top:-30px;
- opacity:0;
- animation:fall linear infinite;
- text-shadow:0 0 12px currentColor;
- will-change:transform,opacity;
-}
-@keyframes fall{
- 0%{transform:translate3d(0,-30px,0) rotate(0);opacity:0}
- 10%{opacity:.8}
- 80%{opacity:.65}
- 100%{transform:translate3d(var(--drift),110vh,0) rotate(360deg);opacity:0}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-/* NAVBAR */
-.navbar{
- height:53px;
- position:sticky;
- top:0;
- z-index:100;
- display:flex;
- justify-content:space-between;
- align-items:center;
- padding:0 22px;
- background:#171827dd;
- backdrop-filter:blur(20px);
- -webkit-backdrop-filter:blur(20px);
- border-bottom:1px solid var(--border);
-}
-.light .navbar{background:#ffffffbb}
-.nav-btn{
- width:38px;
- height:38px;
- border:0;
- border-radius:50%;
- background:transparent;
- font-size:17px;
- transition:.2s;
-}
-.nav-btn:hover{background:#8882;transform:scale(1.1)}
-.bell{color:#6175ff}
-.theme{color:#ff9e00}
-
-/* PROFILE */
-.hero{
- text-align:center;
- padding:40px 15px 45px;
- position:relative;
-}
-.avatar-wrap{
- position:relative;
- width:140px;
- height:140px;
- margin:0 auto 5px;
- overflow:visible;
-}
-.avatar{
- position:absolute;
- width:100px;
- height:100px;
- top:53%;
- left:50%;
- transform:translate(-50%,-50%);
- object-fit:cover;
- object-position:center;
- border-radius:50%;
- z-index:2;
-}
-.avatar-frame{
- position:absolute;
- top:50%;
- left:50%;
- width:140px;
- height:140px;
- transform:translate(-50%,-50%);
- object-fit:contain;
- pointer-events:none;
- z-index:3;
-}
-.avatar-frame:not([src]),
-.avatar-frame[src=""]{display:none}
-.hello{
- color:var(--muted);
- font-size:13px;
- margin-top:5px;
-}
-.hero h1{
- font-size:23px;
- font-weight:800;
- margin-top:5px;
- letter-spacing:-.4px;
- display:flex;
- align-items:center;
- justify-content:center;
- gap:7px;
-}
-.verified{
- width:19px;
- height:19px;
- display:inline-flex;
- align-items:center;
- justify-content:center;
- flex-shrink:0;
- border-radius:50%;
- background:#2196f3;
- color:#fff;
- font-size:11px;
- box-shadow:0 2px 8px #2196f355;
-}
-.tagline{
- margin-top:8px;
- color:var(--muted);
- font-size:15px;
- min-height:23px;
-}
-.tagline span{
- color:#7663ff;
- font-weight:800;
-}
-.typing-cursor{
- display:inline-block;
- width:2px;
- height:15px;
- background:#8065ff;
- margin-left:3px;
- vertical-align:-2px;
- animation:blink .7s infinite;
-}
-@keyframes blink{50%{opacity:0}}
-
-/* SOCIAL */
-.socials{
- display:flex;
- justify-content:center;
- gap:12px;
- margin-top:20px;
-}
-.social{
- width:55px;
- height:55px;
- display:grid;
- place-items:center;
- border-radius:19px;
- background:var(--card);
- box-shadow:var(--shadow);
- font-size:23px;
- transition:.3s;
-}
-.social:hover{transform:translateY(-7px) scale(1.05)}
-.discord{color:#5865f2}
-.telegram{color:#20a5e9}
-.youtube{color:#ff2424}
-
-/* NOTICE */
-.notice{
- max-width:1200px;
- margin:0 auto 23px;
- padding:13px 18px;
- border-radius:15px;
- background:var(--card);
- box-shadow:var(--shadow);
- display:flex;
- align-items:center;
- gap:12px;
- font-size:12px;
- color:var(--muted);
-}
-.notice i,.notice strong{color:#7663ff}
-
-/* MAIN */
-.container{
- width:100%;
- max-width:1660px;
- padding:0 14px;
- margin:auto;
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
 }
 
-/* APP LIST */
-.apps{
- display:grid;
- grid-template-columns:repeat(3,minmax(0,1fr));
- gap:18px;
-}
-.app-card{
- min-width:0;
- background:var(--card);
- border-radius:22px;
- overflow:hidden;
- box-shadow:var(--shadow);
- opacity:0;
- transform:translateY(25px);
- animation:showCard .7s ease forwards;
- transition:transform .3s,box-shadow .3s;
-}
-.app-card:hover{
- transform:translateY(-5px);
- box-shadow:0 18px 35px #0005;
-}
-@keyframes showCard{
- to{opacity:1;transform:translateY(0)}
-}
-.cover-wrap{
- width:100%;
- aspect-ratio:1.8/1;
- position:relative;
- overflow:hidden;
- background:#252638;
-}
-.app-cover{
- width:100%;
- height:100%;
- display:block;
- object-fit:cover;
- transition:transform .5s;
-}
-.app-card:hover .app-cover{transform:scale(1.035)}
-.platform{
- position:absolute;
- top:9px;
- right:10px;
- padding:5px 12px;
- border-radius:20px;
- color:#fff;
- background:#171923dd;
- border:1px solid #ffffff55;
- font-size:10px;
- font-weight:800;
- backdrop-filter:blur(8px);
-}
-.platform.android{background:#16a34add}
-.platform i{margin-right:4px}
-.app-content{padding:0 15px 2px}
-.app-heading{
- display:flex;
- align-items:center;
- gap:10px;
- margin-top:-28px;
- position:relative;
- min-height:62px;
-}
-.app-icon{
- width:64px;
- height:64px;
- flex:0 0 64px;
- object-fit:cover;
- border-radius:17px;
- border:3px solid var(--card);
- background:var(--card);
- box-shadow:0 4px 12px #0002;
-}
-.app-details{
- min-width:0;
- padding-top:24px;
-}
-.app-name{
- font-size:13px;
- font-weight:800;
- line-height:1.45;
- color:var(--text);
- overflow-wrap:anywhere;
-}
-.app-date{
- font-size:10px;
- color:var(--muted);
- font-style:italic;
- font-weight:600;
- margin-top:3px;
-}
-.app-description{
- color:var(--muted);
- font-size:10px;
- margin-top:8px;
- min-height:17px;
- line-height:1.6;
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    transition: background .3s, color .3s;
 }
 
-/* DOWNLOAD */
-.download{
- width:100%;
- min-height:43px;
- display:flex;
- justify-content:center;
- align-items:center;
- gap:9px;
- border:0;
- border-radius:30px;
- margin:11px 0 13px;
- color:white;
- font-family:inherit;
- font-size:12px;
- font-weight:800;
- background:linear-gradient(100deg,#6265ff,#c03ef3);
- box-shadow:0 5px 16px #8750ff33;
- transition:.25s;
-}
-.download:hover{
- transform:translateY(-3px);
- box-shadow:0 9px 23px #8750ff55;
- filter:brightness(1.08);
-}
-.download:active{transform:scale(.98)}
-.download.maintenance{
- background:linear-gradient(100deg,#555b70,#34394c);
- box-shadow:none;
- cursor:not-allowed;
-}
-.download.maintenance:hover{
- transform:none;
- filter:none;
- box-shadow:none;
+body.light {
+    --bg: #f4f2ff;
+    --bg2: #eae7ff;
+    --card: #ffffff;
+    --card2: #f0edff;
+
+    --text: #1a1730;
+    --muted: #77728f;
+
+    --border: rgba(30,20,70,.10);
+    --glass: rgba(255,255,255,.7);
+
+    --shadow: 0 15px 45px rgba(40,25,90,.1);
 }
 
-/* BOTTOM */
-.bottom{
- display:grid;
- grid-template-columns:1fr 1fr;
- align-items:stretch;
- gap:16px;
- margin:25px 0 20px;
-}
-.panel{
- min-width:0;
- background:var(--card);
- border-radius:21px;
- padding:16px;
- box-shadow:var(--shadow);
+body, button, input {
+    font-family: 'Be Vietnam Pro', sans-serif;
 }
 
-/* SOUNDCLOUD */
-.music-header{
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:8px;
- margin-bottom:13px;
-}
-.music-heading{
- display:flex;
- align-items:center;
- gap:9px;
- font-size:14px;
- font-weight:800;
-}
-.music-heading i{
- color:#ff7043;
- font-size:20px;
-}
-.music-status{
- display:flex;
- align-items:center;
- gap:6px;
- color:var(--muted);
- font-size:10px;
- white-space:nowrap;
-}
-.music-status:before{
- content:"";
- width:7px;
- height:7px;
- border-radius:50%;
- background:#22c55e;
- box-shadow:0 0 8px #22c55e;
-}
-.soundcloud-frame{
- width:100%;
- overflow:hidden;
- border-radius:15px;
- background:#252638;
-}
-.soundcloud-frame iframe{
- display:block;
- width:100%;
- height:350px;
- border:0;
-}
-.soundcloud-link{
- display:flex;
- justify-content:center;
- align-items:center;
- gap:8px;
- margin-top:12px;
- padding:11px;
- border-radius:13px;
- background:linear-gradient(100deg,#ff7138,#ff3d00);
- color:white;
- font-size:12px;
- font-weight:800;
- transition:.25s;
-}
-.soundcloud-link:hover{
- transform:translateY(-2px);
- filter:brightness(1.1);
+button, a {
+    -webkit-tap-highlight-color: transparent;
 }
 
-/* YOUTUBE PREMIUM */
-.youtube-panel{
- position:relative;
- display:flex;
- flex-direction:column;
- justify-content:space-between;
- max-width:none;
- margin:0;
- padding:22px;
- overflow:hidden;
- border:1px solid var(--border);
- border-radius:22px;
- background:linear-gradient(135deg,rgba(255,0,0,.10),var(--card) 70%);
- transition:.3s ease;
-}
-.youtube-panel:hover{
- transform:translateY(-4px);
- border-color:rgba(255,0,0,.3);
- box-shadow:0 18px 40px rgba(255,0,0,.09);
-}
-.youtube-panel:before{
- content:"";
- position:absolute;
- width:180px;
- height:180px;
- right:-70px;
- top:-90px;
- border-radius:50%;
- background:#ff0000;
- filter:blur(90px);
- opacity:.13;
- pointer-events:none;
-}
-.youtube-top{
- position:relative;
- display:flex;
- align-items:center;
- gap:15px;
-}
-.youtube-avatar-wrap{
- position:relative;
- flex-shrink:0;
-}
-.youtube-avatar{
- display:block;
- width:82px;
- height:82px;
- object-fit:cover;
- border-radius:50%;
- border:3px solid rgba(255,255,255,.15);
- box-shadow:0 5px 20px rgba(0,0,0,.25);
-}
-.youtube-verified{
- position:absolute;
- right:0;
- bottom:2px;
- width:22px;
- height:22px;
- display:grid;
- place-items:center;
- border:3px solid var(--card);
- border-radius:50%;
- background:#ff0033;
- color:white;
- font-size:9px;
-}
-.youtube-info{
- position:relative;
- flex:1;
- min-width:0;
-}
-.youtube-label{
- display:inline-flex;
- align-items:center;
- gap:6px;
- color:#ff4545;
- font-size:10px;
- font-weight:800;
- letter-spacing:1.1px;
-}
-.youtube-info h3{
- margin:7px 0 3px;
- color:var(--text);
- font-size:19px;
- font-weight:800;
- overflow-wrap:anywhere;
-}
-.youtube-username{
- margin:0;
- color:var(--muted);
- font-size:12px;
-}
-.youtube-desc{
- margin:7px 0 0;
- color:var(--muted);
- font-size:11px;
-}
-.youtube-bottom{
- position:relative;
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:12px;
- flex-wrap:wrap;
- margin-top:23px;
- padding-top:17px;
- border-top:1px solid var(--border);
-}
-.youtube-status{
- display:flex;
- align-items:center;
- gap:8px;
- color:var(--muted);
- font-size:10px;
-}
-.youtube-dot{
- width:7px;
- height:7px;
- flex-shrink:0;
- border-radius:50%;
- background:#ff3333;
- box-shadow:0 0 10px #ff3333;
-}
-.subscribe{
- display:inline-flex;
- justify-content:center;
- align-items:center;
- gap:9px;
- padding:12px 20px;
- border-radius:30px;
- background:linear-gradient(135deg,#ff3030,#d90024);
- color:white;
- text-decoration:none;
- font-size:11px;
- font-weight:800;
- letter-spacing:.4px;
- white-space:nowrap;
- box-shadow:0 7px 20px rgba(255,0,0,.2);
- transition:.25s ease;
-}
-.subscribe:hover{
- transform:translateY(-3px) scale(1.03);
- box-shadow:0 10px 25px rgba(255,0,0,.35);
+button {
+    cursor: pointer;
 }
 
-/* FOOTER */
-footer{
- text-align:center;
- padding:19px 10px;
- color:var(--muted);
- border-top:1px solid var(--border);
- font-size:11px;
-}
-footer span{color:#8065ff;font-weight:800}
-
-/* TOAST */
-.toast{
- position:fixed;
- bottom:25px;
- left:50%;
- transform:translate(-50%,100px);
- opacity:0;
- background:#202131;
- color:white;
- padding:12px 22px;
- border-radius:30px;
- font-size:12px;
- z-index:200;
- transition:.3s;
- text-align:center;
- max-width:90%;
-}
-.toast.show{
- transform:translate(-50%,0);
- opacity:1;
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
-/* RESPONSIVE */
-@media(max-width:950px){
- .apps{grid-template-columns:repeat(2,minmax(0,1fr))}
- .notice{margin-left:14px;margin-right:14px}
-}
-@media(max-width:600px){
- .navbar{height:49px;padding:0 13px}
- .hero{padding:30px 12px 35px}
- .avatar-wrap{width:130px;height:130px}
- .avatar{width:82px;height:82px;top:54%}
- .avatar-frame{width:130px;height:130px}
- .hero h1{font-size:21px}
- .social{width:48px;height:48px;border-radius:16px}
- .notice{margin:0 10px 18px;font-size:11px;padding:12px}
- .container{padding:0 10px}
- .apps{grid-template-columns:1fr;gap:15px}
- .cover-wrap{aspect-ratio:1.7/1}
- .app-name{font-size:13px}
- .bottom{grid-template-columns:1fr;gap:12px;margin-top:18px}
- .panel{padding:13px}
- .soundcloud-frame iframe{height:350px}
- .youtube-panel{padding:18px;border-radius:20px}
- .youtube-avatar{width:72px;height:72px}
- .youtube-info h3{font-size:17px}
- .youtube-bottom{align-items:stretch}
- .youtube-status{width:100%}
- .subscribe{width:100%;box-sizing:border-box}
- .particle{font-size:12px!important}
-}
-@media(prefers-reduced-motion:reduce){
- *,*:before,*:after{
-  animation-duration:.01ms!important;
-  animation-iteration-count:1!important;
-  scroll-behavior:auto!important;
- }
+img {
+    max-width: 100%;
 }
 
- 
-/* ===== HOANG KUN SECURITY ALERT ===== */
-.security-overlay {
+::selection {
+    color: white;
+    background: var(--purple);
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(var(--purple), var(--pink));
+    border-radius: 20px;
+}
+
+/* =====================================================
+   02. ANIMATED BACKGROUND
+===================================================== */
+
+.background-effects {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -2;
+}
+
+.ambient {
+    position: absolute;
+    width: 480px;
+    height: 480px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: .18;
+    animation: ambientMove 14s ease-in-out infinite alternate;
+}
+
+.ambient.one {
+    background: #7650ff;
+    top: -220px;
+    left: -150px;
+}
+
+.ambient.two {
+    background: #d83bff;
+    top: 20%;
+    right: -250px;
+    animation-delay: -5s;
+}
+
+.ambient.three {
+    background: #00bfff;
+    bottom: -300px;
+    left: 25%;
+    animation-delay: -9s;
+}
+
+@keyframes ambientMove {
+    from {
+        transform: translate(0,0) scale(1);
+    }
+    to {
+        transform: translate(70px,50px) scale(1.25);
+    }
+}
+
+#particles {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.particle {
+    position: absolute;
+    top: -30px;
+    color: white;
+    text-shadow: 0 0 12px currentColor;
+    animation: particleFall linear infinite;
+    opacity: 0;
+}
+
+@keyframes particleFall {
+    0% {
+        transform: translate3d(0,-30px,0) rotate(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: .8;
+    }
+    90% {
+        opacity: .6;
+    }
+    100% {
+        transform: translate3d(var(--drift),110vh,0) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* =====================================================
+   03. LOADING SCREEN
+===================================================== */
+
+#preloader {
     position: fixed;
     inset: 0;
     z-index: 999999;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    padding: 20px;
-    background: rgba(5, 6, 20, .72);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    align-items: center;
+    background: #090817;
+    transition: opacity .6s, visibility .6s;
+}
+
+#preloader.hide {
     opacity: 0;
     visibility: hidden;
-    transition: .3s ease;
 }
 
-.security-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.security-box {
-    position: relative;
-    width: 100%;
-    max-width: 370px;
-    padding: 30px 24px;
-    text-align: center;
-    border-radius: 25px;
-    color: #fff;
-    background: linear-gradient(145deg, #20213b, #111322);
-    border: 1px solid rgba(145, 110, 255, .55);
-    box-shadow: 0 0 35px #8155ff55,
-                0 20px 80px #0009;
-    transform: scale(.75) translateY(30px);
-    transition: .4s cubic-bezier(.2,.8,.2,1);
-    overflow: hidden;
-}
-
-.security-overlay.active .security-box {
-    transform: scale(1) translateY(0);
-}
-
-.security-box:before {
-    content: "";
-    position: absolute;
-    width: 180px;
-    height: 180px;
-    top: -110px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #8855ff;
-    filter: blur(75px);
-    opacity: .6;
-}
-
-.security-icon {
-    position: relative;
-    width: 76px;
-    height: 76px;
-    margin: 0 auto 18px;
+.loader-logo {
+    width: 85px;
+    height: 85px;
     display: grid;
     place-items: center;
-    border-radius: 23px;
+    border-radius: 27px;
+    color: white;
+    font-family: 'Outfit', sans-serif;
     font-size: 34px;
-    color: #fff;
-    background: linear-gradient(135deg,#755cff,#d13eff);
-    box-shadow: 0 0 30px #9555ff88;
-    animation: securityPulse 1.5s infinite;
+    font-weight: 900;
+    background: linear-gradient(135deg,#765cff,#d34dff);
+    box-shadow: 0 0 55px #925cff88;
+    animation: loaderPulse 1.4s infinite alternate;
 }
 
-@keyframes securityPulse {
-    50% { transform: scale(1.08); box-shadow: 0 0 45px #b15aff; }
+@keyframes loaderPulse {
+    to {
+        transform: scale(1.1) rotate(5deg);
+        box-shadow: 0 0 80px #925cff;
+    }
 }
 
-.security-box h2 {
-    position: relative;
-    font-size: 21px;
+.loader-title {
+    margin-top: 22px;
+    font-family: 'Outfit', sans-serif;
     font-weight: 800;
-    margin-bottom: 10px;
-    background: linear-gradient(90deg,#9a8aff,#ed8cff);
+    font-size: 19px;
+    letter-spacing: 3px;
+}
+
+.loader-sub {
+    margin-top: 8px;
+    font-size: 11px;
+    color: #aaa6c5;
+    letter-spacing: 2px;
+}
+
+.loader-bar {
+    width: 170px;
+    height: 4px;
+    margin-top: 25px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #28223f;
+}
+
+.loader-bar span {
+    display: block;
+    height: 100%;
+    width: 35%;
+    border-radius: inherit;
+    background: linear-gradient(90deg,#785cff,#f45cff);
+    animation: loaderProgress 1.5s ease-in-out infinite;
+}
+
+@keyframes loaderProgress {
+    from { transform: translateX(-120%); }
+    to { transform: translateX(400%); }
+}
+
+/* =====================================================
+   04. TOP ANNOUNCEMENT
+===================================================== */
+
+.announcement {
+    min-height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+    padding: 7px 15px;
+    color: #e9ddff;
+    background: linear-gradient(90deg,#412c91,#7c35a5,#412c91);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    text-align: center;
+}
+
+.announcement i {
+    color: #ffd76a;
+}
+
+/* =====================================================
+   05. NAVIGATION
+===================================================== */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    min-height: 75px;
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    background: rgba(10,8,25,.78);
+    border-bottom: 1px solid var(--border);
+
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+}
+
+.light .navbar {
+    background: rgba(255,255,255,.82);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: max-content;
+}
+
+.brand-icon {
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    background: linear-gradient(135deg,#655cff,#c24dff);
+    box-shadow: 0 0 25px #985cff66;
+}
+
+.brand-text h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 17px;
+    font-weight: 900;
+    letter-spacing: .5px;
+}
+
+.brand-text p {
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 1.5px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 27px;
+}
+
+.nav-links a {
+    position: relative;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    transition: .25s;
+}
+
+.nav-links a:after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    border-radius: 10px;
+    background: var(--purple);
+    transition: .3s;
+}
+
+.nav-links a:hover {
+    color: var(--text);
+}
+
+.nav-links a:hover:after {
+    width: 100%;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.nav-action {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    background: var(--glass);
+    transition: .25s;
+}
+
+.nav-action:hover {
+    transform: translateY(-3px);
+    color: white;
+    background: var(--purple);
+    box-shadow: var(--glow);
+}
+
+.mobile-menu {
+    display: none;
+}
+
+/* =====================================================
+   06. HERO PROFILE
+===================================================== */
+
+.hero {
+    position: relative;
+    padding: 75px 15px 65px;
+    text-align: center;
+    isolation: isolate;
+}
+
+.hero:before {
+    content: "";
+    position: absolute;
+    width: 550px;
+    height: 350px;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: radial-gradient(
+        ellipse,
+        rgba(135,83,255,.2),
+        transparent 70%
+    );
+    filter: blur(20px);
+    z-index: -1;
+}
+
+.avatar-wrap {
+    position: relative;
+    width: 165px;
+    height: 165px;
+    margin: auto;
+    filter: drop-shadow(0 0 25px #985cff66);
+}
+
+.avatar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 112px;
+    height: 112px;
+    transform: translate(-50%,-50%);
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,.2);
+    object-fit: cover;
+    z-index: 2;
+}
+
+.avatar-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.hero-greeting {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 9px;
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(28px,5vw,48px);
+    font-weight: 900;
+    letter-spacing: -1px;
+    background: linear-gradient(
+        90deg,
+        #fff,
+        #c2a1ff,
+        #ff91e6
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 30px #925cff22;
+}
+
+.verified {
+    width: 21px;
+    height: 21px;
+    display: inline-grid;
+    place-items: center;
+    border-radius: 50%;
+    color: white;
+    background: #238cff;
+    font-size: 11px;
+    -webkit-text-fill-color: white;
+}
+
+.hero-description {
+    margin-top: 13px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.tagline {
+    margin-top: 9px;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.tagline span {
+    color: var(--purple);
+    font-weight: 900;
+}
+
+.typing-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 15px;
+    margin-left: 3px;
+    vertical-align: -2px;
+    background: var(--purple);
+    animation: blink .7s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* =====================================================
+   07. SOCIAL LINKS
+===================================================== */
+
+.socials {
+    display: flex;
+    justify-content: center;
+    gap: 13px;
+    margin-top: 25px;
+}
+
+.social {
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-items: center;
+    border-radius: 17px;
+    border: 1px solid var(--border);
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    font-size: 21px;
+    transition: .3s;
+}
+
+.social:hover {
+    transform: translateY(-7px) rotate(-5deg);
+    box-shadow: 0 12px 30px #925cff44;
+}
+
+.social.facebook { color: #258bff; }
+.social.tiktok { color: var(--text); }
+.social.youtube { color: #ff3030; }
+
+/* =====================================================
+   08. HERO STATISTICS
+===================================================== */
+
+.hero-stats {
+    max-width: 530px;
+    margin: 30px auto 0;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 10px;
+}
+
+.stat-card {
+    padding: 15px 8px;
+    border-radius: 17px;
+    border: 1px solid var(--border);
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+}
+
+.stat-card strong {
+    display: block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 21px;
+    font-weight: 900;
+    color: var(--text);
+}
+
+.stat-card span {
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 9px;
+}
+
+/* =====================================================
+   09. CONTENT CONTAINER
+===================================================== */
+
+.container {
+    width: min(100% - 36px,var(--max-width));
+    margin: auto;
+}
+
+.section {
+    margin-top: 45px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 15px;
+    margin-bottom: 23px;
+}
+
+.section-eyebrow {
+    color: var(--purple);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.section-heading h2 {
+    margin-top: 7px;
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(23px,4vw,32px);
+    font-weight: 900;
+}
+
+.section-heading p {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* =====================================================
+   10. ANNOUNCEMENT CARD
+===================================================== */
+
+.notice {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    overflow: hidden;
+    padding: 17px 20px;
+    border: 1px solid rgba(146,92,255,.25);
+    border-radius: 17px;
+    background: linear-gradient(
+        100deg,
+        rgba(112,75,255,.15),
+        var(--card)
+    );
+    box-shadow: var(--shadow);
+}
+
+.notice-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 13px;
+    color: #ffd66b;
+    background: rgba(255,214,107,.12);
+}
+
+.notice-content {
+    min-width: 0;
+}
+
+.notice-content strong {
+    font-size: 11px;
+    color: var(--text);
+}
+
+.notice-content p {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.7;
+}
+
+/* =====================================================
+   11. APP FILTERS
+===================================================== */
+
+.app-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+    min-width: 220px;
+    max-width: 390px;
+}
+
+.search-box i {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.search-box input {
+    width: 100%;
+    height: 45px;
+    padding: 0 15px 0 42px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    outline: none;
+    color: var(--text);
+    background: var(--glass);
+    font-size: 11px;
+    transition: .25s;
+}
+
+.search-box input:focus {
+    border-color: var(--purple);
+    box-shadow: 0 0 20px #925cff22;
+}
+
+.search-box input::placeholder {
+    color: var(--muted);
+}
+
+.filter-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.filter-btn {
+    padding: 11px 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--muted);
+    background: var(--glass);
+    font-size: 10px;
+    font-weight: 800;
+    transition: .25s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    color: white;
+    border-color: transparent;
+    background: linear-gradient(110deg,#705aff,#bd4bff);
+    box-shadow: 0 5px 20px #925cff33;
+}
+
+/* =====================================================
+   12. APP GRID
+===================================================== */
+
+.apps {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 20px;
+}
+
+.app-card {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 23px;
+    background: linear-gradient(
+        145deg,
+        var(--card2),
+        var(--card) 65%
+    );
+    box-shadow: var(--shadow);
+    transform-style: preserve-3d;
+    transition: transform .35s, box-shadow .35s;
+    animation: cardAppear .65s ease both;
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.app-card:hover {
+    transform: translateY(-8px);
+    box-shadow:
+        0 22px 50px rgba(0,0,0,.3),
+        0 0 25px rgba(146,92,255,.15);
+}
+
+.cover-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1.8 / 1;
+    background: #242039;
+}
+
+.app-cover {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform .6s;
+}
+
+.app-card:hover .app-cover {
+    transform: scale(1.08);
+}
+
+.cover-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        transparent 45%,
+        rgba(0,0,0,.35)
+    );
+    pointer-events: none;
+}
+
+.platform {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 7px 12px;
+    border-radius: 30px;
+    color: white;
+    background: rgba(20,18,35,.85);
+    border: 1px solid #ffffff30;
+    font-size: 9px;
+    font-weight: 900;
+    backdrop-filter: blur(10px);
+}
+
+.platform.android {
+    background: rgba(22,163,74,.9);
+}
+
+.app-badge {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    padding: 7px 10px;
+    border-radius: 30px;
+    color: white;
+    background: linear-gradient(100deg,#ff4c9a,#b54cff);
+    font-size: 8px;
+    font-weight: 900;
+}
+
+.app-content {
+    padding: 0 16px 4px;
+}
+
+.app-heading {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-height: 75px;
+    margin-top: -28px;
+    position: relative;
+}
+
+.app-icon {
+    width: 65px;
+    height: 65px;
+    flex: 0 0 65px;
+    object-fit: cover;
+    border: 3px solid var(--card);
+    border-radius: 19px;
+    background: var(--card);
+    box-shadow: 0 7px 20px rgba(0,0,0,.3);
+}
+
+.app-details {
+    min-width: 0;
+    padding-top: 22px;
+}
+
+.app-name {
+    font-size: 12px;
+    line-height: 1.6;
+    font-weight: 900;
+    overflow-wrap: anywhere;
+}
+
+.app-date {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 9px;
+}
+
+.app-description {
+    min-height: 39px;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+.app-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 9px;
+}
+
+.app-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 9px var(--green);
+}
+
+.status-dot.maintenance {
+    background: #ffb84d;
+    box-shadow: 0 0 9px #ffb84d;
+}
+
+.download {
+    width: 100%;
+    min-height: 45px;
+    margin: 14px 0 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+    border: 0;
+    border-radius: 14px;
+    color: white;
+    background: linear-gradient(110deg,#665aff,#9854ff,#d34dff);
+    box-shadow: 0 7px 20px #925cff30;
+    font-size: 11px;
+    font-weight: 900;
+    transition: .25s;
+}
+
+.download:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.15);
+    box-shadow: 0 12px 27px #925cff55;
+}
+
+.download.maintenance {
+    color: #d5d2e1;
+    background: #454257;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.no-results {
+    grid-column: 1/-1;
+    padding: 55px 15px;
+    text-align: center;
+    border: 1px dashed var(--border);
+    border-radius: 20px;
+    color: var(--muted);
+}
+
+.no-results i {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 35px;
+    color: var(--purple);
+}
+
+.no-results strong {
+    color: var(--text);
+    font-size: 14px;
+}
+
+/* =====================================================
+   13. MUSIC AND YOUTUBE
+===================================================== */
+
+.bottom {
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    gap: 20px;
+    margin-top: 45px;
+}
+
+.panel {
+    min-width: 0;
+    padding: 22px;
+    border: 1px solid var(--border);
+    border-radius: 23px;
+    background: linear-gradient(145deg,var(--card2),var(--card));
+    box-shadow: var(--shadow);
+}
+
+.music-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 17px;
+}
+
+.music-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Outfit',sans-serif;
+    font-size: 15px;
+    font-weight: 900;
+}
+
+.music-heading i {
+    color: #ff7945;
+    font-size: 23px;
+}
+
+.music-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--muted);
+    font-size: 9px;
+}
+
+.music-status:before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 8px var(--green);
+}
+
+.soundcloud-frame {
+    overflow: hidden;
+    border-radius: 16px;
+    background: #252235;
+}
+
+.soundcloud-frame iframe {
+    display: block;
+    width: 100%;
+    height: 350px;
+    border: 0;
+}
+
+.soundcloud-link {
+    min-height: 44px;
+    margin-top: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+    border-radius: 13px;
+    color: white;
+    background: linear-gradient(100deg,#ff813c,#ff3d00);
+    font-size: 11px;
+    font-weight: 900;
+    transition: .25s;
+}
+
+.soundcloud-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 9px 25px #ff693944;
+}
+
+.youtube-panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    background: linear-gradient(145deg,rgba(255,0,0,.1),var(--card));
+}
+
+.youtube-panel:before {
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: -100px;
+    right: -80px;
+    border-radius: 50%;
+    background: red;
+    filter: blur(100px);
+    opacity: .15;
+    pointer-events: none;
+}
+
+.youtube-top {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.youtube-avatar {
+    width: 82px;
+    height: 82px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #ffffff25;
+    box-shadow: 0 5px 25px #0005;
+}
+
+.youtube-label {
+    color: #ff5555;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+}
+
+.youtube-info h3 {
+    margin-top: 8px;
+    font-family: 'Outfit',sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.youtube-info p {
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.youtube-bottom {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+}
+
+.youtube-status {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.subscribe {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 13px 20px;
+    border-radius: 30px;
+    color: white;
+    background: linear-gradient(110deg,#ff4242,#d90024);
+    box-shadow: 0 7px 20px #ff303033;
+    font-size: 10px;
+    font-weight: 900;
+    transition: .25s;
+}
+
+.subscribe:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px #ff303055;
+}
+
+/* =====================================================
+   14. DONATION CENTER
+===================================================== */
+
+.donation-panel {
+    position: relative;
+    overflow: hidden;
+    margin-top: 25px;
+    padding: 30px;
+    border: 1px solid rgba(146,92,255,.3);
+    border-radius: 25px;
+    background: linear-gradient(
+        135deg,
+        rgba(117,78,255,.17),
+        var(--card) 60%,
+        rgba(213,68,255,.12)
+    );
+    box-shadow: var(--shadow);
+}
+
+.donation-header {
+    text-align: center;
+    margin-bottom: 27px;
+}
+
+.donation-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    border: 1px solid #a56cff44;
+    border-radius: 30px;
+    color: #c9aaff;
+    background: #925cff18;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+}
+
+.donation-header h2 {
+    margin-top: 15px;
+    font-family: 'Outfit',sans-serif;
+    font-size: clamp(23px,4vw,34px);
+    font-weight: 900;
+}
+
+.donation-header p {
+    max-width: 600px;
+    margin: 10px auto 0;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.9;
+}
+
+.donation-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 30px;
+}
+
+.donation-info h3 {
+    font-size: 19px;
+    margin-bottom: 12px;
+}
+
+.donation-info p {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 2;
+}
+
+.donation-benefits {
+    display: grid;
+    gap: 14px;
+    margin-top: 22px;
+}
+
+.donation-benefit {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.donation-benefit i {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 10px;
+    color: #c19bff;
+    background: #925cff20;
+}
+
+.donation-qr-box {
+    max-width: 320px;
+    margin: auto;
+    padding: 17px;
+    border-radius: 22px;
+    background: white;
+    text-align: center;
+    box-shadow: 0 15px 45px #0004;
+    transition: .3s;
+}
+
+.donation-qr-box:hover {
+    transform: translateY(-6px);
+}
+
+.donation-qr {
+    width: 100%;
+    display: block;
+    aspect-ratio: 1;
+    object-fit: contain;
+    cursor: zoom-in;
+    border-radius: 12px;
+}
+
+.donation-qr-title {
+    margin-top: 12px;
+    color: #242039;
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.donation-qr-sub {
+    margin-top: 5px;
+    color: #777;
+    font-size: 9px;
+}
+
+.donation-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 16px;
+}
+
+.donation-btn {
+    padding: 12px 17px;
+    border: 0;
+    border-radius: 30px;
+    color: white;
+    background: linear-gradient(110deg,#745cff,#c14cff);
+    font-size: 10px;
+    font-weight: 900;
+    transition: .25s;
+}
+
+.donation-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px #925cff55;
+}
+
+.qr-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: #000e;
+    backdrop-filter: blur(15px);
+}
+
+.qr-lightbox.active {
+    display: flex;
+}
+
+.qr-lightbox img {
+    width: min(90vw,480px);
+    padding: 12px;
+    border-radius: 20px;
+    background: white;
+}
+
+.qr-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 43px;
+    height: 43px;
+    border: 0;
+    border-radius: 50%;
+    color: white;
+    background: #ffffff22;
+    font-size: 20px;
+}
+
+/* =====================================================
+   15. FOOTER
+===================================================== */
+
+footer {
+    margin-top: 55px;
+    padding: 35px 15px;
+    border-top: 1px solid var(--border);
+    background: rgba(0,0,0,.12);
+}
+
+.footer-inner {
+    max-width: 1000px;
+    margin: auto;
+    text-align: center;
+}
+
+.footer-logo {
+    font-family: 'Outfit',sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    background: linear-gradient(90deg,#a17aff,#ed7bff);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 }
 
-.security-box p {
-    position: relative;
-    color: #b9bad1;
-    font-size: 13px;
-    line-height: 1.8;
+.footer-description {
+    max-width: 500px;
+    margin: 10px auto;
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.9;
 }
 
-.security-warning {
-    position: relative;
+.footer-socials {
+    display: flex;
+    justify-content: center;
+    gap: 17px;
     margin: 20px 0;
-    padding: 12px;
-    border-radius: 13px;
-    color: #ffb7c5;
-    font-size: 12px;
-    background: #ff426b18;
-    border: 1px solid #ff426b40;
+    color: var(--muted);
 }
 
-.security-close {
-    position: relative;
-    width: 100%;
-    padding: 13px;
-    border: 0;
-    border-radius: 13px;
+.footer-socials a:hover {
+    color: var(--purple);
+}
+
+.footer-copy {
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 9px;
+}
+
+.footer-copy span {
+    color: var(--purple);
+    font-weight: 900;
+}
+
+/* =====================================================
+   16. TOAST NOTIFICATION
+===================================================== */
+
+.toast {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    z-index: 999999;
+    max-width: 90%;
+    padding: 13px 20px;
+    border: 1px solid #ffffff22;
+    border-radius: 30px;
     color: white;
-    font-weight: 800;
-    font-family: inherit;
-    background: linear-gradient(100deg,#695cff,#c13ef3);
-    box-shadow: 0 5px 20px #8b50ff44;
-    transition: .25s;
+    background: #211b39;
+    box-shadow: 0 10px 35px #0007;
+    font-size: 11px;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%,100px);
+    transition: .35s;
 }
 
-.security-close:hover {
+.toast.show {
+    opacity: 1;
+    transform: translate(-50%,0);
+}
+
+/* =====================================================
+   17. BACK TO TOP
+===================================================== */
+
+.back-top {
+    position: fixed;
+    right: 23px;
+    bottom: 25px;
+    z-index: 900;
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    color: white;
+    background: linear-gradient(135deg,#705cff,#bb4bff);
+    box-shadow: 0 7px 25px #925cff44;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition: .3s;
+}
+
+.back-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* =====================================================
+   18. RESPONSIVE
+===================================================== */
+
+@media(max-width:1100px) {
+    .navbar {
+        padding: 0 3%;
+    }
+
+    .nav-links {
+        gap: 16px;
+    }
+
+    .apps {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+}
+
+@media(max-width:760px) {
+    .navbar {
+        min-height: 65px;
+        padding: 0 15px;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 10px 20px 20px;
+        background: var(--bg2);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-links a {
+        padding: 14px 5px;
+    }
+
+    .nav-links a:after {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: grid;
+    }
+
+    .hero {
+        padding: 45px 12px;
+    }
+
+    .hero-stats {
+        max-width: 450px;
+    }
+
+    .bottom {
+        grid-template-columns: 1fr;
+    }
+
+    .donation-content {
+        grid-template-columns: 1fr;
+    }
+
+    .donation-info {
+        text-align: center;
+    }
+
+    .donation-benefit {
+        justify-content: flex-start;
+        text-align: left;
+    }
+}
+
+@media(max-width:560px) {
+    .container {
+        width: calc(100% - 22px);
+    }
+
+    .announcement {
+        font-size: 9px;
+    }
+
+    .brand-text h2 {
+        font-size: 14px;
+    }
+
+    .brand-icon {
+        width: 38px;
+        height: 38px;
+    }
+
+    .nav-action {
+        width: 36px;
+        height: 36px;
+    }
+
+    .hero h1 {
+        font-size: 29px;
+    }
+
+    .avatar-wrap {
+        width: 140px;
+        height: 140px;
+    }
+
+    .avatar {
+        width: 95px;
+        height: 95px;
+    }
+
+    .hero-stats {
+        gap: 7px;
+    }
+
+    .stat-card {
+        padding: 12px 5px;
+    }
+
+    .stat-card strong {
+        font-size: 18px;
+    }
+
+    .stat-card span {
+        font-size: 8px;
+    }
+
+    .apps {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .cover-wrap {
+        aspect-ratio: 1.8 / 1;
+    }
+
+    .app-toolbar {
+        align-items: stretch;
+    }
+
+    .search-box {
+        max-width: none;
+    }
+
+    .filter-list {
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+    }
+
+    .filter-btn {
+        padding: 10px 5px;
+        font-size: 9px;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+    }
+
+    .panel {
+        padding: 15px;
+    }
+
+    .soundcloud-frame iframe {
+        height: 330px;
+    }
+
+    .youtube-avatar {
+        width: 68px;
+        height: 68px;
+    }
+
+    .youtube-info h3 {
+        font-size: 18px;
+    }
+
+    .youtube-bottom {
+        align-items: stretch;
+    }
+
+    .subscribe {
+        width: 100%;
+    }
+
+    .donation-panel {
+        padding: 20px 14px;
+    }
+
+    .donation-qr-box {
+        max-width: 280px;
+    }
+
+    .donation-actions {
+        flex-direction: column;
+    }
+
+    .donation-btn {
+        width: 100%;
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+    *,
+    *:before,
+    *:after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}
+
+ 
+/* =========================================================
+   HOANG KUN iOS - PART 4
+   PREMIUM UI / 3D / RESPONSIVE / SCROLL ANIMATIONS
+========================================================= */
+
+:root {
+    --hk-glass: rgba(255,255,255,.065);
+    --hk-glass-border: rgba(255,255,255,.12);
+    --hk-shadow: 0 18px 55px rgba(0,0,0,.28);
+    --hk-glow: 0 0 35px rgba(0,210,255,.16);
+    --hk-ease: cubic-bezier(.2,.75,.25,1);
+}
+
+/* Cuộn trang mượt */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+body {
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Lớp kính cao cấp */
+.panel,
+.stat-card,
+.app-card,
+.notice,
+.donation-panel,
+.youtube-card,
+.music-card {
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+/* Navbar */
+.navbar {
+    transition:
+        background .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(5, 8, 22, .92);
+    box-shadow: 0 12px 35px rgba(0,0,0,.28);
+    border-bottom: 1px solid rgba(0,217,255,.2);
+}
+
+.nav-links a,
+.nav-action,
+.social,
+.filter-btn {
+    transition: all .28s var(--hk-ease);
+}
+
+.nav-links a:hover,
+.nav-action:hover {
+    transform: translateY(-2px);
+}
+
+/* Hero */
+.hero {
+    isolation: isolate;
+    position: relative;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(0,217,255,.15),
+        transparent 70%
+    );
+    top: 5%;
+    left: -120px;
+    z-index: -1;
+    pointer-events: none;
+    animation: hkFloat 8s ease-in-out infinite;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(168,85,255,.14),
+        transparent 70%
+    );
+    right: -100px;
+    bottom: -50px;
+    z-index: -1;
+    pointer-events: none;
+    animation: hkFloat 10s ease-in-out infinite reverse;
+}
+
+@keyframes hkFloat {
+    0%, 100% { transform: translate3d(0,0,0); }
+    50% { transform: translate3d(0,-22px,0); }
+}
+
+/* Avatar */
+.avatar-wrap {
+    transform-style: preserve-3d;
+    transition: transform .5s var(--hk-ease);
+}
+
+.avatar-wrap:hover {
+    transform: translateY(-7px) rotateY(7deg) rotateX(4deg);
+}
+
+.avatar {
+    transition: transform .5s ease, filter .5s ease;
+}
+
+.avatar-wrap:hover .avatar {
+    transform: scale(1.045);
+    filter: brightness(1.12);
+}
+
+/* Social buttons */
+.social {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.social::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+        110deg,
+        transparent 20%,
+        rgba(255,255,255,.17) 50%,
+        transparent 80%
+    );
+    transform: translateX(-120%);
+    transition: transform .65s ease;
+}
+
+.social:hover::before {
+    transform: translateX(120%);
+}
+
+.social:hover {
+    transform: translateY(-4px) scale(1.025);
+    box-shadow: 0 12px 28px rgba(0,217,255,.16);
+}
+
+/* Thẻ thống kê */
+.stat-card {
+    position: relative;
+    overflow: hidden;
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--hk-shadow), var(--hk-glow);
+}
+
+/* Notice */
+.notice {
+    position: relative;
+    overflow: hidden;
+}
+
+.notice::after {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -40%;
+    width: 30%;
+    height: 300%;
+    transform: rotate(25deg);
+    background: rgba(255,255,255,.07);
+    pointer-events: none;
+    transition: left .8s ease;
+}
+
+.notice:hover::after {
+    left: 120%;
+}
+
+/* Search */
+.search-box {
+    transition: border-color .3s ease, box-shadow .3s ease;
+}
+
+.search-box:focus-within {
+    border-color: rgba(0,217,255,.75);
+    box-shadow: 0 0 0 4px rgba(0,217,255,.09),
+                0 0 28px rgba(0,217,255,.12);
+}
+
+.search-box input {
+    outline: none;
+}
+
+/* Filter */
+.filter-btn {
+    cursor: pointer;
+}
+
+.filter-btn:hover {
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    box-shadow: 0 5px 20px rgba(0,217,255,.2);
+}
+
+/* App cards 3D */
+.apps {
+    perspective: 1200px;
+}
+
+.app-card {
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition:
+        transform .4s var(--hk-ease),
+        border-color .35s ease,
+        box-shadow .35s ease;
+    will-change: transform;
+}
+
+.app-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+    background: linear-gradient(
+        125deg,
+        transparent 25%,
+        rgba(255,255,255,.12) 48%,
+        transparent 70%
+    );
+    transform: translateX(-100%);
+    transition: opacity .3s ease, transform .8s ease;
+}
+
+.app-card:hover::before {
+    opacity: 1;
+    transform: translateX(100%);
+}
+
+.app-card:hover {
+    border-color: rgba(0,217,255,.45);
+    box-shadow:
+        0 22px 55px rgba(0,0,0,.35),
+        0 0 28px rgba(0,217,255,.12);
+}
+
+.app-cover {
+    transition: transform .65s var(--hk-ease);
+}
+
+.app-card:hover .app-cover {
+    transform: scale(1.075);
+}
+
+.app-icon {
+    transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.app-card:hover .app-icon {
+    transform: translateY(-4px) rotate(-5deg);
+    box-shadow: 0 8px 24px rgba(0,217,255,.22);
+}
+
+/* Nút tải */
+.download,
+.subscribe,
+.donation-btn {
+    position: relative;
+    overflow: hidden;
+    transition: transform .25s ease, filter .25s ease;
+}
+
+.download:hover,
+.subscribe:hover,
+.donation-btn:hover {
     transform: translateY(-3px);
-    filter: brightness(1.15);
+    filter: brightness(1.12);
 }
 
-.security-box.shake {
-    animation: securityShake .35s;
+.download:active,
+.subscribe:active,
+.donation-btn:active {
+    transform: scale(.97);
 }
 
-@keyframes securityShake {
-    0%,100% { transform: translateX(0); }
-    25% { transform: translateX(-8px); }
-    75% { transform: translateX(8px); }
+/* Music */
+.soundcloud-frame {
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+.soundcloud-frame iframe {
+    display: block;
+    width: 100%;
+    border: 0;
+}
+
+.panel:hover {
+    border-color: rgba(0,217,255,.25);
+}
+
+/* YouTube */
+.youtube-avatar {
+    transition: transform .35s ease;
+}
+
+.youtube-card:hover .youtube-avatar {
+    transform: scale(1.08) rotate(4deg);
+}
+
+/* Donation */
+.donation-panel {
+    position: relative;
+    overflow: hidden;
+}
+
+.donation-panel::before {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    right: -100px;
+    top: -120px;
+    background: radial-gradient(
+        circle,
+        rgba(168,85,255,.17),
+        transparent 70%
+    );
+    pointer-events: none;
+}
+
+.donation-qr {
+    transition: transform .35s ease, box-shadow .35s ease;
+    cursor: zoom-in;
+}
+
+.donation-qr:hover {
+    transform: scale(1.035);
+    box-shadow: 0 15px 40px rgba(0,0,0,.3);
+}
+
+/* QR lightbox */
+.qr-lightbox {
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.qr-lightbox img {
+    max-width: min(90vw, 520px);
+    max-height: 82vh;
+    object-fit: contain;
+    border-radius: 18px;
+    box-shadow: 0 25px 90px rgba(0,0,0,.55);
+}
+
+/* Footer */
+footer {
+    position: relative;
+    overflow: hidden;
+}
+
+footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: min(700px, 90%);
+    height: 1px;
+    transform: translateX(-50%);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0,217,255,.7),
+        rgba(168,85,255,.7),
+        transparent
+    );
+}
+
+/* Toast */
+.toast {
+    z-index: 9999;
+    transition: transform .3s ease, opacity .3s ease;
+}
+
+/* Nút lên đầu trang */
+.back-top {
+    transition: transform .3s ease, opacity .3s ease;
+}
+
+.back-top:hover {
+    transform: translateY(-5px);
+}
+
+/* Scroll reveal */
+.hk-reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+        opacity .7s ease,
+        transform .7s var(--hk-ease);
+}
+
+.hk-reveal.hk-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Ảnh */
+img {
+    max-width: 100%;
+}
+
+img[loading="lazy"] {
+    background: rgba(255,255,255,.04);
+}
+
+/* Focus bàn phím */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid #00d9ff;
+    outline-offset: 4px;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    .apps {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    html {
+        scroll-padding-top: 75px;
+    }
+
+    .hero {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .apps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 13px;
+    }
+
+    .app-card {
+        border-radius: 15px;
+    }
+
+    .app-content {
+        padding: 12px;
+    }
+
+    .app-name {
+        font-size: 13px;
+    }
+
+    .app-description {
+        font-size: 12px;
+    }
+
+    .bottom {
+        grid-template-columns: 1fr;
+    }
+
+    .donation-content {
+        grid-template-columns: 1fr;
+    }
+
+    .donation-qr-box {
+        width: 100%;
+    }
+
+    .section {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .hero-stats {
+        gap: 9px;
+    }
+
+    .stat-card {
+        min-width: 0;
+    }
+}
+
+@media (max-width: 380px) {
+    .apps {
+        grid-template-columns: 1fr;
+    }
+
+    .app-cover {
+        max-height: 220px;
+        object-fit: cover;
+    }
+}
+
+/* Người dùng chọn giảm chuyển động */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+
+    .hk-reveal {
+        opacity: 1;
+        transform: none;
+    }
 }
 
 </style>
@@ -816,452 +2300,1496 @@ footer span{color:#8065ff;font-weight:800}
 
 <body>
 
-<!-- HOANG KUN SECURITY -->
-<div class="security-overlay" id="securityOverlay">
-    <div class="security-box" id="securityBox">
+<!-- ==================================================
+     01. BACKGROUND + LOADING
+================================================== -->
 
-        <div class="security-icon">
-            <i class="fa-solid fa-shield-halved"></i>
+<div class="background-effects">
+    <div class="ambient one"></div>
+    <div class="ambient two"></div>
+    <div class="ambient three"></div>
+</div>
+
+<div id="particles"></div>
+
+<div id="preloader">
+    <div class="loader-logo">HK</div>
+    <div class="loader-title">HOÀNG KUN iOS</div>
+    <div class="loader-sub">ULTRA PREMIUM EXPERIENCE</div>
+    <div class="loader-bar"><span></span></div>
+</div>
+
+<!-- ==================================================
+     02. ANNOUNCEMENT
+================================================== -->
+
+<div class="announcement">
+    <i class="fa-solid fa-bolt"></i>
+    WELCOME TO HOÀNG KUN iOS — APP LIBRARY
+    <i class="fa-solid fa-heart"></i>
+</div>
+
+<!-- ==================================================
+     03. NAVIGATION
+================================================== -->
+
+<header class="navbar">
+
+    <a href="#home" class="brand">
+        <div class="brand-icon">HK</div>
+
+        <div class="brand-text">
+            <h2>HOÀNG KUN iOS</h2>
+            <p>PREMIUM APP LIBRARY</p>
         </div>
+    </a>
 
-        <h2>PHÁT HIỆN THAO TÁC BỊ CẤM!</h2>
+    <nav class="nav-links" id="navLinks">
+        <a href="#home">
+            <i class="fa-solid fa-house"></i>
+            Trang chủ
+        </a>
 
-        <p id="securityMessage">
-            Vui lòng không sử dụng công cụ kiểm tra
-            hoặc truy cập trái phép vào hệ thống.
-        </p>
+        <a href="#library">
+            <i class="fa-solid fa-layer-group"></i>
+            Ứng dụng
+        </a>
 
-        <div class="security-warning">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-            Hệ thống Hoàng Kun iOS đang được bảo vệ!
-        </div>
+        <a href="#music">
+            <i class="fa-solid fa-music"></i>
+            Âm nhạc
+        </a>
 
-        <button class="security-close" onclick="closeSecurityAlert()">
-            <i class="fa-solid fa-check-circle"></i>
-            TÔI ĐÃ HIỂU
+        <a href="#youtube">
+            <i class="fa-brands fa-youtube"></i>
+            YouTube
+        </a>
+
+        <a href="#donation">
+            <i class="fa-solid fa-heart"></i>
+            Ủng hộ
+        </a>
+    </nav>
+
+    <div class="nav-actions">
+
+        <button class="nav-action"
+                onclick="showToast('Chào mừng bạn đến với Hoàng Kun iOS!')"
+                aria-label="Thông báo">
+            <i class="fa-solid fa-bell"></i>
+        </button>
+
+        <button class="nav-action"
+                id="themeBtn"
+                onclick="toggleTheme()"
+                aria-label="Đổi giao diện">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+
+        <button class="nav-action mobile-menu"
+                id="menuBtn"
+                onclick="toggleMenu()"
+                aria-label="Mở menu">
+            <i class="fa-solid fa-bars"></i>
         </button>
 
     </div>
-</div>
-
- 
-<div id="particles"></div>
-
-<header class="navbar">
- <button class="nav-btn bell" onclick="showToast('Chào mừng đến với Hoàng Kun iOS!')" aria-label="Thông báo">
-  <i class="fa-solid fa-bell"></i>
- </button>
- <button class="nav-btn theme" id="themeBtn" onclick="toggleTheme()" aria-label="Đổi giao diện">
-  <i class="fa-solid fa-sun"></i>
- </button>
 </header>
 
-<section class="hero">
- <div class="avatar-wrap">
-  <img class="avatar"
-   src="https://scontent.fhph1-3.fna.fbcdn.net/v/t39.30808-6/832661538_122142716325181764_7541821947076323442_n.jpg?stp=dst-jpg_tt6&cstp=mx750x750&ctp=s750x750&_nc_cat=103&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=iXFyQBVvbJYQ7kNvwFCMFCL&_nc_oc=AdqGnvI7Jn8X1W4LTog6A6hJjLLDoi_d0f-0W_tETnuf_XKmuLealWDwWqELzEvIOeg&_nc_zt=23&_nc_ht=scontent.fhph1-3.fna&_nc_gid=7-16npyz86k2BVDAXa_hGw&_nc_ss=782a8&oh=00_AQS51BINEFksVJ-RORicIkDSUTs-604Q-8Dy61fJ3lPTeA&oe=6AECAFBC"
-   alt="Hoàng Kun">
+<!-- ==================================================
+     04. HERO PROFILE
+================================================== -->
 
-  <img class="avatar-frame"
-   src="https://vthangios.xyz/uploads/intro/1789270294_e1f9986c9748fea3.png"
-   alt="" aria-hidden="true">
- </div>
+<section class="hero" id="home">
 
- <p class="hello">Hi, i am</p>
- <h1>
-  Hoàng Kun iOS
-  <span class="verified"><i class="fa-solid fa-check"></i></span>
- </h1>
+    <div class="avatar-wrap">
 
- <p class="tagline">
-  and I'm a <span id="typingText">Gamer</span><span class="typing-cursor"></span>
- </p>
-<div class="socials">
-  <a class="social facebook" href="https://www.facebook.com/profile.php?id=61585452924884" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-    <i class="fa-brands fa-facebook"></i>
-  </a>
+        <img class="avatar"
+             src="https://scontent.fhph1-3.fna.fbcdn.net/v/t39.30808-6/832661538_122142716325181764_7541821947076323442_n.jpg?stp=dst-jpg_tt6&cstp=mx750x750&ctp=s750x750&_nc_cat=103&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=iXFyQBVvbJYQ7kNvwFCMFCL&_nc_oc=AdqGnvI7Jn8X1W4LTog6A6hJjLLDoi_d0f-0W_tETnuf_XKmuLealWDwWqELzEvIOeg&_nc_zt=23&_nc_ht=scontent.fhph1-3.fna&_nc_gid=7-16npyz86k2BVDAXa_hGw&_nc_ss=782a8&oh=00_AQS51BINEFksVJ-RORicIkDSUTs-604Q-8Dy61fJ3lPTeA&oe=6AECAFBC"
+             alt="Ảnh đại diện Hoàng Kun"
+             onerror="this.style.display='none'">
 
-  <a class="social tiktok" href="https://tiktok.com/@hanjuemusic06" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-    <i class="fa-brands fa-tiktok"></i>
-  </a>
+        <img class="avatar-frame"
+             src="https://vthangios.xyz/uploads/intro/1789270294_e1f9986c9748fea3.png"
+             alt=""
+             aria-hidden="true">
 
-  <a class="social youtube" href="https://www.youtube.com/@KunMusic06" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-    <i class="fa-brands fa-youtube"></i>
-  </a>
- </div>
+    </div>
+
+    <p class="hero-greeting">WELCOME TO MY WEBSITE</p>
+
+    <h1>
+        Hoàng Kun iOS
+        <span class="verified">
+            <i class="fa-solid fa-check"></i>
+        </span>
+    </h1>
+
+    <p class="hero-description">
+        Xin chào! Chào mừng bạn đến với không gian ứng dụng,
+        công nghệ và giải trí của Hoàng Kun.
+    </p>
+
+    <p class="tagline">
+        and I'm a
+        <span id="typingText">Gamer</span>
+        <span class="typing-cursor"></span>
+    </p>
+
+    <div class="socials">
+
+        <a class="social facebook"
+           href="https://www.facebook.com/profile.php?id=61585452924884"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Facebook">
+            <i class="fa-brands fa-facebook"></i>
+        </a>
+
+        <a class="social tiktok"
+           href="https://tiktok.com/@hanjuemusic06"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="TikTok">
+            <i class="fa-brands fa-tiktok"></i>
+        </a>
+
+        <a class="social youtube"
+           href="https://www.youtube.com/@KunMusic06"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="YouTube">
+            <i class="fa-brands fa-youtube"></i>
+        </a>
+
+    </div>
+
+    <div class="hero-stats">
+
+        <div class="stat-card">
+            <strong id="appCount">08+</strong>
+            <span>ỨNG DỤNG</span>
+        </div>
+
+        <div class="stat-card">
+            <strong>24/7</strong>
+            <span>TRỰC TUYẾN</span>
+        </div>
+
+        <div class="stat-card">
+            <strong>100%</strong>
+            <span>ĐAM MÊ</span>
+        </div>
+
+    </div>
+
 </section>
 
-<div class="notice">
- <i class="fa-solid fa-bullhorn"></i>
- <div><strong>THÔNG BÁO:</strong> Chào mừng bạn đến với hệ thống Hoàng Kun iOS!</div>
-</div>
+<!-- ==================================================
+     05. MAIN CONTENT
+================================================== -->
 
 <main class="container">
- <section class="apps" id="appList"></section>
 
- <section class="bottom">
+    <!-- NOTICE -->
 
-  <!-- SOUNDCLOUD -->
-  <div class="panel music-panel">
-   <div class="music-header">
-    <div class="music-heading">
-     <i class="fa-brands fa-soundcloud"></i>
-     HOÀNG KUN MUSIC
-    </div>
-    <div class="music-status">SoundCloud</div>
-   </div>
+    <section class="section">
 
-   <div class="soundcloud-frame">
-    <iframe
-     title="Hoàng Kun SoundCloud Player"
-     scrolling="no"
-     allow="autoplay"
-     loading="lazy"
-     src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fng-vi-t-ho-ng-172356656&color=%237665ff&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=true&visual=true">
-    </iframe>
-   </div>
+        <div class="notice">
 
-   <a class="soundcloud-link"
-    href="https://soundcloud.com/ng-vi-t-ho-ng-172356656"
-    target="_blank"
-    rel="noopener noreferrer">
-    <i class="fa-solid fa-headphones"></i>
-    Mở SoundCloud
-    <i class="fa-solid fa-arrow-up-right-from-square"></i>
-   </a>
-  </div>
+            <div class="notice-icon">
+                <i class="fa-solid fa-bullhorn"></i>
+            </div>
 
-  <!-- YOUTUBE PREMIUM -->
-  <div class="panel youtube-panel">
-   <div class="youtube-top">
-    <div class="youtube-avatar-wrap">
-     <img class="youtube-avatar"
-      src="https://scontent.fhph1-3.fna.fbcdn.net/v/t39.30808-6/832661538_122142716325181764_7541821947076323442_n.jpg?stp=dst-jpg_tt6&cstp=mx750x750&ctp=s750x750&_nc_cat=103&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=iXFyQBVvbJYQ7kNvwFCMFCL&_nc_oc=AdqGnvI7Jn8X1W4LTog6A6hJjLLDoi_d0f-0W_tETnuf_XKmuLealWDwWqELzEvIOeg&_nc_zt=23&_nc_ht=scontent.fhph1-3.fna&_nc_gid=7-16npyz86k2BVDAXa_hGw&_nc_ss=782a8&oh=00_AQS51BINEFksVJ-RORicIkDSUTs-604Q-8Dy61fJ3lPTeA&oe=6AECAFBC"
-      alt="Hoàng Kun">
-     <span class="youtube-verified">
-      <i class="fa-solid fa-check"></i>
-     </span>
-    </div>
+            <div class="notice-content">
+                <strong>THÔNG BÁO HỆ THỐNG</strong>
 
-    <div class="youtube-info">
-     <span class="youtube-label">
-      <i class="fa-brands fa-youtube"></i>
-      YOUTUBE CHANNEL
-     </span>
-     <h3>Han Jue Music</h3>
-     <p class="youtube-username">@KunMusic06</p>
-     <p class="youtube-desc">Welcome to my channel! ❤️</p>
-    </div>
-   </div>
+                <p>
+                    Chào mừng bạn đến với Hoàng Kun iOS.
+                    Hãy theo dõi website thường xuyên để cập nhật
+                    những ứng dụng và phiên bản mới nhất.
+                </p>
+            </div>
 
-   <div class="youtube-bottom">
-    <div class="youtube-status">
-     <span class="youtube-dot"></span>
-     Music • Remix • Entertainment
-    </div>
+        </div>
 
-    <a class="subscribe"
-     href="https://www.youtube.com/@KunMusic06"
-     target="_blank"
-     rel="noopener noreferrer">
-     <i class="fa-brands fa-youtube"></i>
-     ĐĂNG KÝ
-     <i class="fa-solid fa-arrow-up-right-from-square"></i>
-    </a>
-   </div>
-  </div>
+    </section>
 
- </section>
+    <!-- ==================================================
+         06. APP LIBRARY
+    ================================================== -->
+
+    <section class="section" id="library">
+
+        <div class="section-heading">
+
+            <div>
+                <div class="section-eyebrow">
+                    DISCOVER APPLICATIONS
+                </div>
+
+                <h2>
+                    <i class="fa-solid fa-cubes"
+                       style="color:var(--purple)"></i>
+                    Kho ứng dụng
+                </h2>
+
+                <p>
+                    Khám phá các ứng dụng được giới thiệu
+                    trên hệ thống Hoàng Kun iOS.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- SEARCH + FILTER -->
+
+        <div class="app-toolbar">
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="search"
+                    id="appSearch"
+                    placeholder="Tìm kiếm ứng dụng..."
+                    autocomplete="off"
+                    aria-label="Tìm kiếm ứng dụng">
+
+            </div>
+
+            <div class="filter-list">
+
+                <button class="filter-btn active"
+                        data-filter="all"
+                        onclick="filterApps('all',this)">
+                    Tất cả
+                </button>
+
+                <button class="filter-btn"
+                        data-filter="ios"
+                        onclick="filterApps('ios',this)">
+                    <i class="fa-brands fa-apple"></i>
+                    iOS
+                </button>
+
+                <button class="filter-btn"
+                        data-filter="android"
+                        onclick="filterApps('android',this)">
+                    <i class="fa-brands fa-android"></i>
+                    Android
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- APP CARDS WILL BE RENDERED BY JAVASCRIPT -->
+
+        <div class="apps" id="appList">
+
+            <div class="no-results">
+                <i class="fa-solid fa-spinner fa-spin"></i>
+                <strong>Đang tải ứng dụng...</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ==================================================
+         07. MUSIC + YOUTUBE
+    ================================================== -->
+
+    <section class="bottom" id="music">
+
+        <!-- SOUNDCLOUD -->
+
+        <div class="panel music-panel">
+
+            <div class="music-header">
+
+                <div class="music-heading">
+                    <i class="fa-brands fa-soundcloud"></i>
+                    HOÀNG KUN MUSIC
+                </div>
+
+                <div class="music-status">
+                    SoundCloud
+                </div>
+
+            </div>
+
+            <div class="soundcloud-frame">
+
+                <iframe
+                    title="Hoàng Kun SoundCloud Player"
+                    scrolling="no"
+                    allow="autoplay"
+                    loading="lazy"
+                    src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fng-vi-t-ho-ng-172356656&color=%237665ff&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+                </iframe>
+
+            </div>
+
+            <a class="soundcloud-link"
+               href="https://soundcloud.com/ng-vi-t-ho-ng-172356656"
+               target="_blank"
+               rel="noopener noreferrer">
+
+                <i class="fa-solid fa-headphones"></i>
+                NGHE NHẠC TRÊN SOUNDCLOUD
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+            </a>
+
+        </div>
+
+        <!-- YOUTUBE -->
+
+        <div class="panel youtube-panel" id="youtube">
+
+            <div>
+
+                <div class="music-header">
+
+                    <div class="music-heading">
+                        <i class="fa-brands fa-youtube"
+                           style="color:#ff3434"></i>
+                        YOUTUBE CHANNEL
+                    </div>
+
+                    <div class="music-status">
+                        Official
+                    </div>
+
+                </div>
+
+                <div class="youtube-top">
+
+                    <img
+                        class="youtube-avatar"
+                        src="https://scontent.fhph1-3.fna.fbcdn.net/v/t39.30808-6/832661538_122142716325181764_7541821947076323442_n.jpg?stp=dst-jpg_tt6&cstp=mx750x750&ctp=s750x750&_nc_cat=103&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=iXFyQBVvbJYQ7kNvwFCMFCL&_nc_oc=AdqGnvI7Jn8X1W4LTog6A6hJjLLDoi_d0f-0W_tETnuf_XKmuLealWDwWqELzEvIOeg&_nc_zt=23&_nc_ht=scontent.fhph1-3.fna&_nc_gid=7-16npyz86k2BVDAXa_hGw&_nc_ss=782a8&oh=00_AQS51BINEFksVJ-RORicIkDSUTs-604Q-8Dy61fJ3lPTeA&oe=6AECAFBC"
+                        alt="Han Jue Music"
+                        loading="lazy">
+
+                    <div class="youtube-info">
+
+                        <span class="youtube-label">
+                            <i class="fa-brands fa-youtube"></i>
+                            OFFICIAL CHANNEL
+                        </span>
+
+                        <h3>Han Jue Music</h3>
+
+                        <p>@KunMusic06</p>
+
+                        <p>
+                            Welcome to my channel! ❤️
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="youtube-bottom">
+
+                <div class="youtube-status">
+                    Music • Remix • Entertainment
+                </div>
+
+                <a class="subscribe"
+                   href="https://www.youtube.com/@KunMusic06"
+                   target="_blank"
+                   rel="noopener noreferrer">
+
+                    <i class="fa-brands fa-youtube"></i>
+                    ĐĂNG KÝ KÊNH
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ==================================================
+         08. DONATION
+    ================================================== -->
+
+    <section class="donation-panel" id="donation">
+
+        <div class="donation-header">
+
+            <span class="donation-label">
+                <i class="fa-solid fa-heart"></i>
+                SUPPORT THE CREATOR
+            </span>
+
+            <h2>
+                Ủng hộ Hoàng Kun ❤️
+            </h2>
+
+            <p>
+                Nếu bạn yêu thích website và những nội dung
+                mình chia sẻ, bạn có thể ủng hộ tự nguyện
+                để mình có thêm động lực phát triển dự án.
+                Xin cảm ơn mọi người rất nhiều!
+            </p>
+
+        </div>
+
+        <div class="donation-content">
+
+            <div class="donation-info">
+
+                <h3>
+                    Cùng mình phát triển nhé!
+                </h3>
+
+                <p>
+                    Mỗi sự ủng hộ đều là nguồn động viên quý giá.
+                    Mình sẽ tiếp tục cải thiện giao diện,
+                    cập nhật nội dung và mang đến trải nghiệm
+                    tốt hơn cho mọi người.
+                </p>
+
+                <div class="donation-benefits">
+
+                    <div class="donation-benefit">
+                        <i class="fa-solid fa-code"></i>
+                        Phát triển và nâng cấp website.
+                    </div>
+
+                    <div class="donation-benefit">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        Duy trì nội dung và tài nguyên.
+                    </div>
+
+                    <div class="donation-benefit">
+                        <i class="fa-solid fa-heart"></i>
+                        Tiếp thêm động lực sáng tạo.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <div class="donation-qr-box">
+
+                    <img
+                        class="donation-qr"
+                        id="donationQR"
+                        src="https://cdn.upanhlaylink.com/i/URE0XSBe.png"
+                        alt="Mã QR ủng hộ Hoàng Kun"
+                        loading="lazy"
+                        onclick="openQR()">
+
+                    <div class="donation-qr-title">
+                        QUÉT MÃ QR ĐỂ ỦNG HỘ
+                    </div>
+
+                    <div class="donation-qr-sub">
+                        Xin chân thành cảm ơn bạn ❤️
+                    </div>
+
+                </div>
+
+                <div class="donation-actions">
+
+                    <button class="donation-btn"
+                            onclick="openQR()">
+                        <i class="fa-solid fa-expand"></i>
+                        Phóng to mã QR
+                    </button>
+
+                    <button class="donation-btn"
+                            onclick="openDonationImage()">
+                        <i class="fa-solid fa-image"></i>
+                        Mở ảnh QR
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
 </main>
 
-<footer>© Designer by <span>HOÀNG KUN iOS</span> 2026</footer>
+<!-- ==================================================
+     09. QR LIGHTBOX
+================================================== -->
+
+<div class="qr-lightbox"
+     id="qrLightbox"
+     onclick="closeQR(event)"
+     role="dialog"
+     aria-modal="true"
+     aria-label="Mã QR ủng hộ">
+
+    <button class="qr-close"
+            onclick="closeQR(event)"
+            aria-label="Đóng mã QR">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <img
+        src="https://cdn.upanhlaylink.com/i/URE0XSBe.png"
+        alt="Mã QR ủng hộ Hoàng Kun">
+
+</div>
+
+<!-- ==================================================
+     10. FOOTER
+================================================== -->
+
+<footer>
+
+    <div class="footer-inner">
+
+        <div class="footer-logo">
+            HOÀNG KUN iOS
+        </div>
+
+        <p class="footer-description">
+            Một không gian nhỏ dành cho ứng dụng,
+            công nghệ, âm nhạc và những điều mình yêu thích.
+            Cảm ơn bạn đã ghé thăm!
+        </p>
+
+        <div class="footer-socials">
+
+            <a href="https://www.facebook.com/profile.php?id=61585452924884"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="Facebook">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+
+            <a href="https://tiktok.com/@hanjuemusic06"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="TikTok">
+                <i class="fa-brands fa-tiktok"></i>
+            </a>
+
+            <a href="https://www.youtube.com/@KunMusic06"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="YouTube">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+
+            <a href="https://soundcloud.com/ng-vi-t-ho-ng-172356656"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="SoundCloud">
+                <i class="fa-brands fa-soundcloud"></i>
+            </a>
+
+        </div>
+
+        <div class="footer-copy">
+            © 2026
+            <span>HOÀNG KUN iOS</span>
+            — Designed with ❤️
+        </div>
+
+    </div>
+
+</footer>
+
+<!-- ==================================================
+     11. FLOATING ELEMENTS
+================================================== -->
+
 <div class="toast" id="toast"></div>
 
+<button class="back-top"
+        id="backTop"
+        onclick="window.scrollTo({top:0,behavior:'smooth'})"
+        aria-label="Lên đầu trang">
+
+    <i class="fa-solid fa-arrow-up"></i>
+
+</button>
+
+<!-- PHẦN 3 SẼ ĐƯỢC DÁN NGAY SAU ĐÂY -->
+
 <script>
-/* DANH SÁCH ỨNG DỤNG */
-const apps=[
- {
-  name:"MENU AOV MAP V1",
-  date:"30/10/2026",
-  description:"Ứng dụng đang được bảo trì, vui lòng quay lại sau!",
-  platform:"iOS",
-  cover:"https://vthangios.xyz/uploads/previews/1785337074_943e1e8c0be1667c.jpeg",
-  icon:"https://vthangios.xyz/uploads/apps/1785224151_22760a5eab01424b.jpeg",
-  link:"",
-  maintenance:true
- },
- {
-  name:"MENU AOV MAP V2",
-  date:"31/10/2026",
-  description:"Ứng dụng đang được bảo trì, vui lòng quay lại sau!",
-  platform:"iOS",
-  cover:"https://vthangios.xyz/uploads/previews/1790753362_1d81439ce002af4c.jpeg",
-  icon:"https://vthangios.xyz/uploads/apps/1785228134_3e17a04f549f80df.jpeg",
-  link:"",
-  maintenance:true
- },
- {
-  name:"MENU AOV ESP V3",
-  date:"01/11/2026",
-  description:"Ứng dụng đang được bảo trì, vui lòng quay lại sau!",
-  platform:"iOS",
-  cover:"https://vthangios.xyz/uploads/previews/1792567885_ff260e829d1d93d1.jpeg",
-  icon:"https://vthangios.xyz/uploads/apps/1785228134_3e17a04f549f80df.jpeg",
-  link:"",
-  maintenance:true
- },
- {
-  name:"MENU AOV MAP ADR V1",
-  date:"27/10/2026",
-  description:"Ứng dụng đang được bảo trì, vui lòng quay lại sau!",
-  platform:"Android",
-  cover:"https://vthangios.xyz/uploads/previews/1790651701_f0f4500bb4de08ec.jpeg",
-  icon:"https://vthangios.xyz/uploads/apps/1793386623_8821a33ff01b84ce.jpg",
-  link:"",
-  maintenance:true
- },
- {
-  name:"MENU AOV MAP ADR V2",
-  date:"28/10/2026",
-  description:"Ứng dụng đang được bảo trì, vui lòng quay lại sau!",
-  platform:"Android",
-  cover:"https://vthangios.xyz/uploads/previews/1793386623_53b22af3dad541dc.jpg",
-  icon:"https://vthangios.xyz/uploads/apps/1793386623_8821a33ff01b84ce.jpg",
-  link:"",
-  maintenance:true
- },
- {
-  name:"FREE FIRE CHEAT PROXY",
-  date:"28/10/2026",
-  description:"Ứng dụng đang được bảo trì, vui lòng quay lại sau!",
-  platform:"iOS",
-  cover:"https://vthangios.xyz/uploads/previews/1792232611_a92ee83f69ad9150.jpeg",
-  icon:"https://vthangios.xyz/uploads/apps/1792232611_55b12dd38115306c.png",
-  link:"",
-  maintenance:true
- },
- {
-  name:"8 BALL POOL",
-  date:"28/10/2026",
-  description:"Ứng dụng đang được bảo trì, vui lòng quay lại sau!",
-  platform:"iOS",
-  cover:"https://vthangios.xyz/uploads/previews/1791292171_9f46c439d104121b.jpeg",
-  icon:"https://vthangios.xyz/uploads/apps/1791292171_1c96f0e7332a61d2.jpeg",
-  link:"",
-  maintenance:true
- },
- {
-  name:"TIKTOK MOD",
-  date:"29/10/2026",
-  description:"Phiên bản TikTok tùy chỉnh",
-  platform:"iOS & Android",
-  cover:"https://vthangios.xyz/uploads/previews/1793165747_d0a5d598f62c1094.jpeg",
-  icon:"https://vthangios.xyz/uploads/apps/1791309784_3a36086979212b10.png",
-  link:"https://hoangkun1207.github.io/tiktok/",
-  maintenance:false
- }
+"use strict";
+
+/* =====================================================
+   01. APP DATABASE - DỮ LIỆU TỪ WEBSITE GỐC
+===================================================== */
+
+const apps = [
+    {
+        name: "MENU AOV MAP V1",
+        date: "30/10/2026",
+        description: "Ứng dụng đang được bảo trì, vui lòng quay lại sau!",
+        platform: "iOS",
+        cover: "https://vthangios.xyz/uploads/previews/1785337074_943e1e8c0be1667c.jpeg",
+        icon: "https://vthangios.xyz/uploads/apps/1785224151_22760a5eab01424b.jpeg",
+        link: "",
+        maintenance: true
+    },
+    {
+        name: "MENU AOV MAP V2",
+        date: "31/10/2026",
+        description: "Ứng dụng đang được bảo trì, vui lòng quay lại sau!",
+        platform: "iOS",
+        cover: "https://vthangios.xyz/uploads/previews/1790753362_1d81439ce002af4c.jpeg",
+        icon: "https://vthangios.xyz/uploads/apps/1785228134_3e17a04f549f80df.jpeg",
+        link: "",
+        maintenance: true
+    },
+    {
+        name: "MENU AOV ESP V3",
+        date: "01/11/2026",
+        description: "Ứng dụng đang được bảo trì, vui lòng quay lại sau!",
+        platform: "iOS",
+        cover: "https://vthangios.xyz/uploads/previews/1792567885_ff260e829d1d93d1.jpeg",
+        icon: "https://vthangios.xyz/uploads/apps/1785228134_3e17a04f549f80df.jpeg",
+        link: "",
+        maintenance: true
+    },
+    {
+        name: "MENU AOV MAP ADR V1",
+        date: "27/10/2026",
+        description: "Ứng dụng đang được bảo trì, vui lòng quay lại sau!",
+        platform: "Android",
+        cover: "https://vthangios.xyz/uploads/previews/1790651701_f0f4500bb4de08ec.jpeg",
+        icon: "https://vthangios.xyz/uploads/apps/1793386623_8821a33ff01b84ce.jpg",
+        link: "",
+        maintenance: true
+    },
+    {
+        name: "MENU AOV MAP ADR V2",
+        date: "28/10/2026",
+        description: "Ứng dụng đang được bảo trì, vui lòng quay lại sau!",
+        platform: "Android",
+        cover: "https://vthangios.xyz/uploads/previews/1793386623_53b22af3dad541dc.jpg",
+        icon: "https://vthangios.xyz/uploads/apps/1793386623_8821a33ff01b84ce.jpg",
+        link: "",
+        maintenance: true
+    },
+    {
+        name: "FREE FIRE CHEAT PROXY",
+        date: "28/10/2026",
+        description: "Ứng dụng đang được bảo trì, vui lòng quay lại sau!",
+        platform: "iOS",
+        cover: "https://vthangios.xyz/uploads/previews/1792232611_a92ee83f69ad9150.jpeg",
+        icon: "https://vthangios.xyz/uploads/apps/1792232611_55b12dd38115306c.png",
+        link: "",
+        maintenance: true
+    },
+    {
+        name: "8 BALL POOL",
+        date: "28/10/2026",
+        description: "Ứng dụng đang được bảo trì, vui lòng quay lại sau!",
+        platform: "iOS",
+        cover: "https://vthangios.xyz/uploads/previews/1791292171_9f46c439d104121b.jpeg",
+        icon: "https://vthangios.xyz/uploads/apps/1791292171_1c96f0e7332a61d2.jpeg",
+        link: "",
+        maintenance: true
+    },
+    {
+        name: "TIKTOK MOD",
+        date: "29/10/2026",
+        description: "Phiên bản TikTok tùy chỉnh",
+        platform: "iOS & Android",
+        cover: "https://vthangios.xyz/uploads/previews/1793165747_d0a5d598f62c1094.jpeg",
+        icon: "https://vthangios.xyz/uploads/apps/1791309784_3a36086979212b10.png",
+        link: "https://hoangkun1207.github.io/tiktok/",
+        maintenance: false
+    }
 ];
 
-/* HIỂN THỊ ỨNG DỤNG */
-function renderApps(){
- const list=document.getElementById("appList");
 
- list.innerHTML=apps.map((app,index)=>{
-  const platform=app.platform.toLowerCase();
-  const isAndroid=platform.includes("android");
-  const isBoth=platform.includes("ios")&&isAndroid;
-  const platformIcon=isBoth
-   ?"fa-mobile-screen-button"
-   :isAndroid?"fa-android":"fa-apple";
+/* =====================================================
+   02. APP LIBRARY ENGINE
+===================================================== */
 
-  return `
-   <article class="app-card" style="animation-delay:${index*.1}s">
-    <div class="cover-wrap">
-     <img class="app-cover"
-      src="${app.cover}"
-      alt="${app.name}"
-      loading="lazy">
+const appList = document.getElementById("appList");
+const appSearch = document.getElementById("appSearch");
 
-     <span class="platform ${isAndroid&&!isBoth?"android":""}">
-      <i class="fa-brands ${platformIcon}"></i>
-      ${app.platform}
-     </span>
-    </div>
+let currentFilter = "all";
+let currentSearch = "";
 
-    <div class="app-content">
-     <div class="app-heading">
-      <img class="app-icon"
-       src="${app.icon}"
-       alt="${app.name}"
-       loading="lazy">
-
-      <div class="app-details">
-       <div class="app-name">${app.name.trim()}</div>
-       <div class="app-date">Cập Nhật Ngày ${app.date}</div>
-      </div>
-     </div>
-
-     <p class="app-description">${app.description}</p>
-
-     <button class="download ${app.maintenance?"maintenance":""}"
-      type="button"
-      onclick="downloadApp(${index})">
-      <i class="fa-solid ${app.maintenance?"fa-screwdriver-wrench":"fa-download"}"></i>
-      ${app.maintenance?"ĐANG BẢO TRÌ":"Download"}
-     </button>
-    </div>
-   </article>
-  `;
- }).join("");
+function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, function(char) {
+        const map = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+        };
+        return map[char];
+    });
 }
 
-function downloadApp(index){
- const app=apps[index];
+function getPlatformInfo(platform) {
+    const value = platform.toLowerCase();
 
- if(app.maintenance){
-  showToast("Ứng dụng đang bảo trì, vui lòng quay lại sau!");
-  return;
- }
+    if (value.includes("ios") && value.includes("android")) {
+        return {
+            icon: "fa-mobile-screen-button",
+            type: "both"
+        };
+    }
 
- if(!app.link){
-  showToast(app.name+" chưa có link tải!");
-  return;
- }
+    if (value.includes("android")) {
+        return {
+            icon: "fa-android",
+            type: "android"
+        };
+    }
 
- window.open(app.link,"_blank","noopener");
+    return {
+        icon: "fa-apple",
+        type: "ios"
+    };
 }
 
-/* CHỮ CHẠY */
-const words=["Gamer","YouTuber","TikToker","Developer"];
-let wordIndex=0;
-let charIndex=0;
-let deleting=false;
-const typingText=document.getElementById("typingText");
+function appMatchesFilter(app) {
+    const platform = app.platform.toLowerCase();
 
-function typeWriter(){
- const word=words[wordIndex];
+    if (currentFilter === "ios") {
+        return platform.includes("ios");
+    }
 
- if(!deleting){
-  charIndex++;
-  typingText.textContent=word.substring(0,charIndex);
+    if (currentFilter === "android") {
+        return platform.includes("android");
+    }
 
-  if(charIndex===word.length){
-   deleting=true;
-   setTimeout(typeWriter,1400);
-   return;
-  }
- }else{
-  charIndex--;
-  typingText.textContent=word.substring(0,charIndex);
-
-  if(charIndex===0){
-   deleting=false;
-   wordIndex=(wordIndex+1)%words.length;
-  }
- }
-
- setTimeout(typeWriter,deleting?65:115);
+    return true;
 }
 
-/* SAO RƠI */
-function createParticles(){
- const area=document.getElementById("particles");
- const symbols=["✦","✧","·","✺","❋"];
- const colors=["#8d85ff","#ff9bcf","#79dfff","#a4e9bd"];
- const count=window.innerWidth<600?14:28;
+function appMatchesSearch(app) {
+    const keyword = currentSearch.trim().toLowerCase();
 
- for(let i=0;i<count;i++){
-  const p=document.createElement("span");
-  p.className="particle";
-  p.textContent=symbols[Math.floor(Math.random()*symbols.length)];
-  p.style.left=Math.random()*100+"%";
-  p.style.fontSize=(8+Math.random()*11)+"px";
-  p.style.color=colors[Math.floor(Math.random()*colors.length)];
-  p.style.animationDuration=(9+Math.random()*13)+"s";
-  p.style.animationDelay=(-Math.random()*18)+"s";
-  p.style.setProperty("--drift",(Math.random()*140-70)+"px");
-  area.appendChild(p);
- }
+    if (!keyword) return true;
+
+    const searchable = [
+        app.name,
+        app.description,
+        app.platform,
+        app.date
+    ].join(" ").toLowerCase();
+
+    return searchable.includes(keyword);
 }
 
-/* DARK MODE */
-function toggleTheme(){
- document.body.classList.toggle("light");
- const light=document.body.classList.contains("light");
+function createAppCard(app, originalIndex, displayIndex) {
+    const platform = getPlatformInfo(app.platform);
+    const maintenance = Boolean(app.maintenance);
 
- document.getElementById("themeBtn").innerHTML=light
-  ?'<i class="fa-solid fa-moon"></i>'
-  :'<i class="fa-solid fa-sun"></i>';
+    return `
+        <article class="app-card"
+                 data-app-index="${originalIndex}"
+                 style="animation-delay:${displayIndex * 0.07}s">
+
+            <div class="cover-wrap">
+
+                <img
+                    class="app-cover"
+                    src="${escapeHTML(app.cover)}"
+                    alt="${escapeHTML(app.name)}"
+                    loading="lazy"
+                    onerror="this.style.opacity='0.15'">
+
+                <div class="cover-overlay"></div>
+
+                <span class="platform ${platform.type === "android" ? "android" : ""}">
+                    <i class="fa-brands ${platform.icon}"></i>
+                    ${escapeHTML(app.platform)}
+                </span>
+
+                <span class="app-badge">
+                    ${maintenance ? "ĐANG CẬP NHẬT" : "AVAILABLE"}
+                </span>
+
+            </div>
+
+            <div class="app-content">
+
+                <div class="app-heading">
+
+                    <img
+                        class="app-icon"
+                        src="${escapeHTML(app.icon)}"
+                        alt="${escapeHTML(app.name)}"
+                        loading="lazy"
+                        onerror="this.style.opacity='0.15'">
+
+                    <div class="app-details">
+
+                        <div class="app-name">
+                            ${escapeHTML(app.name)}
+                        </div>
+
+                        <div class="app-date">
+                            Cập nhật ngày ${escapeHTML(app.date)}
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <p class="app-description">
+                    ${escapeHTML(app.description)}
+                </p>
+
+                <div class="app-meta">
+
+                    <span class="app-status">
+                        <span class="status-dot ${maintenance ? "maintenance" : ""}"></span>
+                        ${maintenance ? "Đang bảo trì" : "Sẵn sàng"}
+                    </span>
+
+                    <span>
+                        <i class="fa-solid fa-shield-halved"></i>
+                        Hoàng Kun
+                    </span>
+
+                </div>
+
+                <button
+                    class="download ${maintenance ? "maintenance" : ""}"
+                    type="button"
+                    onclick="downloadApp(${originalIndex})">
+
+                    <i class="fa-solid ${maintenance ? "fa-screwdriver-wrench" : "fa-download"}"></i>
+
+                    ${maintenance ? "ĐANG BẢO TRÌ" : "DOWNLOAD NGAY"}
+
+                </button>
+
+            </div>
+
+        </article>
+    `;
 }
 
-/* TOAST */
+function renderApps() {
+    if (!appList) return;
+
+    const filtered = apps
+        .map((app, index) => ({
+            app: app,
+            index: index
+        }))
+        .filter(item => appMatchesFilter(item.app))
+        .filter(item => appMatchesSearch(item.app));
+
+    const count = document.getElementById("appCount");
+
+    if (count) {
+        count.textContent = String(apps.length).padStart(2, "0") + "+";
+    }
+
+    if (filtered.length === 0) {
+        appList.innerHTML = `
+            <div class="no-results">
+                <i class="fa-solid fa-box-open"></i>
+                <strong>Không tìm thấy ứng dụng</strong>
+                <p style="margin-top:8px;font-size:11px">
+                    Hãy thử từ khóa khác hoặc chọn bộ lọc khác.
+                </p>
+            </div>
+        `;
+        return;
+    }
+
+    appList.innerHTML = filtered
+        .map((item, index) => createAppCard(
+            item.app,
+            item.index,
+            index
+        ))
+        .join("");
+}
+
+
+/* =====================================================
+   03. SEARCH + FILTER
+===================================================== */
+
+if (appSearch) {
+    appSearch.addEventListener("input", function(event) {
+        currentSearch = event.target.value;
+        renderApps();
+    });
+}
+
+function filterApps(filter, button) {
+    currentFilter = filter;
+
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    if (button) {
+        button.classList.add("active");
+    }
+
+    renderApps();
+}
+
+
+/* =====================================================
+   04. DOWNLOAD SYSTEM
+===================================================== */
+
+function downloadApp(index) {
+    const app = apps[index];
+
+    if (!app) {
+        showToast("Không tìm thấy ứng dụng!");
+        return;
+    }
+
+    if (app.maintenance) {
+        showToast("Ứng dụng đang bảo trì. Hãy quay lại sau nhé!");
+        return;
+    }
+
+    if (!app.link) {
+        showToast("Ứng dụng chưa có đường dẫn tải!");
+        return;
+    }
+
+    const newWindow = window.open(
+        app.link,
+        "_blank",
+        "noopener,noreferrer"
+    );
+
+    if (!newWindow) {
+        showToast("Trình duyệt đã chặn cửa sổ mới. Hãy cho phép mở liên kết.");
+        return;
+    }
+
+    showToast("Đang mở " + app.name + "...");
+}
+
+
+/* =====================================================
+   05. TYPING TEXT EFFECT
+===================================================== */
+
+const words = [
+    "Gamer",
+    "YouTuber",
+    "TikToker",
+    "Developer",
+    "Music Lover"
+];
+
+let wordIndex = 0;
+let charIndex = 0;
+let deleting = false;
+
+const typingText = document.getElementById("typingText");
+
+function typeWriter() {
+    if (!typingText) return;
+
+    const word = words[wordIndex];
+
+    if (!deleting) {
+        charIndex++;
+        typingText.textContent = word.substring(0, charIndex);
+
+        if (charIndex >= word.length) {
+            deleting = true;
+            setTimeout(typeWriter, 1300);
+            return;
+        }
+    } else {
+        charIndex--;
+        typingText.textContent = word.substring(0, charIndex);
+
+        if (charIndex <= 0) {
+            deleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+        }
+    }
+
+    setTimeout(typeWriter, deleting ? 55 : 105);
+}
+
+
+/* =====================================================
+   06. PARTICLE / SNOW EFFECT
+===================================================== */
+
+function createParticles() {
+    const area = document.getElementById("particles");
+
+    if (!area) return;
+
+    area.innerHTML = "";
+
+    const symbols = ["✦", "✧", "·", "✺", "❋"];
+    const colors = [
+        "#8d85ff",
+        "#ff9bcf",
+        "#79dfff",
+        "#a4e9bd"
+    ];
+
+    const count = window.innerWidth < 600 ? 14 : 28;
+
+    for (let i = 0; i < count; i++) {
+        const particle = document.createElement("span");
+
+        particle.className = "particle";
+        particle.textContent =
+            symbols[Math.floor(Math.random() * symbols.length)];
+
+        particle.style.left = Math.random() * 100 + "%";
+        particle.style.fontSize = (8 + Math.random() * 11) + "px";
+        particle.style.color =
+            colors[Math.floor(Math.random() * colors.length)];
+
+        particle.style.animationDuration =
+            (9 + Math.random() * 13) + "s";
+
+        particle.style.animationDelay =
+            (-Math.random() * 18) + "s";
+
+        particle.style.setProperty(
+            "--drift",
+            (Math.random() * 140 - 70) + "px"
+        );
+
+        area.appendChild(particle);
+    }
+}
+
+
+/* =====================================================
+   07. LIGHT / DARK MODE
+===================================================== */
+
+function toggleTheme() {
+    document.body.classList.toggle("light");
+
+    const light = document.body.classList.contains("light");
+    const button = document.getElementById("themeBtn");
+
+    if (button) {
+        button.innerHTML = light
+            ? '<i class="fa-solid fa-moon"></i>'
+            : '<i class="fa-solid fa-sun"></i>';
+    }
+
+    try {
+        localStorage.setItem("hoangkun-theme", light ? "light" : "dark");
+    } catch (error) {
+        // Website vẫn hoạt động nếu trình duyệt chặn localStorage.
+    }
+}
+
+function loadSavedTheme() {
+    try {
+        const saved = localStorage.getItem("hoangkun-theme");
+
+        if (saved === "light") {
+            document.body.classList.add("light");
+
+            const button = document.getElementById("themeBtn");
+
+            if (button) {
+                button.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            }
+        }
+    } catch (error) {
+        // Dùng giao diện tối mặc định.
+    }
+}
+
+
+/* =====================================================
+   08. MOBILE NAVIGATION
+===================================================== */
+
+function toggleMenu() {
+    const nav = document.getElementById("navLinks");
+    const button = document.getElementById("menuBtn");
+
+    if (!nav) return;
+
+    nav.classList.toggle("open");
+
+    if (button) {
+        button.innerHTML = nav.classList.contains("open")
+            ? '<i class="fa-solid fa-xmark"></i>'
+            : '<i class="fa-solid fa-bars"></i>';
+    }
+}
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", function() {
+        const nav = document.getElementById("navLinks");
+        const button = document.getElementById("menuBtn");
+
+        if (nav) nav.classList.remove("open");
+
+        if (button) {
+            button.innerHTML = '<i class="fa-solid fa-bars"></i>';
+        }
+    });
+});
+
+
+/* =====================================================
+   09. TOAST NOTIFICATION
+===================================================== */
+
 let toastTimer;
-function showToast(message){
- const toast=document.getElementById("toast");
- toast.textContent=message;
- toast.classList.add("show");
- clearTimeout(toastTimer);
- toastTimer=setTimeout(()=>toast.classList.remove("show"),2500);
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+
+    if (!toast) return;
+
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2800);
 }
 
-/* KHỞI CHẠY */
-renderApps();
-createParticles();
-typeWriter();
+
+/* =====================================================
+   10. QR CODE LIGHTBOX
+===================================================== */
+
+function openQR() {
+    const lightbox = document.getElementById("qrLightbox");
+
+    if (!lightbox) return;
+
+    lightbox.classList.add("active");
+    document.body.style.overflow = "hidden";
+}
+
+function closeQR(event) {
+    const lightbox = document.getElementById("qrLightbox");
+
+    if (!lightbox) return;
+
+    if (
+        !event ||
+        event.target === lightbox ||
+        event.target.closest(".qr-close")
+    ) {
+        lightbox.classList.remove("active");
+        document.body.style.overflow = "";
+    }
+}
+
+function openDonationImage() {
+    window.open(
+        "https://cdn.upanhlaylink.com/i/URE0XSBe.png",
+        "_blank",
+        "noopener,noreferrer"
+    );
+}
+
+
+/* =====================================================
+   11. BACK TO TOP
+===================================================== */
+
+const backTop = document.getElementById("backTop");
+
+window.addEventListener("scroll", function() {
+    if (!backTop) return;
+
+    backTop.classList.toggle(
+        "show",
+        window.scrollY > 450
+    );
+}, { passive: true });
+
+
+/* =====================================================
+   12. KEYBOARD SHORTCUTS
+===================================================== */
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        const lightbox = document.getElementById("qrLightbox");
+
+        if (lightbox) {
+            lightbox.classList.remove("active");
+            document.body.style.overflow = "";
+        }
+
+        const nav = document.getElementById("navLinks");
+
+        if (nav) nav.classList.remove("open");
+    }
+
+    if (
+        (event.ctrlKey || event.metaKey) &&
+        event.key.toLowerCase() === "k"
+    ) {
+        event.preventDefault();
+
+        if (appSearch) {
+            appSearch.focus();
+        }
+    }
+});
+
+
+/* =====================================================
+   13. PRELOADER
+===================================================== */
+
+function hidePreloader() {
+    const loader = document.getElementById("preloader");
+
+    if (loader) {
+        loader.classList.add("hide");
+    }
+}
+
+window.addEventListener("load", function() {
+    setTimeout(hidePreloader, 500);
+});
+
+setTimeout(hidePreloader, 4000);
+
+
+/* =====================================================
+   14. INITIALIZE WEBSITE
+===================================================== */
+
+function initializeWebsite() {
+    loadSavedTheme();
+    renderApps();
+    createParticles();
+    typeWriter();
+
+    console.log(
+        "%cHOÀNG KUN iOS",
+        "font-size:24px;font-weight:900;color:#a879ff"
+    );
+
+    console.log(
+        "%cWelcome to my website!",
+        "font-size:13px;color:#31d9ff"
+    );
+}
+
+initializeWebsite();
+
 </script>
 
  <script>
   
-/* ===== HOANG KUN ANTI DEVTOOLS ===== */
+/* =========================================================
+   HOANG KUN iOS - PART 4 JAVASCRIPT
+========================================================= */
 
-const securityOverlay = document.getElementById("securityOverlay");
-const securityBox = document.getElementById("securityBox");
-const securityMessage = document.getElementById("securityMessage");
+(() => {
+    "use strict";
 
-let securityTimer;
+    const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
 
-function showSecurityAlert(message) {
-    securityMessage.textContent = message;
+    /* 1. Navbar đổi nền khi cuộn */
+    const navbar = document.querySelector(".navbar");
 
-    securityOverlay.classList.add("active");
-
-    securityBox.classList.remove("shake");
-    void securityBox.offsetWidth;
-    securityBox.classList.add("shake");
-
-    clearTimeout(securityTimer);
-
-    securityTimer = setTimeout(() => {
-        closeSecurityAlert();
-    }, 3000);
-}
-
-function closeSecurityAlert() {
-    securityOverlay.classList.remove("active");
-}
-
-// Chặn chuột phải
-document.addEventListener("contextmenu", function(e) {
-    e.preventDefault();
-    showSecurityAlert("Chuột phải đã bị vô hiệu hóa trên website!");
-});
-
-// Chặn phím tắt
-document.addEventListener("keydown", function(e) {
-    const key = e.key.toLowerCase();
-
-    const blocked =
-        key === "f12" ||
-        (e.ctrlKey && e.shiftKey && ["i", "j", "c"].includes(key)) ||
-        (e.ctrlKey && ["u", "s"].includes(key));
-
-    if (blocked) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        showSecurityAlert("Thao tác bàn phím này không được phép trên hệ thống!");
+    function updateNavbar() {
+        if (!navbar) return;
+        navbar.classList.toggle("scrolled", window.scrollY > 35);
     }
-}, true);
+
+    window.addEventListener("scroll", updateNavbar, {
+        passive: true
+    });
+
+    updateNavbar();
+
+    /* 2. Hiệu ứng xuất hiện khi cuộn */
+    const revealTargets = document.querySelectorAll(
+        ".section, .app-card, .panel, .stat-card, " +
+        ".notice, .donation-panel, footer"
+    );
+
+    revealTargets.forEach((element, index) => {
+        element.classList.add("hk-reveal");
+        element.style.transitionDelay =
+            `${Math.min(index % 5, 4) * 65}ms`;
+    });
+
+    if ("IntersectionObserver" in window && !reduceMotion) {
+        const revealObserver = new IntersectionObserver(
+            (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("hk-visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            {
+                threshold: 0.08,
+                rootMargin: "0px 0px -35px 0px"
+            }
+        );
+
+        revealTargets.forEach(element => {
+            revealObserver.observe(element);
+        });
+    } else {
+        revealTargets.forEach(element => {
+            element.classList.add("hk-visible");
+        });
+    }
+
+    /* 3. Hiệu ứng nghiêng 3D cho thẻ ứng dụng */
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches
+        && !reduceMotion) {
+
+        document.addEventListener("pointermove", event => {
+            const card = event.target.closest(".app-card");
+            if (!card) return;
+
+            const rect = card.getBoundingClientRect();
+
+            const x = (event.clientX - rect.left) / rect.width;
+            const y = (event.clientY - rect.top) / rect.height;
+
+            const rotateY = (x - 0.5) * 7;
+            const rotateX = (0.5 - y) * 7;
+
+            card.style.transform =
+                `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+        });
+
+        document.addEventListener("pointerout", event => {
+            const card = event.target.closest(".app-card");
+            if (!card) return;
+
+            if (event.relatedTarget &&
+                card.contains(event.relatedTarget)) return;
+
+            card.style.transform = "";
+        });
+    }
+
+    /* 4. Tự động lazy-load ảnh ngoài màn hình */
+    document.querySelectorAll("img").forEach(img => {
+        if (!img.hasAttribute("loading")) {
+            img.setAttribute("loading", "lazy");
+        }
+
+        if (!img.hasAttribute("decoding")) {
+            img.setAttribute("decoding", "async");
+        }
+    });
+
+    /* 5. Nút lên đầu trang */
+    const backTop = document.querySelector(
+        "#backTop, .back-top"
+    );
+
+    function updateBackTop() {
+        if (!backTop) return;
+
+        const visible = window.scrollY > 450;
+
+        backTop.style.opacity = visible ? "1" : "0";
+        backTop.style.pointerEvents = visible ? "auto" : "none";
+    }
+
+    window.addEventListener("scroll", updateBackTop, {
+        passive: true
+    });
+
+    updateBackTop();
+
+    if (backTop) {
+        backTop.addEventListener("click", event => {
+            event.preventDefault();
+
+            window.scrollTo({
+                top: 0,
+                behavior: reduceMotion ? "auto" : "smooth"
+            });
+        });
+    }
+
+    /* 6. Đóng QR khi bấm bên ngoài ảnh */
+    const qrLightbox = document.querySelector(".qr-lightbox");
+
+    if (qrLightbox) {
+        qrLightbox.addEventListener("click", event => {
+            if (event.target === qrLightbox) {
+                if (typeof window.closeQR === "function") {
+                    window.closeQR();
+                } else {
+                    qrLightbox.classList.remove("active");
+                    qrLightbox.style.display = "none";
+                }
+            }
+        });
+    }
+
+    /* 7. Bảo đảm liên kết ngoài mở an toàn */
+    document.querySelectorAll('a[target="_blank"]').forEach(link => {
+        const rel = new Set(
+            (link.getAttribute("rel") || "").split(/\s+/).filter(Boolean)
+        );
+
+        rel.add("noopener");
+        rel.add("noreferrer");
+
+        link.setAttribute("rel", [...rel].join(" "));
+    });
+
+    /* 8. Năm hiện tại ở footer */
+    const yearElements = document.querySelectorAll(
+        "[data-current-year]"
+    );
+
+    yearElements.forEach(element => {
+        element.textContent = new Date().getFullYear();
+    });
+
+    console.log(
+        "%cHOANG KUN iOS",
+        "font-size:22px;font-weight:900;color:#00d9ff;"
+    );
+
+    console.log(
+        "%cWebsite đã tải xong!",
+        "font-size:13px;color:#a855ff;"
+    );
+})();
 
  </script>
 </body>
