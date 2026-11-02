@@ -4216,17 +4216,30 @@ document.addEventListener("keydown", function(event) {
         saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
     } catch (error) {}
 
-    const readStats = () => {
-        try {
-            const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+   const BASE_COUNT = 2310;
+const BASE_SUM = BASE_COUNT * 5;
 
-            if (data && Number.isFinite(data.sum) && Number.isFinite(data.count)) {
-                return data;
-            }
-        } catch (error) {}
+const readStats = () => {
+    try {
+        const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
 
-        return { sum: 0, count: 0, rated: false, value: 0 };
+        if (data && Number.isFinite(data.sum) && Number.isFinite(data.count)) {
+            return {
+                sum: BASE_SUM + data.sum,
+                count: BASE_COUNT + data.count,
+                rated: !!data.rated,
+                value: Number(data.value) || 0
+            };
+        }
+    } catch (error) {}
+
+    return {
+        sum: BASE_SUM,
+        count: BASE_COUNT,
+        rated: false,
+        value: 0
     };
+};
 
     const paintStars = value => {
         starsWrap.querySelectorAll(".rating-star-btn").forEach(button => {
