@@ -2457,7 +2457,153 @@ iframe {
     }
 }
 
-
+/* 24. HOANG KUN - STAR RATING */
+.rating-section {
+    max-width: 900px;
+    margin: 45px auto 0;
+    padding: 0 18px;
+}
+.rating-card {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(22px,4vw,38px);
+    border: 1px solid rgba(146,92,255,.28);
+    border-radius: 26px;
+    background:
+        radial-gradient(circle at 8% 0%,rgba(146,92,255,.18),transparent 38%),
+        radial-gradient(circle at 100% 100%,rgba(193,76,255,.12),transparent 38%),
+        linear-gradient(145deg,var(--card2),var(--card));
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+.rating-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border: 1px solid rgba(245,185,66,.25);
+    border-radius: 30px;
+    color: #ffd16a;
+    background: rgba(245,185,66,.08);
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+}
+.rating-card h2 {
+    margin-top: 15px;
+    font-family: 'Outfit',sans-serif;
+    font-size: clamp(23px,4vw,32px);
+    font-weight: 900;
+}
+.rating-subtitle {
+    max-width: 520px;
+    margin: 9px auto 0;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.9;
+}
+.rating-summary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 24px auto;
+}
+.rating-average {
+    color: #ffd16a;
+    font-family: 'Outfit',sans-serif;
+    font-size: 42px;
+    font-weight: 900;
+}
+.rating-summary-info { text-align: left; }
+.rating-summary-stars {
+    display: flex;
+    gap: 3px;
+    color: #f5b942;
+    font-size: 13px;
+}
+.rating-total {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 9px;
+}
+.rating-divider {
+    width: min(100%,440px);
+    height: 1px;
+    margin: 0 auto 22px;
+    background: var(--border);
+}
+.rating-question {
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 800;
+}
+.rating-stars-input {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 15px 0 18px;
+}
+.rating-star-btn {
+    width: 50px;
+    height: 50px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    color: #77718e;
+    background: var(--glass);
+    font-size: 23px;
+    transition: .2s;
+}
+.rating-star-btn:hover,
+.rating-star-btn.active {
+    color: #ffd16a;
+    border-color: rgba(245,185,66,.45);
+    background: rgba(245,185,66,.1);
+}
+.rating-star-btn:hover { transform: translateY(-3px); }
+.rating-submit {
+    min-width: 190px;
+    min-height: 45px;
+    padding: 0 22px;
+    border: 0;
+    border-radius: 14px;
+    color: #fff;
+    background: linear-gradient(110deg,#665aff,#9854ff,#d34dff);
+    box-shadow: 0 8px 22px #925cff38;
+    font-size: 11px;
+    font-weight: 900;
+    cursor: pointer;
+}
+.rating-submit:disabled {
+    cursor: not-allowed;
+    opacity: .55;
+}
+.rating-feedback {
+    min-height: 20px;
+    margin-top: 14px;
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 700;
+}
+.rating-note {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 9px;
+}
+@media(max-width:560px) {
+    .rating-section {
+        padding: 0 11px;
+        margin-top: 32px;
+    }
+    .rating-card { border-radius: 20px; }
+    .rating-average { font-size: 36px; }
+    .rating-stars-input { gap: 7px; }
+    .rating-star-btn {
+        width: 44px;
+        height: 44px;
+    }
+}
+   
 </style>
 </head>
 
@@ -2978,6 +3124,78 @@ iframe {
 
     </section>
 
+   <!-- WEBSITE RATING -->
+<section class="rating-section" id="rating">
+    <div class="rating-card">
+
+        <span class="rating-kicker">
+            <i class="fa-solid fa-sparkles"></i>
+            YOUR FEEDBACK MATTERS
+        </span>
+
+        <h2>Đánh giá Hoàng Kun iOS</h2>
+
+        <p class="rating-subtitle">
+            Một đánh giá nhỏ của bạn sẽ giúp mình có thêm động lực
+            hoàn thiện website và mang đến trải nghiệm tốt hơn.
+        </p>
+
+        <div class="rating-summary" aria-live="polite">
+            <div class="rating-average" id="ratingAverage">0.0</div>
+
+            <div class="rating-summary-info">
+                <div class="rating-summary-stars" id="ratingAverageStars">
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                </div>
+
+                <div class="rating-total" id="ratingTotal">
+                    Chưa có lượt đánh giá
+                </div>
+            </div>
+        </div>
+
+        <div class="rating-divider"></div>
+
+        <p class="rating-question">
+            Bạn cảm thấy website thế nào?
+        </p>
+
+        <div class="rating-stars-input" id="ratingStars">
+            <button class="rating-star-btn" type="button" data-rating="1" aria-label="1 sao">
+                <i class="fa-solid fa-star"></i>
+            </button>
+            <button class="rating-star-btn" type="button" data-rating="2" aria-label="2 sao">
+                <i class="fa-solid fa-star"></i>
+            </button>
+            <button class="rating-star-btn" type="button" data-rating="3" aria-label="3 sao">
+                <i class="fa-solid fa-star"></i>
+            </button>
+            <button class="rating-star-btn" type="button" data-rating="4" aria-label="4 sao">
+                <i class="fa-solid fa-star"></i>
+            </button>
+            <button class="rating-star-btn" type="button" data-rating="5" aria-label="5 sao">
+                <i class="fa-solid fa-star"></i>
+            </button>
+        </div>
+
+        <button class="rating-submit" id="submitRating" type="button" disabled>
+            <i class="fa-solid fa-paper-plane"></i>
+            GỬI ĐÁNH GIÁ
+        </button>
+
+        <div class="rating-feedback" id="ratingFeedback" role="status"></div>
+
+        <p class="rating-note">
+            Đánh giá ẩn danh · Không hiển thị bình luận hay thông tin cá nhân
+        </p>
+
+    </div>
+</section>
+   
 </main>
 
 <!-- ==================================================
@@ -3977,5 +4195,146 @@ document.addEventListener("keydown", function(event) {
     }
 });
 </script>
+
+   <script>
+(() => {
+    const STORAGE_KEY = "hoangkun_ios_rating_v1";
+
+    const starsWrap = document.getElementById("ratingStars");
+    const submitBtn = document.getElementById("submitRating");
+    const feedback = document.getElementById("ratingFeedback");
+    const averageEl = document.getElementById("ratingAverage");
+    const totalEl = document.getElementById("ratingTotal");
+    const averageStars = document.getElementById("ratingAverageStars");
+
+    if (!starsWrap || !submitBtn) return;
+
+    let selectedRating = 0;
+    let saved = null;
+
+    try {
+        saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+    } catch (error) {}
+
+    const readStats = () => {
+        try {
+            const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+
+            if (data && Number.isFinite(data.sum) && Number.isFinite(data.count)) {
+                return data;
+            }
+        } catch (error) {}
+
+        return { sum: 0, count: 0, rated: false, value: 0 };
+    };
+
+    const paintStars = value => {
+        starsWrap.querySelectorAll(".rating-star-btn").forEach(button => {
+            const active = Number(button.dataset.rating) <= value;
+
+            button.classList.toggle("active", active);
+            button.setAttribute(
+                "aria-pressed",
+                String(Number(button.dataset.rating) === value)
+            );
+        });
+    };
+
+    const renderStats = () => {
+        const stats = readStats();
+        const average = stats.count ? stats.sum / stats.count : 0;
+
+        averageEl.textContent = average.toFixed(1);
+
+        totalEl.textContent = stats.count
+            ? `${stats.count.toLocaleString("vi-VN")} lượt đánh giá`
+            : "Chưa có lượt đánh giá";
+
+        averageStars.innerHTML = "";
+
+        for (let i = 1; i <= 5; i++) {
+            const icon = document.createElement("i");
+
+            icon.className = i <= Math.round(average)
+                ? "fa-solid fa-star"
+                : "fa-regular fa-star";
+
+            averageStars.appendChild(icon);
+        }
+    };
+
+    starsWrap.querySelectorAll(".rating-star-btn").forEach(button => {
+        button.addEventListener("click", () => {
+            if (saved && saved.rated) return;
+
+            selectedRating = Number(button.dataset.rating);
+
+            paintStars(selectedRating);
+            submitBtn.disabled = false;
+            feedback.textContent = "";
+        });
+    });
+
+    if (saved && saved.rated) {
+        selectedRating = Number(saved.value) || 0;
+
+        paintStars(selectedRating);
+
+        starsWrap.querySelectorAll("button").forEach(button => {
+            button.disabled = true;
+        });
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> ĐÃ GỬI ĐÁNH GIÁ';
+
+        feedback.textContent = "Cảm ơn bạn đã đánh giá Hoàng Kun iOS ❤️";
+    }
+
+    submitBtn.addEventListener("click", () => {
+        if (selectedRating < 1 || selectedRating > 5) {
+            feedback.textContent = "Bạn hãy chọn số sao trước nhé!";
+            return;
+        }
+
+        const stats = readStats();
+
+        if (stats.rated) {
+            feedback.textContent = "Bạn đã gửi đánh giá rồi. Cảm ơn bạn ❤️";
+            return;
+        }
+
+        const updated = {
+            sum: stats.sum + selectedRating,
+            count: stats.count + 1,
+            rated: true,
+            value: selectedRating
+        };
+
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+
+            saved = updated;
+
+            renderStats();
+            paintStars(selectedRating);
+
+            starsWrap.querySelectorAll("button").forEach(button => {
+                button.disabled = true;
+            });
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> ĐÃ GỬI ĐÁNH GIÁ';
+
+            feedback.textContent = "Cảm ơn bạn đã đánh giá Hoàng Kun iOS ❤️";
+
+        } catch (error) {
+            feedback.textContent = "Không thể lưu đánh giá trên trình duyệt này.";
+        }
+    });
+
+    renderStats();
+})();
+</script>
+   
 </body>
 </html>
