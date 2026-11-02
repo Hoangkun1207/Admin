@@ -2863,7 +2863,74 @@ iframe {
     font-size: 10px;
     line-height: 1.5;
 }
-   
+
+    
+/* ADMIN PINNED REVIEW */
+.admin-pinned-review {
+    position: relative;
+    margin: 16px 0;
+    padding: 18px;
+    border: 1px solid rgba(141, 117, 255, .35);
+    border-radius: 17px;
+    background: linear-gradient(135deg, rgba(141, 117, 255, .12), rgba(141, 117, 255, .035));
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
+}
+
+.admin-pinned-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-bottom: 14px;
+}
+
+.admin-pinned-badge {
+    padding: 5px 9px;
+    border-radius: 7px;
+    background: rgba(141, 117, 255, .17);
+    color: #a994ff;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.admin-pinned-author {
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.admin-pinned-author i {
+    color: #a994ff;
+    margin-right: 4px;
+}
+
+.admin-pinned-title {
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 800;
+    margin-bottom: 9px;
+}
+
+.admin-pinned-content {
+    color: var(--text-secondary, var(--text));
+    font-size: 13px;
+    line-height: 1.8;
+    margin: 0;
+    opacity: .88;
+}
+
+.admin-pinned-footer {
+    margin-top: 13px;
+    color: #a994ff;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.admin-pinned-footer i {
+    margin-right: 4px;
+}
+
 </style>
 </head>
 
@@ -3384,7 +3451,8 @@ iframe {
 
     </section>
 
-  <!-- WEBSITE RATING -->
+ 
+<!-- WEBSITE RATING -->
 <section class="rating-section" id="rating">
     <div class="rating-card">
         <span class="rating-kicker">
@@ -3402,11 +3470,11 @@ iframe {
             <div class="rating-summary-info">
                 <div class="rating-summary-stars" id="ratingAverageStars"></div>
                 <div class="rating-total" id="ratingTotal">
-    Đang tải đánh giá...
-</div>
-<div class="rating-sample-note">
-    Bao gồm dữ liệu và đánh giá 
-</div>
+                    Đang tải đánh giá...
+                </div>
+                <div class="rating-sample-note">
+                    Bao gồm dữ liệu và đánh giá
+                </div>
             </div>
         </div>
 
@@ -3444,7 +3512,9 @@ iframe {
             rows="4"
             placeholder="Chia sẻ cảm nhận của bạn về website..."></textarea>
 
-        <div class="rating-char-count"><span id="reviewCharCount">0</span>/500</div>
+        <div class="rating-char-count">
+            <span id="reviewCharCount">0</span>/500
+        </div>
 
         <button class="rating-submit" id="submitRating" type="button" disabled>
             <i class="fa-solid fa-paper-plane"></i>
@@ -3463,6 +3533,37 @@ iframe {
             </span>
         </div>
 
+        <!-- BÌNH LUẬN GHIM QUẢN TRỊ VIÊN -->
+        <div class="admin-pinned-review">
+            <div class="admin-pinned-header">
+                <span class="admin-pinned-badge">
+                    <i class="fa-solid fa-thumbtack"></i> ĐÃ GHIM
+                </span>
+                <span class="admin-pinned-author">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    Quản trị viên
+                </span>
+            </div>
+
+            <div class="admin-pinned-title">
+                Cảm ơn mọi người đã đóng góp ý kiến ❤️
+            </div>
+
+            <p class="admin-pinned-content">
+                Cảm ơn tất cả mọi người đã dành thời gian đánh giá và gửi phản hồi.
+                Chúng mình sẽ tiếp thu mọi ý kiến đóng góp, cố gắng cải thiện chất
+                lượng dịch vụ, khắc phục những vấn đề còn tồn tại và cập nhật tốt
+                hơn trong thời gian tới. Rất mong tiếp tục nhận được sự ủng hộ
+                của mọi người!
+            </p>
+
+            <div class="admin-pinned-footer">
+                <i class="fa-solid fa-heart"></i>
+                Trân trọng cảm ơn!
+            </div>
+        </div>
+
+        <!-- DANH SÁCH BÌNH LUẬN -->
         <div class="reviews-list" id="reviewsList">
             <div class="rating-loading">Đang tải bình luận...</div>
         </div>
@@ -3482,7 +3583,7 @@ iframe {
         </p>
     </div>
 </section>
-   
+
 </main>
 
 <!-- ==================================================
