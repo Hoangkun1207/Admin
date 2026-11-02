@@ -4930,10 +4930,21 @@ function renderReviews() {
 
     const visible = displayReviews.slice(0, visibleCount);
 
-    if (reviewCount) {
-        reviewCount.textContent =
-            `${allReviews.length.toLocaleString("vi-VN")} đánh giá · ${sampleReviews.length} bình luận `;
-    }
+   if (reviewCount) {
+    const totalReviews = allReviews.length + sampleReviews.length;
+
+    const averageText = averageEl
+        ? Number(averageEl.textContent || 0).toFixed(2)
+        : "0.00";
+
+    reviewCount.innerHTML = `
+        <span class="review-summary-stars">
+            <i class="fa-solid fa-star"></i>
+            ${averageText}/5
+        </span>
+        <span>· ${totalReviews.toLocaleString("vi-VN")} nhận xét</span>
+    `;
+}
 
     if (!visible.length) {
         reviewsList.innerHTML = `
