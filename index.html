@@ -2485,22 +2485,15 @@ input:focus-visible {
 
                 </div>
 
-                <div class="donation-actions">
+               <div class="donation-actions">
+    <button class="donation-btn" type="button" onclick="openQR()">
+        <i class="fas fa-expand"></i> Phóng to mã QR
+    </button>
 
-                    <button class="donation-btn"
-                            onclick="openQR()">
-                        <i class="fa-solid fa-expand"></i>
-                        Phóng to mã QR
-                    </button>
-
-                    <button class="donation-btn"
-                            onclick="openDonationImage()">
-                        <i class="fa-solid fa-image"></i>
-                        Mở ảnh QR
-                    </button>
-
-                </div>
-
+    <button class="donation-btn" type="button" onclick="openQRImage()">
+        <i class="fas fa-image"></i> Mở ảnh QR
+    </button>
+</div>
             </div>
 
         </div>
@@ -3453,5 +3446,58 @@ initializeWebsite();
 })();
 
  </script>
+
+   <script>
+function getQRImage() {
+    const qr = document.querySelector(".donation-qr");
+
+    if (!qr || !qr.src) {
+        alert("Không tìm thấy ảnh mã QR!");
+        return null;
+    }
+
+    return qr.src;
+}
+
+function openQR() {
+    const image = getQRImage();
+    if (!image) return;
+
+    const lightbox = document.getElementById("qrLightbox");
+    const largeImage = document.getElementById("qrLargeImage");
+
+    if (!lightbox || !largeImage) {
+        alert("Không tìm thấy khung hiển thị mã QR!");
+        return;
+    }
+
+    largeImage.src = image;
+    lightbox.classList.add("active");
+    document.body.style.overflow = "hidden";
+}
+
+function closeQR(event) {
+    if (event && event.target.id !== "qrLightbox") return;
+
+    const lightbox = document.getElementById("qrLightbox");
+    if (!lightbox) return;
+
+    lightbox.classList.remove("active");
+    document.body.style.overflow = "";
+}
+
+function openQRImage() {
+    const image = getQRImage();
+    if (!image) return;
+
+    window.open(image, "_blank", "noopener,noreferrer");
+}
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        closeQR();
+    }
+});
+</script>
 </body>
 </html>
