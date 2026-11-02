@@ -2149,6 +2149,89 @@ input:focus-visible {
     }
 }
 
+   
+/* ==========================================
+   HOANG KUN - AVATAR RESPONSIVE FIX
+========================================== */
+
+.avatar-wrap {
+    position: relative !important;
+    display: block !important;
+    width: clamp(120px, 18vw, 158px) !important;
+    aspect-ratio: 1 / 1 !important;
+    height: auto !important;
+    margin: 0 auto 14px !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    border-radius: 50% !important;
+    isolation: isolate;
+    transform: none !important;
+}
+
+.avatar-wrap .avatar {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 72% !important;
+    height: 72% !important;
+    inset: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    border-radius: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 2 !important;
+}
+
+.avatar-wrap .avatar-frame {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    height: 100% !important;
+    inset: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    transform: translate(-50%, -50%) !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    pointer-events: none !important;
+    z-index: 3 !important;
+}
+
+.avatar-frame:not([src]),
+.avatar-frame[src=""] {
+    display: none !important;
+}
+
+/* iPhone */
+@media (max-width: 600px) {
+    .avatar-wrap {
+        width: 140px !important;
+    }
+}
+
+/* iPad */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .avatar-wrap {
+        width: 150px !important;
+    }
+}
+
+/* PC */
+@media (min-width: 1025px) {
+    .avatar-wrap {
+        width: 158px !important;
+    }
+}
+
 </style>
 </head>
 
