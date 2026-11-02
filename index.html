@@ -463,96 +463,43 @@ img {
     z-index: -1;
 }
 
-/* =========================================
-   HOANG KUN - PREMIUM AVATAR
-========================================= */
-
-.avatar-wrap {
-    position: relative;
-    isolation: isolate;
-    width: 130px;
-    height: 130px;
-    margin: auto;
-    overflow: visible;
-    border-radius: 50%;
+.avatar-wrap{
+ position:relative;
+ width:158px;
+ height:158px;
+ margin:0 auto 8px;
 }
-
-/* Vòng viền gradient xoay */
-.avatar-wrap::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    background: conic-gradient(
-        from 0deg,
-        #925cff,
-        #31d9ff,
-        #ff55c8,
-        #ffb84d,
-        #925cff
-    );
-    animation: hkAvatarSpin 3s linear infinite;
-    box-shadow:
-        0 0 12px rgba(146,92,255,.65),
-        0 0 28px rgba(49,217,255,.25);
-    z-index: 0;
+.avatar{
+ position:absolute;
+ width:112px;
+ height:112px;
+ top:53%;
+ left:50%;
+ transform:translate(-50%,-50%);
+ object-fit:cover;
+ border-radius:50%;
+ z-index:2;
+ box-shadow:0 0 0 7px #7c3aed1c,0 0 48px #8765ff77;
 }
-
-/* Viền nền bên trong */
-.avatar-wrap::after {
-    content: "";
-    position: absolute;
-    inset: 4px;
-    border-radius: 50%;
-    background: var(--bg);
-    z-index: 1;
+.avatar-frame{
+ position:absolute;
+ top:50%;
+ left:50%;
+ width:158px;
+ height:158px;
+ transform:translate(-50%,-50%);
+ object-fit:contain;
+ pointer-events:none;
+ z-index:3;
 }
-
-/* Ảnh đại diện */
-.avatar {
-    position: absolute;
-    inset: 7px;
-    width: calc(100% - 14px);
-    height: calc(100% - 14px);
-    transform: none;
-    object-fit: cover;
-    border: none !important;
-    border-radius: 50%;
-    z-index: 2;
-}
-
-/* Khung avatar */
-.avatar-frame {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 120%;
-    height: 120%;
-    transform: translate(-50%, -50%);
-    object-fit: contain;
-    pointer-events: none;
-    z-index: 4;
-}
-
-/* Hiệu ứng xoay */
-@keyframes hkAvatarSpin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* Hiệu ứng khi rê chuột */
-.avatar-wrap:hover {
-    transform: translateY(-5px) scale(1.04);
-    transition: transform .35s ease;
-}
-
-/* Điện thoại */
-@media (max-width: 600px) {
-    .avatar-wrap {
-        width: 120px;
-        height: 120px;
-    }
+.avatar-frame:not([src]),
+.avatar-frame[src=""]{display:none}
+.hello{
+ color:var(--muted);
+ font-size:11px;
+ font-weight:800;
+ letter-spacing:3px;
+ margin-top:7px;
 }
    
 .hero-greeting {
