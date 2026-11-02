@@ -2232,6 +2232,484 @@ input:focus-visible {
     }
 }
 
+   
+/* ==========================================
+   HOANG KUN iOS - SMART RESPONSIVE
+   AUTO FIT: IPHONE / IPAD / PC
+========================================== */
+
+/* Chống tràn ngang và co giãn nội dung */
+html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+img,
+iframe {
+    max-width: 100%;
+}
+
+.container {
+    width: min( calc(100% - 36px), var(--max-width));
+    margin-inline: auto;
+}
+
+.apps,
+.bottom,
+.donation-content {
+    min-width: 0;
+}
+
+.app-card,
+.panel,
+.donation-panel,
+.notice {
+    min-width: 0;
+    max-width: 100%;
+}
+
+/* AVATAR: luôn căn giữa, tự co theo màn hình */
+.avatar-wrap {
+    width: clamp(118px, 15vw, 158px) !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto 14px !important;
+    position: relative !important;
+    transform: none !important;
+}
+
+.avatar-wrap .avatar {
+    position: absolute !important;
+    width: 72% !important;
+    height: 72% !important;
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin: 0 !important;
+    transform: translate(-50%, -50%) !important;
+    object-fit: cover !important;
+    z-index: 2 !important;
+}
+
+.avatar-wrap .avatar-frame {
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin: 0 !important;
+    transform: translate(-50%, -50%) !important;
+    object-fit: contain !important;
+    z-index: 3 !important;
+    pointer-events: none !important;
+}
+
+/* TABLET - IPAD */
+@media (min-width: 761px) and (max-width: 1100px) {
+    .navbar {
+        padding-inline: 22px;
+        gap: 12px;
+    }
+
+    .nav-links {
+        gap: clamp(10px, 1.5vw, 18px);
+    }
+
+    .nav-links a {
+        font-size: 10px;
+    }
+
+    .brand {
+        gap: 8px;
+    }
+
+    .brand-text h2 {
+        font-size: 14px;
+    }
+
+    .nav-actions {
+        gap: 6px;
+    }
+
+    .nav-action {
+        width: 36px;
+        height: 36px;
+    }
+
+    .apps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .bottom {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .donation-content {
+        gap: 20px;
+    }
+
+    .hero {
+        padding-top: 60px;
+    }
+}
+
+/* MÀN HÌNH NHỎ VÀ IPAD DỌC */
+@media (max-width: 760px) {
+    .navbar {
+        min-height: 64px;
+        padding-inline: 14px;
+        gap: 8px;
+    }
+
+    .brand {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .brand-text h2 {
+        font-size: 14px;
+    }
+
+    .brand-text p {
+        font-size: 8px;
+    }
+
+    .nav-actions {
+        flex-shrink: 0;
+    }
+
+    .nav-links {
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-height: calc(100dvh - 70px);
+        overflow-y: auto;
+    }
+
+    .mobile-menu {
+        display: grid !important;
+    }
+
+    .hero {
+        padding: 42px 16px 38px;
+    }
+
+    .hero h1 {
+        font-size: clamp(25px, 6vw, 36px);
+        line-height: 1.25;
+    }
+
+    .hero-description {
+        font-size: 12px;
+    }
+
+    .socials {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .hero-stats {
+        width: 100%;
+        max-width: 460px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .container {
+        width: calc(100% - 28px);
+    }
+
+    .section {
+        margin-top: 35px;
+    }
+
+    .apps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 13px;
+    }
+
+    .app-content {
+        padding: 10px 12px;
+    }
+
+    .app-heading {
+        gap: 8px;
+    }
+
+    .app-icon {
+        width: 52px;
+        height: 52px;
+        flex-basis: 52px;
+        border-radius: 14px;
+    }
+
+    .app-name {
+        font-size: 11px;
+    }
+
+    .app-description {
+        font-size: 10px;
+    }
+
+    .bottom,
+    .donation-content {
+        grid-template-columns: 1fr;
+    }
+
+    .donation-info {
+        text-align: center;
+    }
+
+    .donation-benefit {
+        text-align: left;
+    }
+
+    .donation-qr-box {
+        width: min(100%, 320px);
+    }
+
+    .section-heading {
+        flex-wrap: wrap;
+    }
+
+    .app-toolbar {
+        align-items: stretch;
+    }
+
+    .search-box {
+        width: 100%;
+        max-width: none;
+    }
+
+    .filter-list {
+        width: 100%;
+    }
+
+    .soundcloud-frame iframe {
+        height: 300px;
+    }
+}
+
+/* ĐIỆN THOẠI */
+@media (max-width: 560px) {
+    .announcement {
+        padding: 7px 10px;
+        font-size: 9px;
+        line-height: 1.6;
+    }
+
+    .brand-icon {
+        width: 36px;
+        height: 36px;
+        flex-shrink: 0;
+    }
+
+    .nav-action {
+        width: 34px;
+        height: 34px;
+    }
+
+    .hero {
+        padding: 35px 13px;
+    }
+
+    .avatar-wrap {
+        width: clamp(120px, 34vw, 140px) !important;
+    }
+
+    .hello {
+        font-size: 10px;
+        letter-spacing: 2px;
+    }
+
+    .hero-greeting {
+        font-size: 10px;
+        letter-spacing: 1px;
+    }
+
+    .hero h1 {
+        font-size: clamp(24px, 7vw, 30px);
+        gap: 6px;
+    }
+
+    .hero-description {
+        font-size: 11px;
+        line-height: 1.8;
+    }
+
+    .tagline {
+        font-size: 12px;
+    }
+
+    .social {
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
+    }
+
+    .stat-card {
+        padding: 12px 4px;
+    }
+
+    .stat-card strong {
+        font-size: 17px;
+    }
+
+    .stat-card span {
+        font-size: 8px;
+    }
+
+    .container {
+        width: calc(100% - 24px);
+    }
+
+    .apps {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .app-card {
+        border-radius: 17px;
+    }
+
+    .app-content {
+        padding: 10px 14px;
+    }
+
+    .app-name {
+        font-size: 13px;
+    }
+
+    .app-description {
+        font-size: 11px;
+    }
+
+    .cover-wrap {
+        aspect-ratio: 1.8 / 1;
+    }
+
+    .filter-list {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 7px;
+    }
+
+    .filter-btn {
+        padding: 10px 4px;
+        font-size: 9px;
+    }
+
+    .notice {
+        padding: 13px;
+    }
+
+    .panel {
+        padding: 15px;
+    }
+
+    .youtube-top {
+        flex-wrap: wrap;
+    }
+
+    .youtube-bottom {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .subscribe {
+        width: 100%;
+    }
+
+    .donation-panel {
+        padding: 20px 13px;
+    }
+
+    .donation-actions {
+        flex-direction: column;
+    }
+
+    .donation-btn {
+        width: 100%;
+    }
+
+    .soundcloud-frame iframe {
+        height: 280px;
+    }
+
+    .back-top {
+        right: 13px;
+        bottom: 15px;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* ĐIỆN THOẠI RẤT NHỎ */
+@media (max-width: 360px) {
+    .brand-text p {
+        letter-spacing: .5px;
+    }
+
+    .nav-actions {
+        gap: 4px;
+    }
+
+    .hero-stats {
+        gap: 5px;
+    }
+
+    .stat-card strong {
+        font-size: 15px;
+    }
+
+    .hero h1 {
+        font-size: 23px;
+    }
+
+    .donation-qr-box {
+        padding: 12px;
+    }
+}
+
+/* MÀN HÌNH LỚN */
+@media (min-width: 1400px) {
+    .hero {
+        padding-top: 85px;
+        padding-bottom: 75px;
+    }
+
+    .apps {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+    }
+}
+
+/* THIẾT BỊ CẢM ỨNG: hạn chế hover gây giật */
+@media (hover: none) and (pointer: coarse) {
+    .app-card:hover,
+    .social:hover,
+    .stat-card:hover,
+    .donation-qr-box:hover {
+        transform: none !important;
+    }
+
+    .app-card:hover .app-cover,
+    .app-card:hover .app-icon {
+        transform: none !important;
+    }
+}
+
+
 </style>
 </head>
 
