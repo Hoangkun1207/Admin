@@ -4196,9 +4196,12 @@ document.addEventListener("keydown", function(event) {
 });
 </script>
 
-   <script>
+
+<script>
 (() => {
     const STORAGE_KEY = "hoangkun_ios_rating_v1";
+    const BASE_COUNT = 3218;
+    const BASE_SUM = BASE_COUNT * 5;
 
     const starsWrap = document.getElementById("ratingStars");
     const submitBtn = document.getElementById("submitRating");
@@ -4216,40 +4219,29 @@ document.addEventListener("keydown", function(event) {
         saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
     } catch (error) {}
 
-   const BASE_COUNT = 2310;
-const BASE_SUM = BASE_COUNT * 5;
+    const readStats = () => {
+        let data = { sum: 0, count: 0, rated: false, value: 0 };
 
-const readStats = () => {
-    try {
-        const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+        try {
+            const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+            if (stored && Number.isFinite(stored.sum) && Number.isFinite(stored.count)) {
+                data = stored;
+            }
+        } catch (error) {}
 
-        if (data && Number.isFinite(data.sum) && Number.isFinite(data.count)) {
-            return {
-                sum: BASE_SUM + data.sum,
-                count: BASE_COUNT + data.count,
-                rated: !!data.rated,
-                value: Number(data.value) || 0
-            };
-        }
-    } catch (error) {}
-
-    return {
-        sum: BASE_SUM,
-        count: BASE_COUNT,
-        rated: false,
-        value: 0
+        return {
+            sum: BASE_SUM + data.sum,
+            count: BASE_COUNT + data.count,
+            rated: !!data.rated,
+            value: Number(data.value) || 0
+        };
     };
-};
 
     const paintStars = value => {
         starsWrap.querySelectorAll(".rating-star-btn").forEach(button => {
             const active = Number(button.dataset.rating) <= value;
-
             button.classList.toggle("active", active);
-            button.setAttribute(
-                "aria-pressed",
-                String(Number(button.dataset.rating) === value)
-            );
+            button.setAttribute("aria-pressed", String(Number(button.dataset.rating) === value));
         });
     };
 
@@ -4258,20 +4250,15 @@ const readStats = () => {
         const average = stats.count ? stats.sum / stats.count : 0;
 
         averageEl.textContent = average.toFixed(1);
-
-        totalEl.textContent = stats.count
-            ? `${stats.count.toLocaleString("vi-VN")} lượt đánh giá`
-            : "Chưa có lượt đánh giá";
+        totalEl.textContent = `${stats.count.toLocaleString("vi-VN")} lượt đánh giá`;
 
         averageStars.innerHTML = "";
 
         for (let i = 1; i <= 5; i++) {
             const icon = document.createElement("i");
-
             icon.className = i <= Math.round(average)
                 ? "fa-solid fa-star"
                 : "fa-regular fa-star";
-
             averageStars.appendChild(icon);
         }
     };
@@ -4281,7 +4268,6 @@ const readStats = () => {
             if (saved && saved.rated) return;
 
             selectedRating = Number(button.dataset.rating);
-
             paintStars(selectedRating);
             submitBtn.disabled = false;
             feedback.textContent = "";
@@ -4290,7 +4276,6 @@ const readStats = () => {
 
     if (saved && saved.rated) {
         selectedRating = Number(saved.value) || 0;
-
         paintStars(selectedRating);
 
         starsWrap.querySelectorAll("button").forEach(button => {
@@ -4299,7 +4284,6 @@ const readStats = () => {
 
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> ĐÃ GỬI ĐÁNH GIÁ';
-
         feedback.textContent = "Cảm ơn bạn đã đánh giá Hoàng Kun iOS ❤️";
     }
 
@@ -4317,15 +4301,14 @@ const readStats = () => {
         }
 
         const updated = {
-            sum: stats.sum + selectedRating,
-            count: stats.count + 1,
+            sum: stats.sum - BASE_SUM + selectedRating,
+            count: stats.count - BASE_COUNT + 1,
             rated: true,
             value: selectedRating
         };
 
         try {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-
             saved = updated;
 
             renderStats();
@@ -4337,9 +4320,7 @@ const readStats = () => {
 
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> ĐÃ GỬI ĐÁNH GIÁ';
-
             feedback.textContent = "Cảm ơn bạn đã đánh giá Hoàng Kun iOS ❤️";
-
         } catch (error) {
             feedback.textContent = "Không thể lưu đánh giá trên trình duyệt này.";
         }
@@ -4348,6 +4329,7 @@ const readStats = () => {
     renderStats();
 })();
 </script>
+
    
 </body>
 </html>
