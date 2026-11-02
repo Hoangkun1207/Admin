@@ -4542,6 +4542,7 @@ let alreadyRated = false;
 let sending = false;
 
 const PAGE_SIZE = 10;
+
 /* THỐNG KÊ SAO MẪU - 3.218 LƯỢT */
 const SAMPLE_RATING_COUNTS = {
     5: 2253,
@@ -4560,17 +4561,8 @@ const SAMPLE_RATING_SUM = Object.entries(SAMPLE_RATING_COUNTS)
 const SAMPLE_RATING_AVERAGE =
     SAMPLE_RATING_SUM / SAMPLE_RATING_TOTAL;
 
-function escapeText(value) {
-    return String(value).replace(/[&<>"']/g, char => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#039;"
-    })[char]);
-}
-
-   const sampleReviews = [
+/* 30 BÌNH LUẬN MINH HỌA */
+const sampleReviews = [
     { nickname: "Mèo Lười", rating: 5, comment: "Giao diện đẹp, dễ sử dụng và tải ứng dụng khá nhanh." },
     { nickname: "Minh Anh", rating: 5, comment: "Website thiết kế rất ổn, nhìn hiện đại và dễ tìm kiếm." },
     { nickname: "An Nhiên", rating: 5, comment: "Mình thích giao diện trên điện thoại, hiển thị khá mượt." },
@@ -4581,7 +4573,7 @@ function escapeText(value) {
     { nickname: "Ngọc Mai", rating: 4, comment: "Dùng khá ổn, thông tin ứng dụng được trình bày dễ hiểu." },
     { nickname: "Minh Khang", rating: 5, comment: "Tìm ứng dụng nhanh, không phải mất nhiều thời gian." },
     { nickname: "Cá Con", rating: 5, comment: "Website chạy ổn định, giao diện thân thiện với người dùng." },
-    { nickname: "Hoài Nam", rating: 4, comment: "Thiết kế đẹp, hy vọng sẽ có thêm nhiều tiện ích mới." },
+    { nickname: "Hoài Nam", rating: 4, comment: "Thiết kế đẹp, hy vọng website cập nhật thêm nhiều ứng dụng." },
     { nickname: "Sunny", rating: 5, comment: "Mình khá thích cách bố trí các mục trên trang chủ." },
     { nickname: "Bảo Ngọc", rating: 5, comment: "Giao diện dễ nhìn, sử dụng trên điện thoại cũng tiện." },
     { nickname: "Sóc Nâu", rating: 4, comment: "Các nút chức năng dễ nhận biết, thao tác không phức tạp." },
@@ -4603,6 +4595,18 @@ function escapeText(value) {
     { nickname: "Cún Con", rating: 5, comment: "Website đẹp, dễ sử dụng và có trải nghiệm khá tốt." }
 ];
 
+/* ESCAPE HTML */
+function escapeText(value) {
+    return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+    })[char]);
+}
+
+/* ĐỊNH DẠNG NGÀY */
 function formatDate(timestamp) {
     if (!timestamp) return "Vừa xong";
 
@@ -4622,6 +4626,7 @@ function formatDate(timestamp) {
     return date.toLocaleDateString("vi-VN");
 }
 
+/* HIỂN THỊ SAO TRUNG BÌNH */
 function renderAverageStars(average) {
     if (!averageStars) return;
 
@@ -4642,6 +4647,7 @@ function renderAverageStars(average) {
     }
 }
 
+/* PHÂN BỐ SỐ SAO */
 function renderBreakdown(counts, total) {
     if (!breakdown) return;
 
@@ -4655,29 +4661,49 @@ function renderBreakdown(counts, total) {
         row.className = "rating-breakdown-row";
 
         row.innerHTML = `
-            <span class="rating-breakdown-label">${star} <i class="fa-solid fa-star" style="color:#ffbf47"></i></span>
+            <span class="rating-breakdown-label">
+                ${star}
+                <i class="fa-solid fa-star" style="color:#ffbf47"></i>
+            </span>
             <div class="rating-breakdown-track">
                 <div class="rating-breakdown-fill" style="width:${percent}%"></div>
             </div>
-            <span class="rating-breakdown-count">${count.toLocaleString("vi-VN")}</span>
+            <span class="rating-breakdown-count">
+                ${count.toLocaleString("vi-VN")}
+            </span>
         `;
 
         breakdown.appendChild(row);
     }
 }
 
+/* HIỂN THỊ BÌNH LUẬN THẬT + BÌNH LUẬN MẪU */
 function renderReviews() {
     if (!reviewsList) return;
 
-    const visible = allReviews.slice(0, visibleCount);
+    const displayReviews = [
+        ...allReviews.map(item => ({
+            ...item,
+            isSample: false
+        })),
+        ...sampleReviews.map((item, index) => ({
+            ...item,
+            uid: "sample-" + index,
+            isSample: true
+        }))
+    ];
 
-    reviewCount.textContent =
-        `${allReviews.length.toLocaleString("vi-VN")} nhận xét`;
+    const visible = displayReviews.slice(0, visibleCount);
+
+    if (reviewCount) {
+        reviewCount.textContent =
+            `${allReviews.length.toLocaleString("vi-VN")} đánh giá thật · ${sampleReviews.length} bình luận minh họa`;
+    }
 
     if (!visible.length) {
         reviewsList.innerHTML = `
             <div class="rating-loading">
-                Chưa có bình luận nào. Hãy là người đầu tiên chia sẻ nhé!
+                Chưa có bình luận nào.
             </div>
         `;
     } else {
@@ -4690,23 +4716,36 @@ function renderReviews() {
                 <article class="review-item">
                     <div class="review-top">
                         <div>
-                            <div class="review-name">${escapeText(item.nickname)}</div>
-                            <div class="review-date">${formatDate(item.createdAt)}</div>
+                            <div class="review-name">
+                                ${escapeText(item.nickname)}
+                                ${item.isSample ? '<span class="review-sample-tag">MINH HỌA</span>' : ""}
+                            </div>
+                            <div class="review-date">
+                                ${item.isSample ? "Bình luận mẫu" : formatDate(item.createdAt)}
+                            </div>
                         </div>
                         <div class="review-stars" aria-label="${item.rating} sao">
                             ${stars}
                         </div>
                     </div>
-                    <p class="review-content">${escapeText(item.comment)}</p>
+                    <p class="review-content">
+                        ${escapeText(item.comment)}
+                    </p>
                 </article>
             `;
         }).join("");
     }
 
-    moreBtn.hidden = visibleCount >= allReviews.length;
-    collapseBtn.hidden = visibleCount <= 5;
+    if (moreBtn) {
+        moreBtn.hidden = visibleCount >= displayReviews.length;
+    }
+
+    if (collapseBtn) {
+        collapseBtn.hidden = visibleCount <= 5;
+    }
 }
-   
+
+/* THỐNG KÊ SAO + CẬP NHẬT DỮ LIỆU */
 function renderStats(votes) {
     latestVotes = votes || {};
 
@@ -4721,6 +4760,8 @@ function renderStats(votes) {
     let realSum = 0;
 
     Object.values(latestVotes).forEach(vote => {
+        if (!vote) return;
+
         const rating = Number(vote.rating);
 
         if (
@@ -4736,7 +4777,6 @@ function renderStats(votes) {
     const realTotal = Object.values(realCounts)
         .reduce((sum, count) => sum + count, 0);
 
-    // Cộng số liệu mẫu và dữ liệu thật để hiển thị
     const displayCounts = {};
 
     for (let star = 1; star <= 5; star++) {
@@ -4745,12 +4785,8 @@ function renderStats(votes) {
     }
 
     const displayTotal = SAMPLE_RATING_TOTAL + realTotal;
-
     const displaySum = SAMPLE_RATING_SUM + realSum;
-
-    const average = displayTotal
-        ? displaySum / displayTotal
-        : 0;
+    const average = displayTotal ? displaySum / displayTotal : 0;
 
     if (averageEl) {
         averageEl.textContent = average.toFixed(2);
@@ -4764,6 +4800,7 @@ function renderStats(votes) {
     renderAverageStars(average);
     renderBreakdown(displayCounts, displayTotal);
 
+    /* LẤY BÌNH LUẬN THẬT TỪ FIREBASE */
     allReviews = Object.entries(latestVotes)
         .filter(([, vote]) =>
             vote &&
@@ -4778,12 +4815,14 @@ function renderStats(votes) {
 
     renderReviews();
 
+    /* KIỂM TRA NGƯỜI DÙNG ĐÃ ĐÁNH GIÁ CHƯA */
     if (currentUser) {
         const myVote = latestVotes[currentUser.uid];
 
         if (myVote) {
             alreadyRated = true;
             selectedRating = Number(myVote.rating) || 0;
+
             paintStars(selectedRating);
             lockRatingForm();
 
@@ -4795,107 +4834,154 @@ function renderStats(votes) {
     }
 }
 
+/* TÔ MÀU SAO ĐƯỢC CHỌN */
 function paintStars(value) {
+    if (!starsWrap) return;
+
     starsWrap.querySelectorAll(".rating-star-btn").forEach(button => {
         const active = Number(button.dataset.rating) <= value;
+
         button.classList.toggle("active", active);
         button.setAttribute("aria-pressed", String(active));
     });
 }
 
+/* KHÓA FORM SAU KHI ĐÁNH GIÁ */
 function lockRatingForm() {
-    starsWrap.querySelectorAll("button").forEach(button => {
-        button.disabled = true;
-    });
+    if (starsWrap) {
+        starsWrap.querySelectorAll("button").forEach(button => {
+            button.disabled = true;
+        });
+    }
 
-    nicknameInput.disabled = true;
-    commentInput.disabled = true;
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> ĐÃ GỬI ĐÁNH GIÁ';
+    if (nicknameInput) nicknameInput.disabled = true;
+    if (commentInput) commentInput.disabled = true;
+
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML =
+            '<i class="fa-solid fa-check"></i> ĐÃ GỬI ĐÁNH GIÁ';
+    }
 }
 
-starsWrap.querySelectorAll(".rating-star-btn").forEach(button => {
-    button.addEventListener("click", () => {
+/* CHỌN SAO */
+if (starsWrap) {
+    starsWrap.querySelectorAll(".rating-star-btn").forEach(button => {
+        button.addEventListener("click", () => {
+            if (alreadyRated || sending) return;
+
+            selectedRating = Number(button.dataset.rating);
+            paintStars(selectedRating);
+
+            if (submitBtn) submitBtn.disabled = false;
+            if (feedback) feedback.textContent = "";
+        });
+    });
+}
+
+/* ĐẾM KÝ TỰ BÌNH LUẬN */
+if (commentInput && charCount) {
+    commentInput.addEventListener("input", () => {
+        charCount.textContent = commentInput.value.length;
+    });
+}
+
+/* GỬI ĐÁNH GIÁ LÊN FIREBASE */
+if (submitBtn) {
+    submitBtn.addEventListener("click", async () => {
+        if (!currentUser) {
+            if (feedback) {
+                feedback.textContent =
+                    "Đang kết nối hệ thống, vui lòng thử lại.";
+            }
+            return;
+        }
+
         if (alreadyRated || sending) return;
 
-        selectedRating = Number(button.dataset.rating);
-        paintStars(selectedRating);
-        submitBtn.disabled = false;
-        feedback.textContent = "";
+        const nickname = nicknameInput.value.trim();
+        const comment = commentInput.value.trim();
+
+        if (selectedRating < 1 || selectedRating > 5) {
+            feedback.textContent = "Bạn hãy chọn số sao trước nhé!";
+            return;
+        }
+
+        if (nickname.length < 2 || nickname.length > 24) {
+            feedback.textContent =
+                "Biệt danh cần từ 2 đến 24 ký tự.";
+            nicknameInput.focus();
+            return;
+        }
+
+        if (comment.length < 5 || comment.length > 500) {
+            feedback.textContent =
+                "Nhận xét cần từ 5 đến 500 ký tự.";
+            commentInput.focus();
+            return;
+        }
+
+        sending = true;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML =
+            '<i class="fa-solid fa-spinner fa-spin"></i> ĐANG GỬI...';
+
+        try {
+            await set(ref(db, `ratings/votes/${currentUser.uid}`), {
+                nickname,
+                comment,
+                rating: selectedRating,
+                createdAt: Date.now()
+            });
+
+            alreadyRated = true;
+            lockRatingForm();
+
+            feedback.textContent =
+                "Đánh giá của bạn đã được gửi. Cảm ơn bạn ❤️";
+
+        } catch (error) {
+            console.error("Rating error:", error);
+
+            feedback.textContent =
+                "Không gửi được. Hãy kiểm tra kết nối hoặc quyền Firebase.";
+
+            submitBtn.disabled = false;
+            submitBtn.innerHTML =
+                '<i class="fa-solid fa-paper-plane"></i> GỬI ĐÁNH GIÁ';
+
+        } finally {
+            sending = false;
+        }
     });
-});
+}
 
-commentInput.addEventListener("input", () => {
-    charCount.textContent = commentInput.value.length;
-});
-
-submitBtn.addEventListener("click", async () => {
-    if (!currentUser) {
-        feedback.textContent = "Đang kết nối hệ thống, vui lòng thử lại.";
-        return;
-    }
-
-    if (alreadyRated || sending) return;
-
-    const nickname = nicknameInput.value.trim();
-    const comment = commentInput.value.trim();
-
-    if (selectedRating < 1 || selectedRating > 5) {
-        feedback.textContent = "Bạn hãy chọn số sao trước nhé!";
-        return;
-    }
-
-    if (nickname.length < 2 || nickname.length > 24) {
-        feedback.textContent = "Biệt danh cần từ 2 đến 24 ký tự.";
-        nicknameInput.focus();
-        return;
-    }
-
-    if (comment.length < 5 || comment.length > 500) {
-        feedback.textContent = "Nhận xét cần từ 5 đến 500 ký tự.";
-        commentInput.focus();
-        return;
-    }
-
-    sending = true;
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> ĐANG GỬI...';
-
-    try {
-        await set(ref(db, `ratings/votes/${currentUser.uid}`), {
-            nickname,
-            comment,
-            rating: selectedRating,
-            createdAt: Date.now()
-        });
-
-        alreadyRated = true;
-        lockRatingForm();
-        feedback.textContent = "Đánh giá của bạn đã được gửi. Cảm ơn bạn ❤️";
-    } catch (error) {
-        console.error("Rating error:", error);
-        feedback.textContent = "Không gửi được. Hãy kiểm tra kết nối hoặc quyền Firebase.";
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> GỬI ĐÁNH GIÁ';
-    } finally {
-        sending = false;
-    }
-});
-
-moreBtn.addEventListener("click", () => {
-    visibleCount += PAGE_SIZE;
-    renderReviews();
-});
-
-collapseBtn.addEventListener("click", () => {
-    visibleCount = 5;
-    renderReviews();
-    document.getElementById("rating").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
+/* XEM THÊM BÌNH LUẬN */
+if (moreBtn) {
+    moreBtn.addEventListener("click", () => {
+        visibleCount += PAGE_SIZE;
+        renderReviews();
     });
-});
+}
 
+/* THU GỌN BÌNH LUẬN */
+if (collapseBtn) {
+    collapseBtn.addEventListener("click", () => {
+        visibleCount = 5;
+        renderReviews();
+
+        const ratingSection = $("rating");
+
+        if (ratingSection) {
+            ratingSection.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+    });
+}
+
+/* ĐĂNG NHẬP ẨN DANH */
 onAuthStateChanged(auth, async user => {
     if (user) {
         currentUser = user;
@@ -4907,20 +4993,31 @@ onAuthStateChanged(auth, async user => {
         await signInAnonymously(auth);
     } catch (error) {
         console.error("Firebase auth error:", error);
-        feedback.textContent = "Không thể kết nối tài khoản đánh giá.";
+
+        if (feedback) {
+            feedback.textContent =
+                "Không thể kết nối tài khoản đánh giá.";
+        }
     }
 });
 
+/* LẮNG NGHE DỮ LIỆU FIREBASE */
 onValue(votesRef, snapshot => {
     renderStats(snapshot.val() || {});
 }, error => {
     console.error("Firebase read error:", error);
-    totalEl.textContent = "Không tải được dữ liệu đánh giá";
-    reviewsList.innerHTML = `
-        <div class="rating-loading">
-            Không thể tải bình luận. Vui lòng thử lại sau.
-        </div>
-    `;
+
+    if (totalEl) {
+        totalEl.textContent = "Không tải được dữ liệu đánh giá";
+    }
+
+    if (reviewsList) {
+        reviewsList.innerHTML = `
+            <div class="rating-loading">
+                Không thể tải bình luận. Vui lòng thử lại sau.
+            </div>
+        `;
+    }
 });
 </script>
 
