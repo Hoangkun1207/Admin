@@ -463,36 +463,39 @@ img {
     z-index: -1;
 }
 
-/* AVATAR FIX */
+/* AVATAR HOANG KUN */
 .avatar-wrap {
     position: relative;
     width: 165px;
     height: 165px;
     margin: auto;
+    border-radius: 50%;
     overflow: visible;
-    filter: drop-shadow(0 0 25px #985cff66);
+    filter: drop-shadow(0 0 18px rgba(153, 75, 255, .45));
 }
 
+/* Ảnh nằm gọn bên trong mũ */
 .avatar {
     position: absolute;
+    width: 76px;
+    height: 76px;
     top: 50%;
     left: 50%;
-    width: 112px;
-    height: 112px;
     transform: translate(-50%, -50%);
-    border-radius: 50%;
-    border: 3px solid rgba(255,255,255,.2);
     object-fit: cover;
-    z-index: 2;
+    border: none !important;
+    border-radius: 50%;
+    z-index: 1;
 }
 
+/* Mũ trùm phủ toàn bộ ảnh */
 .avatar-frame {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: contain;
-    z-index: 3;
+    z-index: 2;
     pointer-events: none;
     mix-blend-mode: screen;
 }
