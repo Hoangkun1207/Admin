@@ -5264,5 +5264,116 @@ onValue(votesRef, snapshot => {
 });
 </script>
 
+    
+<style>
+#hk-security-toast {
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    z-index: 999999;
+    width: min(360px, calc(100% - 32px));
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    background: rgba(18, 18, 28, .94);
+    border: 1px solid rgba(255, 75, 95, .35);
+    border-radius: 18px;
+    color: #fff;
+    box-shadow: 0 15px 50px rgba(0,0,0,.35);
+    backdrop-filter: blur(18px);
+    font-family: inherit;
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -20px);
+    transition: .3s ease;
+    pointer-events: none;
+}
+#hk-security-toast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
+#hk-security-toast .hk-icon {
+    width: 43px;
+    height: 43px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 65, 85, .15);
+    color: #ff5268;
+    border-radius: 13px;
+    font-size: 21px;
+}
+#hk-security-toast strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+#hk-security-toast span {
+    color: #b7b7c5;
+    font-size: 12px;
+    line-height: 1.5;
+}
+</style>
+
+<div id="hk-security-toast" role="alert" aria-live="polite">
+    <div class="hk-icon">
+        <i class="fa-solid fa-shield-halved"></i>
+    </div>
+    <div>
+        <strong>HoangKun Security</strong>
+        <span id="hk-security-message">Thao tác này đã bị hạn chế!</span>
+    </div>
+</div>
+
+<script>
+(() => {
+    "use strict";
+
+    const toast = document.getElementById("hk-security-toast");
+    const message = document.getElementById("hk-security-message");
+    let toastTimer;
+
+    function showSecurityToast(text) {
+        message.textContent = text;
+        toast.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+            toast.classList.remove("show");
+        }, 2200);
+    }
+
+    document.addEventListener("contextmenu", e => {
+        e.preventDefault();
+        showSecurityToast("Chuột phải đã bị hạn chế!");
+    });
+
+    document.addEventListener("keydown", e => {
+        const key = e.key.toLowerCase();
+
+        const blocked =
+            key === "f12" ||
+            (e.ctrlKey && key === "u") ||
+            (e.ctrlKey && e.shiftKey &&
+                ["i", "j", "c"].includes(key)) ||
+            (e.metaKey && e.altKey && key === "i");
+
+        if (blocked) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            showSecurityToast("Thao tác xem mã nguồn đã bị hạn chế!");
+        }
+    }, true);
+
+    document.addEventListener("dragstart", e => {
+        if (e.target.tagName === "IMG") {
+            e.preventDefault();
+            showSecurityToast("Không thể kéo hình ảnh!");
+        }
+    });
+})();
+</script>
+
 </body>
 </html>
