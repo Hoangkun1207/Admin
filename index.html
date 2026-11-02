@@ -2076,6 +2076,79 @@ input:focus-visible {
     }
 }
 
+   
+/* HOANG KUN iOS - ULTRA MOBILE PERFORMANCE */
+@media (max-width: 760px) {
+    html {
+        scroll-behavior: auto !important;
+    }
+
+    body {
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Tắt toàn bộ hiệu ứng chuyển động nền */
+    #particles,
+    .ambient,
+    .hero::before,
+    .hero::after {
+        display: none !important;
+        animation: none !important;
+    }
+
+    /* Tắt hiệu ứng làm mờ */
+    *,
+    *::before,
+    *::after {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        scroll-behavior: auto !important;
+    }
+
+    /* Tắt animation và transition */
+    .app-card,
+    .app-cover,
+    .app-icon,
+    .avatar,
+    .avatar-wrap,
+    .social,
+    .stat-card,
+    .notice,
+    .panel,
+    .donation-panel,
+    .donation-qr-box,
+    .hk-reveal {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+        will-change: auto !important;
+    }
+
+    /* Giảm tải đổ bóng */
+    .app-card,
+    .panel,
+    .donation-panel,
+    .stat-card,
+    .notice {
+        box-shadow: none !important;
+    }
+
+    /* Tắt hiệu ứng hover trên điện thoại */
+    .app-card:hover,
+    .social:hover,
+    .stat-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Đảm bảo nội dung reveal luôn hiện */
+    .hk-reveal {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+}
+
 </style>
 </head>
 
