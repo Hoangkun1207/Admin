@@ -4630,8 +4630,10 @@ function renderReviews() {
     moreBtn.hidden = visibleCount >= allReviews.length;
     collapseBtn.hidden = visibleCount <= 5;
 }
-
+   
 function renderStats(votes) {
+    latestVotes = votes || {};
+
     const counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
     let sum = 0;
 
@@ -4782,6 +4784,7 @@ collapseBtn.addEventListener("click", () => {
 onAuthStateChanged(auth, async user => {
     if (user) {
         currentUser = user;
+        renderStats(latestVotes);
         return;
     }
 
