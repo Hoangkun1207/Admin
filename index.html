@@ -463,43 +463,41 @@ img {
     z-index: -1;
 }
 
-/* AVATAR - HOANG KUN */
+/* AVATAR - STYLE VAN THANG IOS */
 .avatar-wrap {
     position: relative;
-    width: 165px;
-    height: 165px;
+    width: 120px;
+    height: 120px;
     margin: auto;
     overflow: visible;
-    filter: drop-shadow(0 0 18px rgba(153, 75, 255, .4));
+    isolation: isolate;
 }
 
-/* Ảnh bên trong lòng mũ */
+/* Ảnh đại diện */
 .avatar {
     position: absolute;
-    width: 118px;
-    height: 118px;
     top: 50%;
     left: 50%;
+    width: 120px;
+    height: 120px;
     transform: translate(-50%, -50%);
     object-fit: cover;
-    object-position: center;
     border: none !important;
     border-radius: 50%;
     z-index: 1;
 }
 
-/* Mũ phủ lên mép ảnh */
+/* Khung mũ trùm */
 .avatar-frame {
     position: absolute;
-    width: 190px;
-    height: 190px;
     top: 50%;
     left: 50%;
+    width: 120%;
+    height: 120%;
     transform: translate(-50%, -50%);
     object-fit: contain;
-    z-index: 2;
     pointer-events: none;
-    mix-blend-mode: screen;
+    z-index: 4;
 }
    
 .hero-greeting {
