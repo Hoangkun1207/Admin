@@ -4953,10 +4953,9 @@ function renderReviews() {
                         <div>
                             <div class="review-name">
                                 ${escapeText(item.nickname)}
-                                ${item.isSample ? '<span class="review-sample-tag">MINH HỌA</span>' : ""}
                             </div>
                             <div class="review-date">
-                                ${item.isSample ? "Bình luận mẫu" : formatDate(item.createdAt)}
+                                ${item.isSample ? "Bình luận" : formatDate(item.createdAt)}
                             </div>
                         </div>
                         <div class="review-stars" aria-label="${item.rating} sao">
