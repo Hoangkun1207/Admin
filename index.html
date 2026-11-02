@@ -2401,6 +2401,38 @@ input:focus-visible {
         scroll-behavior: auto !important;
     }
 }
+
+   /* FIX AVATAR + AVATAR FRAME */
+.avatar-wrap {
+    position: relative !important;
+    width: 120px !important;
+    height: 120px !important;
+    margin: 0 auto 14px !important;
+    border-radius: 50% !important;
+    overflow: visible !important;
+    isolation: isolate;
+}
+
+.avatar-wrap .avatar {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+    z-index: 1 !important;
+}
+
+.avatar-wrap .avatar-frame {
+    position: absolute !important;
+    inset: -5px !important;
+    width: calc(100% + 10px) !important;
+    height: calc(100% + 10px) !important;
+    object-fit: contain !important;
+    border-radius: 0 !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
+}
 </style>
 </head>
 
