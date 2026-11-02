@@ -2750,6 +2750,20 @@ iframe {
     animation: reviewAppear .3s ease both;
 }
 
+   /* NHÃN BÌNH LUẬN MINH HỌA */
+.review-sample-tag {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 3px 6px;
+    border-radius: 5px;
+    background: rgba(141, 117, 255, .13);
+    color: #a994ff;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .4px;
+    vertical-align: middle;
+}
+
 @keyframes reviewAppear {
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
@@ -2847,6 +2861,13 @@ iframe {
     .reviews-heading {
         align-items: flex-start;
     }
+}
+
+   .rating-sample-note {
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.5;
 }
    
 </style>
@@ -3386,7 +3407,12 @@ iframe {
             <div class="rating-average" id="ratingAverage">0.0</div>
             <div class="rating-summary-info">
                 <div class="rating-summary-stars" id="ratingAverageStars"></div>
-                <div class="rating-total" id="ratingTotal">Đang tải đánh giá...</div>
+                <div class="rating-total" id="ratingTotal">
+    Đang tải đánh giá...
+</div>
+<div class="rating-sample-note">
+    Bao gồm dữ liệu minh họa và đánh giá thực tế
+</div>
             </div>
         </div>
 
@@ -4516,6 +4542,23 @@ let alreadyRated = false;
 let sending = false;
 
 const PAGE_SIZE = 10;
+/* THỐNG KÊ SAO MẪU - 3.218 LƯỢT */
+const SAMPLE_RATING_COUNTS = {
+    5: 2253,
+    4: 644,
+    3: 225,
+    2: 64,
+    1: 32
+};
+
+const SAMPLE_RATING_TOTAL = Object.values(SAMPLE_RATING_COUNTS)
+    .reduce((sum, count) => sum + count, 0);
+
+const SAMPLE_RATING_SUM = Object.entries(SAMPLE_RATING_COUNTS)
+    .reduce((sum, [star, count]) => sum + Number(star) * count, 0);
+
+const SAMPLE_RATING_AVERAGE =
+    SAMPLE_RATING_SUM / SAMPLE_RATING_TOTAL;
 
 function escapeText(value) {
     return String(value).replace(/[&<>"']/g, char => ({
@@ -4526,6 +4569,39 @@ function escapeText(value) {
         "'": "&#039;"
     })[char]);
 }
+
+   const sampleReviews = [
+    { nickname: "Mèo Lười", rating: 5, comment: "Giao diện đẹp, dễ sử dụng và tải ứng dụng khá nhanh." },
+    { nickname: "Minh Anh", rating: 5, comment: "Website thiết kế rất ổn, nhìn hiện đại và dễ tìm kiếm." },
+    { nickname: "An Nhiên", rating: 5, comment: "Mình thích giao diện trên điện thoại, hiển thị khá mượt." },
+    { nickname: "Linh Nguyễn", rating: 5, comment: "Các danh mục được sắp xếp rõ ràng, dễ tìm ứng dụng." },
+    { nickname: "Gấu Nhỏ", rating: 4, comment: "Giao diện đẹp, mong website cập nhật thêm nhiều ứng dụng." },
+    { nickname: "Thanh Tùng", rating: 5, comment: "Tốc độ tải trang tốt, thao tác đơn giản và thuận tiện." },
+    { nickname: "Bắp Rang", rating: 5, comment: "Màu sắc hài hòa, bố cục nhìn khá chuyên nghiệp." },
+    { nickname: "Ngọc Mai", rating: 4, comment: "Dùng khá ổn, thông tin ứng dụng được trình bày dễ hiểu." },
+    { nickname: "Minh Khang", rating: 5, comment: "Tìm ứng dụng nhanh, không phải mất nhiều thời gian." },
+    { nickname: "Cá Con", rating: 5, comment: "Website chạy ổn định, giao diện thân thiện với người dùng." },
+    { nickname: "Hoài Nam", rating: 4, comment: "Thiết kế đẹp, hy vọng sẽ có thêm nhiều tiện ích mới." },
+    { nickname: "Sunny", rating: 5, comment: "Mình khá thích cách bố trí các mục trên trang chủ." },
+    { nickname: "Bảo Ngọc", rating: 5, comment: "Giao diện dễ nhìn, sử dụng trên điện thoại cũng tiện." },
+    { nickname: "Sóc Nâu", rating: 4, comment: "Các nút chức năng dễ nhận biết, thao tác không phức tạp." },
+    { nickname: "Đức Anh", rating: 5, comment: "Trang web đẹp, tốc độ phản hồi khá nhanh." },
+    { nickname: "Mây Trắng", rating: 5, comment: "Mình thấy website được đầu tư khá tốt về giao diện." },
+    { nickname: "Quốc Bảo", rating: 4, comment: "Nội dung rõ ràng, mong có thêm nhiều ứng dụng mới." },
+    { nickname: "Thỏ Bông", rating: 5, comment: "Màu sắc đẹp, các phần được chia rất hợp lý." },
+    { nickname: "Hải Đăng", rating: 5, comment: "Dễ sử dụng, tìm kiếm ứng dụng khá nhanh chóng." },
+    { nickname: "Lá Nhỏ", rating: 4, comment: "Giao diện đơn giản nhưng vẫn đẹp và hiện đại." },
+    { nickname: "Phương Linh", rating: 5, comment: "Mình thích cách hiển thị thông tin và hình ảnh ứng dụng." },
+    { nickname: "Tommy", rating: 5, comment: "Trải nghiệm khá tốt, website tải nhanh và dễ thao tác." },
+    { nickname: "Gia Huy", rating: 4, comment: "Trang web nhìn chuyên nghiệp, có nhiều danh mục hữu ích." },
+    { nickname: "Kem Dâu", rating: 5, comment: "Giao diện rất xinh, dùng trên điện thoại khá thuận tiện." },
+    { nickname: "Hoàng Minh", rating: 5, comment: "Bố cục rõ ràng, các chức năng được sắp xếp hợp lý." },
+    { nickname: "Mít Ướt", rating: 4, comment: "Website dễ dùng, hy vọng sẽ tiếp tục được phát triển." },
+    { nickname: "Nam Phong", rating: 5, comment: "Tốc độ truy cập tốt, thiết kế gọn gàng và hiện đại." },
+    { nickname: "Bông Tuyết", rating: 5, comment: "Mình khá hài lòng với giao diện và cách trình bày." },
+    { nickname: "Khánh Vy", rating: 4, comment: "Tìm kiếm thuận tiện, mong có thêm nhiều tính năng." },
+    { nickname: "Cún Con", rating: 5, comment: "Website đẹp, dễ sử dụng và có trải nghiệm khá tốt." }
+];
 
 function formatDate(timestamp) {
     if (!timestamp) return "Vừa xong";
@@ -4634,28 +4710,61 @@ function renderReviews() {
 function renderStats(votes) {
     latestVotes = votes || {};
 
-    const counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
-    let sum = 0;
+    const realCounts = {
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0,
+        5: 0
+    };
 
-    Object.values(votes || {}).forEach(vote => {
+    let realSum = 0;
+
+    Object.values(latestVotes).forEach(vote => {
         const rating = Number(vote.rating);
 
-        if (rating >= 1 && rating <= 5 && Number.isInteger(rating)) {
-            counts[rating]++;
-            sum += rating;
+        if (
+            rating >= 1 &&
+            rating <= 5 &&
+            Number.isInteger(rating)
+        ) {
+            realCounts[rating]++;
+            realSum += rating;
         }
     });
 
-    const total = Object.values(counts).reduce((a, b) => a + b, 0);
-    const average = total ? sum / total : 0;
+    const realTotal = Object.values(realCounts)
+        .reduce((sum, count) => sum + count, 0);
 
-    averageEl.textContent = average.toFixed(1);
-    totalEl.textContent = `${total.toLocaleString("vi-VN")} lượt đánh giá`;
+    // Cộng số liệu mẫu và dữ liệu thật để hiển thị
+    const displayCounts = {};
+
+    for (let star = 1; star <= 5; star++) {
+        displayCounts[star] =
+            SAMPLE_RATING_COUNTS[star] + realCounts[star];
+    }
+
+    const displayTotal = SAMPLE_RATING_TOTAL + realTotal;
+
+    const displaySum = SAMPLE_RATING_SUM + realSum;
+
+    const average = displayTotal
+        ? displaySum / displayTotal
+        : 0;
+
+    if (averageEl) {
+        averageEl.textContent = average.toFixed(2);
+    }
+
+    if (totalEl) {
+        totalEl.textContent =
+            `${displayTotal.toLocaleString("vi-VN")} lượt đánh giá`;
+    }
 
     renderAverageStars(average);
-    renderBreakdown(counts, total);
+    renderBreakdown(displayCounts, displayTotal);
 
-    allReviews = Object.entries(votes || {})
+    allReviews = Object.entries(latestVotes)
         .filter(([, vote]) =>
             vote &&
             typeof vote.nickname === "string" &&
@@ -4663,19 +4772,25 @@ function renderStats(votes) {
             Number.isInteger(Number(vote.rating))
         )
         .map(([uid, vote]) => ({ uid, ...vote }))
-        .sort((a, b) => Number(b.createdAt || 0) - Number(a.createdAt || 0));
+        .sort((a, b) =>
+            Number(b.createdAt || 0) - Number(a.createdAt || 0)
+        );
 
     renderReviews();
 
     if (currentUser) {
-        const myVote = votes && votes[currentUser.uid];
+        const myVote = latestVotes[currentUser.uid];
 
         if (myVote) {
             alreadyRated = true;
             selectedRating = Number(myVote.rating) || 0;
             paintStars(selectedRating);
             lockRatingForm();
-            feedback.textContent = "Bạn đã gửi đánh giá. Cảm ơn bạn ❤️";
+
+            if (feedback) {
+                feedback.textContent =
+                    "Bạn đã gửi đánh giá. Cảm ơn bạn ❤️";
+            }
         }
     }
 }
