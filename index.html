@@ -2930,6 +2930,232 @@ iframe {
     margin-right: 4px;
 }
 
+    /* WEBSITE STORE */
+.website-store {
+    width: min(100% - 32px, 1240px);
+    margin: 65px auto;
+    scroll-margin-top: 100px;
+}
+
+.website-heading {
+    margin-bottom: 28px;
+}
+
+.website-heading .section-label {
+    color: #a477ff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.website-heading h2 {
+    font-size: 30px;
+    margin: 10px 0;
+    color: var(--text-color, #fff);
+}
+
+.website-heading h2 i {
+    color: #a477ff;
+}
+
+.website-heading p,
+.website-products-top p {
+    color: #9995b5;
+    font-size: 13px;
+}
+
+.website-categories {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.website-category {
+    min-height: 190px;
+    padding: 25px;
+    border: 1px solid rgba(164,119,255,.18);
+    border-radius: 20px;
+    background: linear-gradient(145deg, #211a39, #111020);
+    color: #fff;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.website-category:hover {
+    transform: translateY(-6px);
+    border-color: #a477ff;
+    box-shadow: 0 12px 35px rgba(145,80,255,.16);
+}
+
+.website-category > i {
+    font-size: 30px;
+    color: #ae79ff;
+}
+
+.website-category strong {
+    font-size: 17px;
+}
+
+.website-category span {
+    font-size: 12px;
+    color: #aaa5c2;
+}
+
+.website-category small {
+    margin-top: auto;
+    color: #b68aff;
+    font-weight: 700;
+}
+
+.website-products-area {
+    margin-top: 28px;
+}
+
+.website-products-top {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+}
+
+.website-products-top h3 {
+    color: var(--text-color, #fff);
+    font-size: 21px;
+    margin: 0 0 5px;
+}
+
+.website-back {
+    padding: 11px 16px;
+    border: 1px solid rgba(164,119,255,.25);
+    border-radius: 12px;
+    background: #211a39;
+    color: #c6a6ff;
+    cursor: pointer;
+}
+
+.website-products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.website-product-card {
+    overflow: hidden;
+    border: 1px solid rgba(164,119,255,.17);
+    border-radius: 18px;
+    background: #19152c;
+    transition: .3s;
+}
+
+.website-product-card:hover {
+    transform: translateY(-5px);
+    border-color: #a477ff;
+}
+
+.website-product-image {
+    height: 165px;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(circle at 50% 20%, #6742a5, #171126 70%);
+}
+
+.website-product-image i {
+    font-size: 52px;
+    color: #d4baff;
+}
+
+.website-product-info {
+    padding: 17px;
+}
+
+.website-product-info h4 {
+    color: #fff;
+    font-size: 15px;
+    margin: 0 0 9px;
+}
+
+.website-product-info p {
+    color: #aaa5c2;
+    font-size: 12px;
+    line-height: 1.6;
+    min-height: 38px;
+}
+
+.website-product-price {
+    color: #c49aff;
+    font-weight: 800;
+    margin: 14px 0;
+}
+
+.website-product-action {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: 0;
+    border-radius: 11px;
+    background: linear-gradient(90deg, #7050ff, #c044f5);
+    color: white;
+    font-weight: 800;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+
+.website-product-card[hidden] {
+    display: none !important;
+}
+
+.website-more-wrap {
+    text-align: center;
+    margin-top: 28px;
+}
+
+.website-more-btn {
+    padding: 13px 25px;
+    border: 1px solid rgba(164,119,255,.3);
+    border-radius: 13px;
+    background: #211a39;
+    color: #d7c1ff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.website-more-wrap p {
+    color: #88839f;
+    font-size: 11px;
+    margin-top: 12px;
+}
+
+@media(max-width: 700px) {
+    .website-categories,
+    .website-products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .website-category {
+        min-height: 165px;
+        padding: 17px;
+    }
+
+    .website-product-image {
+        height: 125px;
+    }
+}
+
+@media(max-width: 420px) {
+    .website-categories,
+    .website-products-grid {
+        grid-template-columns: 1fr;
+    }
+}
+    
 </style>
 </head>
 
@@ -2989,6 +3215,11 @@ iframe {
             <i class="fa-solid fa-layer-group"></i>
             Ứng dụng
         </a>
+
+        <a href="#website-store">
+    <i class="fa-solid fa-globe"></i>
+    Kho Website
+</a>
 
         <a href="#music">
             <i class="fa-solid fa-music"></i>
@@ -3231,6 +3462,60 @@ iframe {
 
     </section>
 
+    <section class="website-store" id="website-store">
+    <div class="website-heading">
+        <span class="section-label">DISCOVER WEBSITES</span>
+        <h2><i class="fa-solid fa-globe"></i> Kho Website</h2>
+        <p>Khám phá các mẫu website chất lượng từ Hoàng Kun</p>
+    </div>
+
+    <!-- DANH MỤC -->
+    <div class="website-categories" id="websiteCategories">
+        <button class="website-category" data-category="service">
+            <i class="fa-solid fa-laptop-code"></i>
+            <strong>Web dịch vụ</strong>
+            <span>Website cung cấp dịch vụ</span>
+            <small>Khám phá <i class="fa-solid fa-arrow-right"></i></small>
+        </button>
+
+        <button class="website-category" data-category="shop">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <strong>Web bán hàng</strong>
+            <span>Website kinh doanh trực tuyến</span>
+            <small>Khám phá <i class="fa-solid fa-arrow-right"></i></small>
+        </button>
+
+        <button class="website-category" data-category="personal">
+            <i class="fa-solid fa-user-astronaut"></i>
+            <strong>Web cá nhân</strong>
+            <span>Portfolio và trang giới thiệu</span>
+            <small>Khám phá <i class="fa-solid fa-arrow-right"></i></small>
+        </button>
+    </div>
+
+    <!-- DANH SÁCH SẢN PHẨM -->
+    <div class="website-products-area" id="websiteProductsArea" hidden>
+        <div class="website-products-top">
+            <button class="website-back" id="websiteBack">
+                <i class="fa-solid fa-arrow-left"></i> Danh mục
+            </button>
+            <div>
+                <h3 id="websiteCategoryTitle">Sản phẩm</h3>
+                <p id="websiteCategoryDesc">Danh sách website</p>
+            </div>
+        </div>
+
+        <div class="website-products-grid" id="websiteProducts"></div>
+
+        <div class="website-more-wrap">
+            <button class="website-more-btn" id="websiteLoadMore">
+                Xem thêm sản phẩm <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <p id="websiteProductCount"></p>
+        </div>
+    </div>
+</section>
+    
     <!-- ==================================================
          07. MUSIC + YOUTUBE
     ================================================== -->
@@ -5304,5 +5589,103 @@ onValue(votesRef, snapshot => {
 })();
 </script>
 
+    <script>
+const websiteData = {
+    service: {
+        title: "Website dịch vụ",
+        desc: "Các mẫu website giới thiệu và cung cấp dịch vụ",
+        products: [
+            {name:"Website dịch vụ công nghệ",desc:"Giao diện hiện đại, giới thiệu dịch vụ và bảng giá.",price:"Liên hệ",icon:"fa-laptop-code"},
+            {name:"Website dịch vụ mạng xã hội",desc:"Hệ thống giới thiệu dịch vụ Facebook, TikTok, Instagram.",price:"Liên hệ",icon:"fa-share-nodes"},
+            {name:"Website tải ứng dụng",desc:"Kho ứng dụng, danh sách sản phẩm và trang tải xuống.",price:"Liên hệ",icon:"fa-mobile-screen"},
+            {name:"Website dịch vụ thiết kế",desc:"Trưng bày dịch vụ, dự án và thông tin liên hệ.",price:"Liên hệ",icon:"fa-palette"}
+        ]
+    },
+    shop: {
+        title: "Website bán hàng",
+        desc: "Các mẫu website kinh doanh và thương mại điện tử",
+        products: [
+            {name:"Website bán hàng chuyên nghiệp",desc:"Danh mục sản phẩm, giỏ hàng và trang thanh toán.",price:"Liên hệ",icon:"fa-store"},
+            {name:"Website bán phụ kiện",desc:"Giao diện cửa hàng phụ kiện hiện đại.",price:"Liên hệ",icon:"fa-headphones"},
+            {name:"Website bán tài khoản",desc:"Quản lý sản phẩm số và thông tin đơn hàng.",price:"Liên hệ",icon:"fa-cart-shopping"},
+            {name:"Website cửa hàng điện tử",desc:"Giới thiệu sản phẩm công nghệ và thiết bị.",price:"Liên hệ",icon:"fa-computer"}
+        ]
+    },
+    personal: {
+        title: "Website cá nhân",
+        desc: "Các mẫu website hồ sơ và thương hiệu cá nhân",
+        products: [
+            {name:"Website Profile cá nhân",desc:"Giới thiệu bản thân, kỹ năng và mạng xã hội.",price:"Liên hệ",icon:"fa-user"},
+            {name:"Website Portfolio",desc:"Trưng bày dự án và sản phẩm đã thực hiện.",price:"Liên hệ",icon:"fa-briefcase"},
+            {name:"Website giới thiệu YouTube",desc:"Giới thiệu kênh, video và liên kết mạng xã hội.",price:"Liên hệ",icon:"fa-youtube"},
+            {name:"Website Landing Page",desc:"Trang giới thiệu cá nhân với hiệu ứng hiện đại.",price:"Liên hệ",icon:"fa-window-maximize"}
+        ]
+    }
+};
+
+const websiteCategories = document.getElementById("websiteCategories");
+const websiteArea = document.getElementById("websiteProductsArea");
+const websiteProducts = document.getElementById("websiteProducts");
+const websiteBack = document.getElementById("websiteBack");
+const websiteTitle = document.getElementById("websiteCategoryTitle");
+const websiteDesc = document.getElementById("websiteCategoryDesc");
+const websiteMore = document.getElementById("websiteLoadMore");
+const websiteCount = document.getElementById("websiteProductCount");
+
+let currentWebsiteCategory = "";
+let websiteVisibleCount = 3;
+
+function renderWebsiteProducts() {
+    const products = websiteData[currentWebsiteCategory].products;
+
+    websiteProducts.innerHTML = products.map((product, index) => `
+        <article class="website-product-card" ${index >= websiteVisibleCount ? "hidden" : ""}>
+            <div class="website-product-image">
+                <i class="fa-solid ${product.icon}"></i>
+            </div>
+            <div class="website-product-info">
+                <h4>${product.name}</h4>
+                <p>${product.desc}</p>
+                <div class="website-product-price">${product.price}</div>
+                <a class="website-product-action" href="https://zalo.me/84788265513" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-solid fa-message"></i> Liên hệ đặt website
+                </a>
+            </div>
+        </article>
+    `).join("");
+
+    websiteMore.hidden = websiteVisibleCount >= products.length;
+    websiteCount.textContent = `Đang hiển thị ${Math.min(websiteVisibleCount, products.length)} / ${products.length} sản phẩm`;
+}
+
+websiteCategories.querySelectorAll(".website-category").forEach(button => {
+    button.addEventListener("click", () => {
+        currentWebsiteCategory = button.dataset.category;
+        websiteVisibleCount = 3;
+
+        const category = websiteData[currentWebsiteCategory];
+        websiteTitle.textContent = category.title;
+        websiteDesc.textContent = category.desc;
+
+        websiteCategories.hidden = true;
+        websiteArea.hidden = false;
+
+        renderWebsiteProducts();
+        websiteArea.scrollIntoView({behavior:"smooth", block:"start"});
+    });
+});
+
+websiteBack.addEventListener("click", () => {
+    websiteArea.hidden = true;
+    websiteCategories.hidden = false;
+    websiteCategories.scrollIntoView({behavior:"smooth", block:"start"});
+});
+
+websiteMore.addEventListener("click", () => {
+    websiteVisibleCount += 3;
+    renderWebsiteProducts();
+});
+</script>
+    
 </body>
 </html>
