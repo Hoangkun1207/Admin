@@ -3306,6 +3306,134 @@ iframe {
     }
 }
 
+    /* ==========================================
+   HOANG KUN MUSIC - MOBILE RESPONSIVE FIX
+========================================== */
+
+.hk-music-panel,
+.hk-player,
+.hk-player-main,
+.hk-track-info{
+    min-width:0;
+    max-width:100%;
+}
+
+.hk-player-main{
+    display:flex;
+    align-items:center;
+    gap:16px;
+}
+
+.hk-track-info{
+    flex:1;
+    min-width:0;
+    width:100%;
+}
+
+.hk-music-title{
+    width:100%;
+    font-size:16px;
+    line-height:1.5;
+    white-space:normal;
+    overflow-wrap:break-word;
+    word-break:normal;
+}
+
+.hk-music-artist{
+    display:block;
+    width:100%;
+    font-size:12px;
+    white-space:normal;
+    overflow-wrap:break-word;
+    word-break:normal;
+}
+
+.hk-playlist-item-info{
+    min-width:0;
+    flex:1;
+}
+
+.hk-playlist-item-name{
+    white-space:normal;
+    overflow-wrap:break-word;
+    word-break:normal;
+    line-height:1.4;
+}
+
+@media(max-width:600px){
+    .hk-music-panel{
+        width:100%;
+        padding:16px;
+        box-sizing:border-box;
+    }
+
+    .hk-player-main{
+        display:grid;
+        grid-template-columns:88px minmax(0,1fr);
+        align-items:center;
+        gap:13px;
+        width:100%;
+    }
+
+    .hk-music-cover{
+        width:88px;
+        height:88px;
+        min-width:88px;
+    }
+
+    .hk-track-info{
+        width:100%;
+        min-width:0;
+    }
+
+    .hk-music-title{
+        font-size:14px;
+        line-height:1.5;
+        margin-bottom:5px;
+    }
+
+    .hk-music-artist{
+        font-size:11px;
+        line-height:1.5;
+    }
+
+    .hk-music-status{
+        margin-top:8px;
+        font-size:9px;
+    }
+
+    .hk-player-controls{
+        gap:20px;
+    }
+
+    .hk-playlist-item{
+        min-width:0;
+        gap:10px;
+    }
+
+    .hk-playlist-item img{
+        width:40px;
+        height:40px;
+    }
+}
+
+@media(max-width:360px){
+    .hk-player-main{
+        grid-template-columns:72px minmax(0,1fr);
+        gap:10px;
+    }
+
+    .hk-music-cover{
+        width:72px;
+        height:72px;
+        min-width:72px;
+    }
+
+    .hk-music-title{
+        font-size:13px;
+    }
+}
+    
 </style>
 </head>
 
@@ -5792,7 +5920,7 @@ onValue(votesRef, snapshot => {
     const setCover = src => {
         if (cover.tagName === "IMG") {
             cover.src = src;
-            cover.alt = "Hoàng Kun Music";
+            cover.alt = "Han Jue Music";
         } else {
             let img = cover.querySelector("img");
 
@@ -5802,7 +5930,7 @@ onValue(votesRef, snapshot => {
             }
 
             img.src = src;
-            img.alt = "Hoàng Kun Music";
+            img.alt = "Han Jue Music Music";
         }
     };
 
@@ -5816,7 +5944,7 @@ onValue(votesRef, snapshot => {
                     <img src="${track.image}" alt="">
                     <div class="hk-playlist-item-info">
                         <div class="hk-playlist-item-name">${track.name}</div>
-                        <div class="hk-playlist-item-sub">Hoàng Kun Music</div>
+                        <div class="hk-playlist-item-sub">Han Jue Music</div>
                     </div>
                     <i class="fa-solid ${index === currentIndex && !audio.paused ? "fa-volume-high" : "fa-play"}"></i>
                 </div>
@@ -5858,7 +5986,7 @@ onValue(votesRef, snapshot => {
         title.textContent = track.name;
 
         if (artist) {
-            artist.textContent = "Hoàng Kun Music";
+            artist.textContent = "Han Jue Music";
         }
 
         setCover(track.image);
