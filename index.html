@@ -5648,6 +5648,231 @@ onValue(votesRef, snapshot => {
     });
 })();
 </script>
+
+<script>
+
+(() => {
+    const audio = document.getElementById("hkAudio");
+    const cover = document.getElementById("hkMusicCover");
+    const title = document.getElementById("hkMusicTitle");
+    const artist = document.getElementById("hkMusicArtist");
+    const playBtn = document.getElementById("hkPlay");
+    const prevBtn = document.getElementById("hkPrev");
+    const nextBtn = document.getElementById("hkNext");
+    const progress = document.getElementById("hkProgress");
+    const currentTime = document.getElementById("hkCurrentTime");
+    const duration = document.getElementById("hkDuration");
+    const status = document.getElementById("hkMusicStatus");
+    const playlistBox = document.getElementById("hkPlaylist");
+
+    if (!audio || !cover || !title || !playBtn || !progress) {
+        console.warn("Hoang Kun Music: Không tìm thấy phần tử HTML của trình phát.");
+        return;
+    }
+
+    const tracks = [
+        {
+            name: "Hai Chữ Đã Từng x Vết Thương",
+            file: "Hai Chữ Đã Từng x Vết Thương.mp3"
+        },
+        {
+            name: "Hoa Phận Ái Nưu x Chữ Vấn Vương",
+            file: "Hoa Phận Ái Nưu x Chữ Vấn Vương.mp3"
+        },
+        {
+            name: "Ngày Mình Chia Tay",
+            file: "Ngày Mình Chia Tay - Han Jue Music.mp3"
+        },
+        {
+            name: "Người Dưng x Vết Thương Trong Lòng",
+            file: "Người Dưng x Vết Thương Trong Lòng.mp3"
+        },
+        {
+            name: "Vết Thương Remix",
+            file: "Vết Thương Remix.mp3"
+        },
+        {
+            name: "Vết Thương x Lý Do Nào Để Quay Lại",
+            file: "Vết Thương x Lý Do Nào Để Quay Lại.mp3"
+        }
+    ];
+
+    const images = [
+        "https://cdn.upanhlaylink.com/i/OYTiUwLX.jpeg",
+        "https://cdn.upanhlaylink.com/i/pKbrpcXY.jpeg",
+        "https://cdn.upanhlaylink.com/i/dylhOJ8p.jpeg",
+        "https://cdn.upanhlaylink.com/i/7T0IDK6u.jpeg",
+        "https://cdn.upanhlaylink.com/i/4YfK7xGK.jpeg",
+        "https://cdn.upanhlaylink.com/i/MYEeerhC.jpeg"
+    ];
+
+    const shuffle = array => {
+        const result = [...array];
+
+        for (let i = result.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [result[i], result[j]] = [result[j], result[i]];
+        }
+
+        return result;
+    };
+
+    const shuffledImages = shuffle(images);
+    const playlist = shuffle(tracks).map((track, index) => ({
+        ...track,
+        image: shuffledImages[index]
+    }));
+
+    let currentIndex = 0;
+
+    const formatTime = time => {
+        if (!Number.isFinite(time)) return "0:00";
+
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time % 60);
+
+        return `${minutes}:${String(seconds).padStart(2, "0")}`;
+    };
+
+    const setCover = src => {
+        if (cover.tagName === "IMG") {
+            cover.src = src;
+            cover.alt = "Hoàng Kun Music";
+        } else {
+            let img = cover.querySelector("img");
+
+            if (!img) {
+                img = document.createElement("img");
+                cover.appendChild(img);
+            }
+
+            img.src = src;
+            img.alt = "Hoàng Kun Music";
+        }
+    };
+
+    const renderPlaylist = () => {
+        if (!playlistBox) return;
+
+        playlistBox.innerHTML = `
+            <div class="hk-playlist-title">DANH SÁCH PHÁT</div>
+            ${playlist.map((track, index) => `
+                <div class="hk-playlist-item ${index === currentIndex ? "active" : ""}" data-index="${index}">
+                    <img src="${track.image}" alt="">
+                    <div class="hk-playlist-item-info">
+                        <div class="hk-playlist-item-name">${track.name}</div>
+                        <div class="hk-playlist-item-sub">Hoàng Kun Music</div>
+                    </div>
+                    <i class="fa-solid ${index === currentIndex && !audio.paused ? "fa-volume-high" : "fa-play"}"></i>
+                </div>
+            `).join("")}
+        `;
+
+        playlistBox.querySelectorAll(".hk-playlist-item").forEach(item => {
+            item.addEventListener("click", () => {
+                loadTrack(Number(item.dataset.index), true);
+            });
+        });
+    };
+
+    const updatePlayButton = () => {
+        const playing = !audio.paused;
+
+        playBtn.innerHTML = playing
+            ? '<i class="fa-solid fa-pause"></i>'
+            : '<i class="fa-solid fa-play"></i>';
+
+        const player = document.querySelector(".hk-player");
+
+        if (player) {
+            player.classList.toggle("playing", playing);
+        }
+
+        if (status) {
+            status.textContent = playing ? "Đang phát" : "Tạm dừng";
+        }
+
+        renderPlaylist();
+    };
+
+    const loadTrack = (index, autoplay = false) => {
+        currentIndex = (index + playlist.length) % playlist.length;
+
+        const track = playlist[currentIndex];
+
+        title.textContent = track.name;
+
+        if (artist) {
+            artist.textContent = "Hoàng Kun Music";
+        }
+
+        setCover(track.image);
+
+        audio.src = encodeURI(track.file);
+        audio.load();
+
+        progress.value = 0;
+        currentTime.textContent = "0:00";
+        duration.textContent = "0:00";
+
+        renderPlaylist();
+
+        if (autoplay) {
+            audio.play().catch(error => {
+                console.warn("Không thể phát nhạc:", error);
+                if (status) status.textContent = "Không tải được bài hát";
+            });
+        }
+
+        updatePlayButton();
+    };
+
+    playBtn.addEventListener("click", () => {
+        if (audio.paused) {
+            audio.play().catch(error => console.warn(error));
+        } else {
+            audio.pause();
+        }
+    });
+
+    prevBtn?.addEventListener("click", () => {
+        loadTrack(currentIndex - 1, true);
+    });
+
+    nextBtn?.addEventListener("click", () => {
+        loadTrack(currentIndex + 1, true);
+    });
+
+    audio.addEventListener("loadedmetadata", () => {
+        progress.max = audio.duration || 0;
+        duration.textContent = formatTime(audio.duration);
+    });
+
+    audio.addEventListener("timeupdate", () => {
+        progress.value = audio.currentTime;
+        currentTime.textContent = formatTime(audio.currentTime);
+    });
+
+    progress.addEventListener("input", () => {
+        audio.currentTime = Number(progress.value);
+    });
+
+    audio.addEventListener("play", updatePlayButton);
+    audio.addEventListener("pause", updatePlayButton);
+
+    audio.addEventListener("ended", () => {
+        loadTrack(currentIndex + 1, true);
+    });
+
+    audio.addEventListener("error", () => {
+        if (status) status.textContent = "Lỗi tải nhạc";
+        console.error("Không tải được file MP3:", audio.src);
+    });
+
+    loadTrack(0);
+})();
+
+</script>
     
 </body>
 </html>
