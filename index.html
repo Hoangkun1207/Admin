@@ -2954,7 +2954,303 @@ iframe {
 .admin-pinned-footer i {
     margin-right: 4px;
 }
-    
+
+/* =========================================
+   HOANG KUN MUSIC PLAYER
+========================================= */
+
+.hk-music-panel{
+    position:relative;
+    overflow:hidden;
+    padding:22px;
+    border:1px solid rgba(146,92,255,.2);
+    background:linear-gradient(145deg,rgba(146,92,255,.10),rgba(193,76,255,.035));
+}
+
+.hk-music-panel::before{
+    content:"";
+    position:absolute;
+    width:220px;
+    height:220px;
+    top:-120px;
+    right:-80px;
+    background:rgba(146,92,255,.15);
+    filter:blur(65px);
+    pointer-events:none;
+}
+
+.hk-music-panel .music-header{
+    position:relative;
+    z-index:1;
+    margin-bottom:20px;
+}
+
+.hk-player{
+    position:relative;
+    z-index:1;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.hk-player-main{
+    display:flex;
+    align-items:center;
+    gap:17px;
+}
+
+.hk-music-cover{
+    position:relative;
+    flex-shrink:0;
+    width:105px;
+    height:105px;
+    border-radius:20px;
+    overflow:hidden;
+    background:var(--surface,#17152d);
+    border:1px solid rgba(255,255,255,.12);
+    box-shadow:0 8px 30px rgba(0,0,0,.3);
+}
+
+.hk-music-cover img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.hk-player.playing .hk-music-cover img{
+    animation:hkCoverRotate 12s linear infinite;
+}
+
+@keyframes hkCoverRotate{
+    from{transform:rotate(0deg) scale(1.08)}
+    to{transform:rotate(360deg) scale(1.08)}
+}
+
+.hk-track-info{
+    min-width:0;
+    flex:1;
+}
+
+.hk-music-title{
+    color:var(--text,#fff);
+    font-size:16px;
+    font-weight:800;
+    line-height:1.45;
+    margin-bottom:7px;
+    overflow-wrap:anywhere;
+}
+
+.hk-music-artist{
+    color:var(--muted,#aaa);
+    font-size:12px;
+    font-weight:600;
+}
+
+.hk-music-status{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-top:10px;
+    padding:5px 10px;
+    border-radius:30px;
+    color:var(--green,#39e6a0);
+    background:rgba(57,230,160,.09);
+    font-size:10px;
+    font-weight:800;
+}
+
+.hk-music-status::before{
+    content:"";
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:currentColor;
+    box-shadow:0 0 8px currentColor;
+}
+
+.hk-progress-area{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.hk-progress{
+    appearance:none;
+    -webkit-appearance:none;
+    width:100%;
+    height:5px;
+    border-radius:20px;
+    outline:none;
+    cursor:pointer;
+    background:rgba(255,255,255,.13);
+    accent-color:var(--purple,#925cff);
+}
+
+.hk-progress::-webkit-slider-thumb{
+    appearance:none;
+    -webkit-appearance:none;
+    width:13px;
+    height:13px;
+    border-radius:50%;
+    background:#fff;
+    border:3px solid var(--purple,#925cff);
+    box-shadow:0 0 12px rgba(146,92,255,.65);
+}
+
+.hk-progress::-moz-range-thumb{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#fff;
+    border:3px solid var(--purple,#925cff);
+    box-shadow:0 0 12px rgba(146,92,255,.65);
+}
+
+.hk-time-row{
+    display:flex;
+    justify-content:space-between;
+    color:var(--muted,#aaa);
+    font-size:11px;
+    font-weight:600;
+    font-variant-numeric:tabular-nums;
+}
+
+.hk-player-controls{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:22px;
+}
+
+.hk-control-btn{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:40px;
+    height:40px;
+    border:0;
+    border-radius:50%;
+    color:var(--text,#fff);
+    background:rgba(255,255,255,.07);
+    cursor:pointer;
+    font-size:15px;
+    transition:.25s ease;
+}
+
+.hk-control-btn:hover{
+    color:#fff;
+    background:rgba(146,92,255,.25);
+    transform:scale(1.08);
+}
+
+.hk-control-btn.main{
+    width:53px;
+    height:53px;
+    color:#fff;
+    font-size:19px;
+    background:linear-gradient(135deg,#925cff,#c14cff);
+    box-shadow:0 5px 22px rgba(146,92,255,.35);
+}
+
+.hk-control-btn.main:hover{
+    transform:scale(1.1);
+    box-shadow:0 7px 28px rgba(146,92,255,.5);
+}
+
+.hk-playlist{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-top:4px;
+}
+
+.hk-playlist-title{
+    color:var(--text,#fff);
+    font-size:12px;
+    font-weight:800;
+    margin-bottom:3px;
+}
+
+.hk-playlist-item{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:9px;
+    border:1px solid transparent;
+    border-radius:12px;
+    background:rgba(255,255,255,.035);
+    cursor:pointer;
+    transition:.2s ease;
+}
+
+.hk-playlist-item:hover{
+    background:rgba(146,92,255,.1);
+    border-color:rgba(146,92,255,.2);
+}
+
+.hk-playlist-item.active{
+    background:rgba(146,92,255,.13);
+    border-color:rgba(146,92,255,.35);
+}
+
+.hk-playlist-item img{
+    width:42px;
+    height:42px;
+    flex-shrink:0;
+    object-fit:cover;
+    border-radius:9px;
+}
+
+.hk-playlist-item-info{
+    min-width:0;
+    flex:1;
+}
+
+.hk-playlist-item-name{
+    color:var(--text,#fff);
+    font-size:12px;
+    font-weight:700;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.hk-playlist-item-sub{
+    color:var(--muted,#aaa);
+    font-size:10px;
+    margin-top:4px;
+}
+
+.hk-playlist-item i{
+    color:var(--purple,#925cff);
+    font-size:12px;
+}
+
+@media(max-width:600px){
+    .hk-music-panel{
+        padding:16px;
+    }
+
+    .hk-player-main{
+        gap:13px;
+    }
+
+    .hk-music-cover{
+        width:88px;
+        height:88px;
+        border-radius:16px;
+    }
+
+    .hk-music-title{
+        font-size:14px;
+    }
+
+    .hk-player-controls{
+        gap:19px;
+    }
+}
+
 </style>
 </head>
 
@@ -3256,125 +3552,149 @@ iframe {
 
     </section>
     
-    <!-- ==================================================
-         07. MUSIC + YOUTUBE
-    ================================================== -->
+<!-- ==================================================
+     07. MUSIC + YOUTUBE
+================================================== -->
 
-    <section class="bottom" id="music">
+<section class="bottom" id="music">
 
-        <!-- SOUNDCLOUD -->
+    <!-- HOANG KUN MUSIC PLAYER -->
 
-        <div class="panel music-panel">
+    <div class="panel music-panel hk-music-panel">
 
-            <div class="music-header">
+        <div class="hk-player">
 
-                <div class="music-heading">
-                    <i class="fa-brands fa-soundcloud"></i>
-                    HOÀNG KUN MUSIC
+            <div class="hk-player-main">
+
+                <img
+                    id="hkMusicCover"
+                    class="hk-music-cover"
+                    src="https://cdn.upanhlaylink.com/i/OYTiUwLX.jpeg"
+                    alt="Music Cover">
+
+                <div class="hk-track-info">
+                    <strong id="hkMusicTitle">Han Jue Music</strong>
+                    <span id="hkMusicArtist">Music Collection • 6 Tracks</span>
                 </div>
 
-                <div class="music-status">
-                    SoundCloud
+                <div class="hk-player-controls">
+
+                    <button type="button" id="hkPrev" aria-label="Previous">
+                        <i class="fa-solid fa-backward-step"></i>
+                    </button>
+
+                    <button type="button" id="hkPlay" class="hk-play-btn" aria-label="Play">
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+
+                    <button type="button" id="hkNext" aria-label="Next">
+                        <i class="fa-solid fa-forward-step"></i>
+                    </button>
+
                 </div>
 
             </div>
 
-           
-<div class="soundcloud-frame">
-    <iframe
-        title="Hoàng Kun SoundCloud Player"
-        scrolling="no"
-        allow="autoplay"
-        loading="lazy"
-        src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fng-vi-t-ho-ng-172356656&color=%23925cff&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false">
-    </iframe>
-</div>
+            <div class="hk-progress-area">
+                <span id="hkCurrentTime">0:00</span>
 
+                <input
+                    type="range"
+                    id="hkProgress"
+                    min="0"
+                    max="1000"
+                    value="0">
 
-            <a class="soundcloud-link"
-               href="https://soundcloud.com/ng-vi-t-ho-ng-172356656"
+                <span id="hkDuration">0:00</span>
+            </div>
+
+            <div class="hk-player-bottom">
+                <span>
+                    <i class="fa-solid fa-music"></i>
+                    Han Jue MUSIC
+                </span>
+
+                <span id="hkMusicStatus">
+                    <i class="fa-solid fa-circle"></i> READY
+                </span>
+            </div>
+
+            <audio id="hkAudio" preload="metadata"></audio>
+
+        </div>
+
+    </div>
+
+    <!-- YOUTUBE -->
+
+    <div class="panel youtube-panel" id="youtube">
+
+        <div>
+
+            <div class="music-header">
+
+                <div class="music-heading">
+                    <i class="fa-brands fa-youtube"
+                       style="color:#ff3434"></i>
+                    YOUTUBE CHANNEL
+                </div>
+
+                <div class="music-status">
+                    Official
+                </div>
+
+            </div>
+
+            <div class="youtube-top">
+
+                <img
+                    class="youtube-avatar"
+                    src="https://scontent.fhph1-3.fna.fbcdn.net/v/t39.30808-6/832661538_122142716325181764_7541821947076323442_n.jpg?stp=dst-jpg_tt6&cstp=mx750x750&ctp=s750x750&_nc_cat=103&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=iXFyQBVvbJYQ7kNvwFCMFCL&_nc_oc=AdqGnvI7Jn8X1W4LTog6A6hJjLLDoi_d0f-0W_tETnuf_XKmuLealWDwWqELzEvIOeg&_nc_zt=23&_nc_ht=scontent.fhph1-3.fna&_nc_gid=7-16npyz86k2BVDAXa_hGw&_nc_ss=782a8&oh=00_AQS51BINEFksVJ-RORicIkDSUTs-604Q-8Dy61fJ3lPTeA&oe=6AECAFBC"
+                    alt="Han Jue Music"
+                    loading="lazy">
+
+                <div class="youtube-info">
+
+                    <span class="youtube-label">
+                        <i class="fa-brands fa-youtube"></i>
+                        OFFICIAL CHANNEL
+                    </span>
+
+                    <h3>Han Jue Music</h3>
+
+                    <p>@KunMusic06</p>
+
+                    <p>Welcome to my channel! ❤️</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="youtube-bottom">
+
+            <div class="youtube-status">
+                Music • Remix • Entertainment
+            </div>
+
+            <a class="subscribe"
+               href="https://www.youtube.com/@KunMusic06"
                target="_blank"
                rel="noopener noreferrer">
 
-                <i class="fa-solid fa-headphones"></i>
-                NGHE NHẠC TRÊN SOUNDCLOUD
+                <i class="fa-brands fa-youtube"></i>
+                ĐĂNG KÝ KÊNH
                 <i class="fa-solid fa-arrow-up-right-from-square"></i>
 
             </a>
 
         </div>
 
-        <!-- YOUTUBE -->
+    </div>
 
-        <div class="panel youtube-panel" id="youtube">
+</section>
 
-            <div>
-
-                <div class="music-header">
-
-                    <div class="music-heading">
-                        <i class="fa-brands fa-youtube"
-                           style="color:#ff3434"></i>
-                        YOUTUBE CHANNEL
-                    </div>
-
-                    <div class="music-status">
-                        Official
-                    </div>
-
-                </div>
-
-                <div class="youtube-top">
-
-                    <img
-                        class="youtube-avatar"
-                        src="https://scontent.fhph1-3.fna.fbcdn.net/v/t39.30808-6/832661538_122142716325181764_7541821947076323442_n.jpg?stp=dst-jpg_tt6&cstp=mx750x750&ctp=s750x750&_nc_cat=103&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=iXFyQBVvbJYQ7kNvwFCMFCL&_nc_oc=AdqGnvI7Jn8X1W4LTog6A6hJjLLDoi_d0f-0W_tETnuf_XKmuLealWDwWqELzEvIOeg&_nc_zt=23&_nc_ht=scontent.fhph1-3.fna&_nc_gid=7-16npyz86k2BVDAXa_hGw&_nc_ss=782a8&oh=00_AQS51BINEFksVJ-RORicIkDSUTs-604Q-8Dy61fJ3lPTeA&oe=6AECAFBC"
-                        alt="Han Jue Music"
-                        loading="lazy">
-
-                    <div class="youtube-info">
-
-                        <span class="youtube-label">
-                            <i class="fa-brands fa-youtube"></i>
-                            OFFICIAL CHANNEL
-                        </span>
-
-                        <h3>Han Jue Music</h3>
-
-                        <p>@KunMusic06</p>
-
-                        <p>
-                            Welcome to my channel! ❤️
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="youtube-bottom">
-
-                <div class="youtube-status">
-                    Music • Remix • Entertainment
-                </div>
-
-                <a class="subscribe"
-                   href="https://www.youtube.com/@KunMusic06"
-                   target="_blank"
-                   rel="noopener noreferrer">
-
-                    <i class="fa-brands fa-youtube"></i>
-                    ĐĂNG KÝ KÊNH
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
 
     <!-- ==================================================
          08. DONATION
