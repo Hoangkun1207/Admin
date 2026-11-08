@@ -544,13 +544,12 @@ body.light .navbar.scrolled {
 .verified {
     width: 21px;
     height: 21px;
-    display: inline-grid;
-    place-items: center;
-    border-radius: 50%;
-    color: #fff;
-    background: #238cff;
-    font-size: 11px;
-    -webkit-text-fill-color: #fff;
+    display: inline-block;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-left: 3px;
+    border-radius: 0;
+    background: transparent;
 }
 
 .hero-description {
@@ -3557,9 +3556,11 @@ iframe {
 
     <h1>
         Hoàng Kun iOS
-        <span class="verified">
-            <i class="fa-solid fa-check"></i>
-        </span>
+       <img
+    class="verified"
+    src="https://static.vecteezy.com/system/resources/thumbnails/047/309/930/small/verified-badge-profile-icon-png.png"
+    alt="Verified"
+    loading="eager">
     </h1>
 
     <p class="hero-description">
